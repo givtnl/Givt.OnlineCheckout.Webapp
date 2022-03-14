@@ -22,7 +22,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Build the angular webapp
+      - name: Build the Angular webapp
         run: |
           npm i
           npm install -g @angular/cli
