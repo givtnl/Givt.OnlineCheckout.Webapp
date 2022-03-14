@@ -5,12 +5,12 @@
   "projects": {
     "givt-online-checkout": {
       "i18n": {
-        "sourceLocale": "en",
+        "sourceLocale": "en-US",
         "locales": {
-          "nl": "src/locale/messages.nl.xlf",
-          "de": "src/locale/messages.de.xlf",
-          "en-GB": "src/locale/messages.en-GB.xlf",
-          "en-US": "src/locale/messages.en-US.xlf"
+          "nl": { "translation" :"src/locale/messages.nl.xlf", "baseHref": "/nl" },
+          "de":  { "translation" :"src/locale/messages.de.xlf", "baseHref": "/de" },
+          "en-GB":  { "translation" :"src/locale/messages.en-GB.xlf", "baseHref": "/en-GB" },
+          "en":  { "translation" :"src/locale/messages.en.xlf", "baseHref": "/en" }
         }
       },
       "projectType": "application",
@@ -39,7 +39,7 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "localize": true
+            "localize": false
           },
           "configurations": {
             "production": {
