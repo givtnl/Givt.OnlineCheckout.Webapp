@@ -29,6 +29,6 @@ jobs:
           ng build
       - name: Build the Docker image
         run: |
-            - docker login --username secrets.DOCKER_USERNAME --password secrets.DOCKER_PASSWORD
-            - docker build -t givt/onlinecheckout-webapp:latest .
-            - docker push givt/onlinecheckout-webapp:latest
+          docker login --username secrets.DOCKER_USERNAME --password secrets.DOCKER_PASSWORD
+          docker build -t givt/onlinecheckout-webapp:latest .
+          docker push givt/onlinecheckout-webapp:latest
