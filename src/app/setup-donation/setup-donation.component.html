@@ -5,33 +5,17 @@
   <div class="page1-margin">
     <div class="centered-container">
       <h1 class="title">Give to 'Placeholder charity'</h1>
-      <h2 class="subtitle border">Text from charity describing the goal</h2>
-      <div class="border">
-        <div class="choose-amount">
-        <input class="radio-input" type="radio" checked="checked" name="amount" id="first" (click)="closeAmount()">
-        <label class="container-radio" for="first">€ 3</label>
-        <input class="radio-input" type="radio" name="amount" id="second" (click)="closeAmount()">
-        <label class="container-radio" for="second">€ 5</label>
-        <input class="radio-input" type="radio" name="amount" id="third" (click)="closeAmount()">
-        <label class="container-radio" for="third">€ 10</label>
-        <input class="radio-input" type="radio" name="amount" id="none" [checked]="amountShown">
-      </div>
-
-      <button (click)="toggleAmount()" class="button button-small">Choose a different amount</button>
-
-      <div class="amount-container" [ngClass]="{'not-shown': !amountShown}">
-        <span class="currency-symbol">€<input type="number" class="currency-input"/></span>
-      </div>
+      <h2 class="subtitle custom-border">Text from charity describing the goal</h2>
+      <app-amount></app-amount>
+      <label class="container-checkbox">I would like a tax certificate for this donation
+        <input type="checkbox" (click)="toggleEmail()">
+        <span class="checkmark"></span>
+      </label>
+      <div class="centered-container" [ngClass]="{'not-shown': !emailShown}">
+        <label class="label" type="email">Email</label>
+        <input class="input" />
       </div>
     </div>
-  </div>
-  <label class="container-checkbox">I would like a tax certificate for this donation
-    <input type="checkbox" (click)="toggleEmail()">
-    <span class="checkmark"></span>
-  </label>
-  <div class="centered-container" [ngClass]="{'not-shown': !emailShown}">
-    <label class="label" type="email">Email</label>
-    <input class="input" />
   </div>
   <button (click)="submit()" class="button">Give</button>
 </div>

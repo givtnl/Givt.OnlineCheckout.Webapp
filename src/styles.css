@@ -14,6 +14,10 @@
   margin: auto;
   width: 320px;
 }
+
+.put-margin-bottom {
+  margin-bottom: 30px;
+}
 /**------------------------------------------------------------------------------------------------**/
 /**------------------------------------------------ Button Stylings -------------------------------**/
 .button {
@@ -33,6 +37,11 @@
   line-height: 19.5px;
 }
 
+.custom-border {
+  border: 3px solid #ABAAAA;
+  border-radius: 15px;
+}
+
 /** CHECKBOX HACK **/
 /* The container */
 .container-checkbox {
@@ -41,6 +50,7 @@
   align-items: center;
   margin: 0 auto;
   position: relative;
+  padding-top: 25px;
   padding-left: 35px;
   cursor: pointer;
   -webkit-user-select: none;
@@ -92,106 +102,35 @@
   left: 6px;
 }
 
-/** SECOND PAGE
 
-.info-container {
-  margin-top: 40px;
-  margin-bottom: 32px;
-}
-
-.info {
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 16px;
-}
-
-.info-bold {
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 16px;
-}
-
-.label-street {
-  display: inline-block;
-  width: 70%;
-}
-
-.label-number {
-  display: inline-block;
-  width: 30%;
-}
-
-.input-street {
-  display: inline-block;
-  width: 64%;
-  margin-right: 16px;
-}
-
-.input-number {
-  display: inline-block;
-  width: 30%;
-}
-
-/** THIRD PAGE
-
-.flex-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.success-title {
-  text-align: center;
-  margin-top: 85px;
-  margin-bottom: 47px;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 32px;
-}
-
-.party-guy {
-  height: 275px;
-}
-
-.thank-you-text {
-  text-align: center;
-  color: #ABAAAA;
-  margin-top: 20px;
+/**------------------------------------------------------------------------------------------------**/
+/**------------------------------------------------ Text Input & Label Stylings -------------------**/
+.label {
+  display: block;
+  margin: 20px auto 8px auto;
   font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
   line-height: 15px;
+  color: #ABAAAA;
 }
 
-.learn-more-text {
-  font-weight: 800;
+.input {
+  height: 40px;
+  width: 318px;
+  background: #F8F8F8;
+  border-radius: 12px;
+  border: none;
+  padding-left: 16px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
 }
 
-.margin-big {
-  margin-top: 61px;
+.input:focus {
+  outline: none;
 }
-
-.margin-small {
-  margin-top: 32px;
-}
-
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover
-  -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden
-}
-
-input[type=number] {
-  -moz-appearance:textfield; /* Firefox
-}
-
-**/

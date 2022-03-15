@@ -9,12 +9,15 @@ import {StripeElementsOptions} from "@stripe/stripe-js";
 export class PaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'nl',
-    clientSecret: 'pi_3KdGStLgFatYzb8p2ogTeTzY_secret_ueS2aWoy18SYa5yknewZwkWMq'
+    clientSecret: 'pi_3KdGStLgFatYzb8p2ogTeTzY_secret_ueS2aWoy18SYa5yknewZwkWMq',
+    appearance: {
+      disableAnimations: false,
+      theme: "flat",
+    }
   };
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

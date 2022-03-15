@@ -8,13 +8,15 @@ import { SetupDonationComponent } from './setup-donation/setup-donation.componen
 import { PaymentComponent } from './payment/payment.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import {RouterModule} from "@angular/router";
+import { AmountComponent } from './setup-donation/amount/amount.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SetupDonationComponent,
     PaymentComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    AmountComponent
   ],
   imports: [
     BrowserModule,

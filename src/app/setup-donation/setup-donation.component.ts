@@ -19,15 +19,9 @@ export class SetupDonationComponent implements OnInit {
     this.router.navigate(['/payment'])
   }
 
-  toggleAmount() {
-    this.amountShown = !this.amountShown
-  }
+
 
   toggleEmail() {
     this.emailShown = !this.emailShown
-  }
-
-  closeAmount() {
-    this.amountShown = false
   }
 }
