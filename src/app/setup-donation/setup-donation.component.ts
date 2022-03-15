@@ -7,13 +7,23 @@ import {Router} from "@angular/router";
   styleUrls: ['./setup-donation.component.css']
 })
 export class SetupDonationComponent implements OnInit {
-
   constructor(private router: Router) { }
+  amountShown: boolean = false;
+  emailShown: boolean = false;
 
   ngOnInit(): void {
+
   }
 
   submit() {
     this.router.navigate(['/payment'])
+  }
+
+  toggleAmount() {
+    this.amountShown = !this.amountShown
+  }
+
+  toggleEmail() {
+    this.emailShown = !this.emailShown
   }
 }

@@ -1,14 +1,6 @@
+/**------------------------------------------------ Logo Stylings ---------------------------------**/
 .top-container {
   text-align: center;
-}
-
-.top-container-page-2 {
-  text-align: left;
-}
-
-.back-button {
-  display: inline-block;
-  padding: 16px 16px 0 0;
 }
 
 .logo {
@@ -17,89 +9,13 @@
   align-content: center
 }
 
-.logo-page-2 {
-  display: block;
-  margin: 0 auto;
-
-}
-
-.page1-margin {
-  margin-top: 40px;
-  margin-bottom: 165px;
-}
-
 .centered-container {
   display: block;
   margin: auto;
   width: 320px;
 }
-
-.label {
-  display: block;
-  margin: 20px auto 8px auto;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-  color: #ABAAAA;
-}
-
-.input {
-  height: 40px;
-  width: 318px;
-  background: #F8F8F8;
-  border-radius: 12px;
-  border: none;
-  padding-left: 16px;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-  color: #000000;
-}
-
-.currency-symbol {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 16px;
-  border-radius: 12px;
-  border: none;
-  background: #F8F8F8;
-  height: 40px;
-  width: 318px;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 15px;
-  color: #ABAAAA;
-}
-
-.currency-input {
-  background: #F8F8F8;
-  height: 40px;
-  width: 318px;
-  border-radius: 12px;
-  border: none;
-  padding-left: 8px;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-}
-
-.currency-input:focus {
-  outline: none;
-}
-
-.input:focus {
-  outline: none;
-}
-
+/**------------------------------------------------------------------------------------------------**/
+/**------------------------------------------------ Button Stylings -------------------------------**/
 .button {
   display: block;
   margin: 20px auto;
@@ -119,7 +35,7 @@
 
 /** CHECKBOX HACK **/
 /* The container */
-.container {
+.container-checkbox {
   display: flex;
   width: fit-content;
   align-items: center;
@@ -139,7 +55,7 @@
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.container-checkbox input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -165,18 +81,18 @@
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.container-checkbox input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.container-checkbox .checkmark:after {
   content: url("/assets/checkmark.svg");
   bottom: 2px;
   left: 6px;
 }
 
-/** SECOND PAGE **/
+/** SECOND PAGE
 
 .info-container {
   margin-top: 40px;
@@ -220,7 +136,7 @@
   width: 30%;
 }
 
-/** THIRD PAGE **/
+/** THIRD PAGE
 
 .flex-container {
   display: flex;
@@ -269,11 +185,13 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
+  /* display: none; <- Crashes Chrome on hover
   -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden
 }
 
 input[type=number] {
-  -moz-appearance:textfield; /* Firefox */
+  -moz-appearance:textfield; /* Firefox
 }
+
+**/
