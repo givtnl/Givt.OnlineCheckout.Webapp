@@ -18,10 +18,4 @@ export class SetupDonationComponent implements OnInit {
   submit() {
     this.router.navigate(['/payment'])
   }
-
-
-
-  toggleEmail() {
-    this.emailShown = !this.emailShown
-  }
 }

@@ -9,6 +9,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import {RouterModule} from "@angular/router";
 import { AmountComponent } from './setup-donation/amount/amount.component';
+import { ReceiptComponent } from './setup-donation/receipt/receipt.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AmountComponent } from './setup-donation/amount/amount.component';
     SetupDonationComponent,
     PaymentComponent,
     ThankYouComponent,
-    AmountComponent
+    AmountComponent,
+    ReceiptComponent
   ],
   imports: [
     BrowserModule,

@@ -7,14 +7,7 @@
       <h1 class="title">Give to 'Placeholder charity'</h1>
       <h2 class="subtitle custom-border">Text from charity describing the goal</h2>
       <app-amount></app-amount>
-      <label class="container-checkbox">I would like a tax certificate for this donation
-        <input type="checkbox" (click)="toggleEmail()">
-        <span class="checkmark"></span>
-      </label>
-      <div class="centered-container" [ngClass]="{'not-shown': !emailShown}">
-        <label class="label" type="email">Email</label>
-        <input class="input" />
-      </div>
+      <app-receipt></app-receipt>
     </div>
   </div>
   <button (click)="submit()" class="button">Give</button>
