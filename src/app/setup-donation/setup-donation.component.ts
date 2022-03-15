@@ -26,4 +26,8 @@ export class SetupDonationComponent implements OnInit {
   toggleEmail() {
     this.emailShown = !this.emailShown
   }
+
+  closeAmount() {
+    this.amountShown = false
+  }
 }
