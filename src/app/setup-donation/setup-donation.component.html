@@ -1,0 +1,25 @@
+<div class="centered-container top-container">
+  <img  class="logo" src="../../assets/givt_logo.svg"/>
+</div>
+<div>
+  <div class="page1-margin">
+    <div class="centered-container">
+      <label class="label">Charity</label>
+      <input class="input" />
+      <label class="label">Amount</label>
+      <span class="currency-symbol">€<input type="number" class="currency-input"/></span>
+      <label class="label" type="email">Email</label>
+      <input class="input" />
+      <label class="label">Payment Method</label>
+      <select>
+        <option>Bancontact</option>
+        <option>Ideal</option>
+      </select>
+    </div>
+  </div>
+  <label class="container">I would like a tax certificate for this donation
+    <input type="checkbox">
+    <span class="checkmark"></span>
+  </label>
+  <button (click)="submit()" class="button btn">next</button>
+</div>

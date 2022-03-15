@@ -1,30 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { StripeElementsOptions } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'givt-online-checkout';
-  taxCertificate = false;
-  page = 1;
-
-  incrementPage() {
-    this.page++
-    if (!this.taxCertificate) {
-      this.page++
-    }
+export class AppComponent implements OnInit{
+  ngOnInit(): void {
+    console.log('Ah yeet');
   }
 
-  decrementPage() {
-    if (this.page == 2) {
-      this.toggleTaxCertificate()
-    }
-    this.page--
-  }
-
-  toggleTaxCertificate() {
-    this.taxCertificate = !this.taxCertificate
-  }
 }
