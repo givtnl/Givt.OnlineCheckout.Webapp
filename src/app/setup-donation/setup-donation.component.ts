@@ -8,8 +8,7 @@ import {Router} from "@angular/router";
 })
 export class SetupDonationComponent implements OnInit {
   constructor(private router: Router) { }
-  amountShown: boolean = false;
-  emailShown: boolean = false;
+
 
   ngOnInit(): void {
 

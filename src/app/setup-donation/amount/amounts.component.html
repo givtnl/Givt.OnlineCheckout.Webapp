@@ -1,0 +1,15 @@
+<div class="custom-border">
+  <div class="presets-container">
+    <div class="input-container" *ngFor="let amount of AMOUNTS">
+      <input class="radio-input" type="radio" name="amount" id="{{amount.id}}" (click)="closeAmount()">
+      <label class="container-radio" for="{{amount.id}}">{{amount.value}}</label>
+    </div>
+    <input class="radio-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
+  </div>
+
+  <button (click)="toggleAmount()" class="button button-small">Choose a different amount</button>
+
+  <div class="amount-container" [ngClass]="{'not-shown': !customAmountInputShown}">
+    <span class="currency-symbol">€<input type="number" id="custom-amount-input" class="currency-input"/></span>
+  </div>
+</div>

@@ -36,11 +36,15 @@
 }
 
 /**------------------------------ Radio Buttons Stylings -------------------------------------------------**/
-.choose-amount {
+.presets-container {
   padding: 15px 0 10px;
   display: flex;
   flex-direction: row;
   justify-items: auto;
+}
+
+.input-container {
+  margin: 0 auto;
 }
 
 .container-radio {
