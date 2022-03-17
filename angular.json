@@ -39,7 +39,7 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "localize": false
+            "localize": true
           },
           "configurations": {
             "production": {
