@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AmountData, DATA} from "../model/organisation";
 
 @Component({
-  selector: 'app-amount',
+  selector: 'app-amounts',
   templateUrl: './amounts.component.html',
   styleUrls: ['./amounts.component.css']
 })
 export class AmountsComponent implements OnInit {
-  AMOUNTS = [
-    {id: 1, value: 6},
-    {id: 2, value: 10},
-    {id: 3, value: 15},
-  ]
+  @Input()
+  values: AmountData[] = [];
   customAmountInputShown: boolean = false;
   constructor() { }
 

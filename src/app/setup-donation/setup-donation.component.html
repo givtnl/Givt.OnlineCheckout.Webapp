@@ -4,9 +4,9 @@
 <div>
   <div class="page1-margin">
     <div class="centered-container">
-      <h1 class="title">Give to 'Placeholder charity'</h1>
-      <h2 class="subtitle custom-border">Text from charity describing the goal</h2>
-      <app-amount></app-amount>
+      <h1 class="title">Give to {{organisation.name}}</h1>
+      <h2 class="subtitle custom-border">{{organisation.goal}}</h2>
+      <app-amounts [values]="organisation.amounts"></app-amounts>
       <app-receipt></app-receipt>
     </div>
   </div>

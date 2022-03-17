@@ -1,8 +1,8 @@
 <div class="custom-border">
   <div class="presets-container">
-    <div class="input-container" *ngFor="let amount of AMOUNTS">
-      <input class="radio-input" type="radio" name="amount" id="{{amount.id}}" (click)="closeAmount()">
-      <label class="container-radio" for="{{amount.id}}">{{amount.value}}</label>
+    <div class="input-container" *ngFor="let widget of values">
+      <input class="radio-input" type="radio" name="amount" id="{{widget.id}}" (click)="closeAmount()">
+      <label class="container-radio" for="{{widget.id}}">{{widget.value}}</label>
     </div>
     <input class="radio-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
   </div>
