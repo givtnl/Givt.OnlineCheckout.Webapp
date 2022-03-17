@@ -8,7 +8,6 @@ import { StripeElementsOptions } from '@stripe/stripe-js';
 })
 export class AppComponent implements OnInit{
   ngOnInit(): void {
-    console.log('Ah yeet');
   }
 
 }

@@ -7,14 +7,17 @@ import { AppComponent } from './app.component';
 import { SetupDonationComponent } from './setup-donation/setup-donation.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
-import {RouterModule} from "@angular/router";
+import { AmountsComponent } from './setup-donation/amount/amounts.component';
+import { ReceiptComponent } from './setup-donation/receipt/receipt.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SetupDonationComponent,
     PaymentComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    AmountsComponent,
+    ReceiptComponent,
   ],
   imports: [
     BrowserModule,

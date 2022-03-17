@@ -7,10 +7,10 @@
       "i18n": {
         "sourceLocale": "en-US",
         "locales": {
-          "nl": { "translation" :"src/locale/messages.nl.xlf", "baseHref": "/nl" },
-          "de":  { "translation" :"src/locale/messages.de.xlf", "baseHref": "/de" },
-          "en-GB":  { "translation" :"src/locale/messages.en-GB.xlf", "baseHref": "/en-GB" },
-          "en":  { "translation" :"src/locale/messages.en.xlf", "baseHref": "/en" }
+          "nl": { "translation" :"src/locale/messages.nl.xlf", "baseHref": "/nl/" },
+          "de":  { "translation" :"src/locale/messages.de.xlf", "baseHref": "/de/" },
+          "en-GB":  { "translation" :"src/locale/messages.en-GB.xlf", "baseHref": "/en-GB/" },
+          "en":  { "translation" :"src/locale/messages.en.xlf", "baseHref": "/en/" }
         }
       },
       "projectType": "application",
