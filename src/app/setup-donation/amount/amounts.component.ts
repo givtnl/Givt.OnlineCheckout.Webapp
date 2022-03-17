@@ -10,15 +10,12 @@ export class AmountsComponent implements OnInit {
   @Input()
   values: AmountData[] = []
   @Output()
-  PresetClickedEventEmitter = new EventEmitter<AmountData>()
-
-
+  presetClicked = new EventEmitter<AmountData>()
   customAmountInputShown: boolean = false
   @Output()
-  InputModeEventEmitter = new EventEmitter<boolean>()
-
+  inputModeChanged = new EventEmitter<boolean>()
   @Output()
-  CustomAmountEventEmitter = new EventEmitter<number>()
+  amountChanged = new EventEmitter<number>()
 
   constructor() { }
 
@@ -26,20 +23,20 @@ export class AmountsComponent implements OnInit {
   }
 
   itemClickedEvent(id: number, value: number) {
-    this.PresetClickedEventEmitter.emit(new AmountData(id,value,));
+    this.presetClicked.emit(new AmountData(id,value,));
   }
 
   closeAmount() {
     this.customAmountInputShown = false
-    this.InputModeEventEmitter.emit(this.customAmountInputShown)
+    this.inputModeChanged.emit(this.customAmountInputShown)
   }
 
   toggleAmount() {
     this.customAmountInputShown = !this.customAmountInputShown
-    this.InputModeEventEmitter.emit(this.customAmountInputShown)
+    this.inputModeChanged.emit(this.customAmountInputShown)
   }
 
   sendAmount(event: any) {
-    this.CustomAmountEventEmitter.emit(event.target.value);
+    this.amountChanged.emit(event.target.value);
   }
 }

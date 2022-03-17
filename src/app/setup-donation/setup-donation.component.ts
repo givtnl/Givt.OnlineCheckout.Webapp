@@ -25,7 +25,6 @@ export class SetupDonationComponent implements OnInit {
     this.customAmount = 0
   }
 
-
   ngOnInit(): void {
 
   }

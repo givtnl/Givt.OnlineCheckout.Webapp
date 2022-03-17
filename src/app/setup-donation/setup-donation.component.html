@@ -6,7 +6,7 @@
     <div class="centered-container">
       <h1 class="title">Give to {{organisation.name}}</h1>
       <h2 class="subtitle custom-border">{{organisation.goal}}</h2>
-      <app-amounts [values]="organisation.amounts" (PresetClickedEventEmitter)="setCurrentSelected($event)" (InputModeEventEmitter)="setInputMode($event)" (CustomAmountEventEmitter)="saveCustomAmount($event)"></app-amounts>
+      <app-amounts [values]="organisation.amounts" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
       <app-receipt></app-receipt>
     </div>
   </div>
