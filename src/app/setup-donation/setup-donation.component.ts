@@ -11,11 +11,10 @@ export class SetupDonationComponent implements OnInit {
   organisation: Organisation;
   constructor(private router: Router) {
     this.organisation = DATA[0];
-    console.log(this.organisation.amounts)
   }
 
   ngOnInit(): void {
-    
+
   }
 
   submit() {
