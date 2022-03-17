@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AmountData, DATA, Organisation} from "./model/organisation";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs";
 
 @Component({
   selector: 'app-setup-donation',
@@ -10,17 +9,14 @@ import {map} from "rxjs";
   styleUrls: ['./setup-donation.component.css']
 })
 export class SetupDonationComponent implements OnInit {
-
-  organisation: Organisation;
+  organisation = DATA[0];
   currentSelected = new AmountData(0,0,);
   inputMode = false;
   customAmount = 0;
-
   mainGiveButtonDisabled = true;
 
-  constructor(private router: Router, private http: HttpClient) {
-    this.organisation = DATA[0];
-  }
+
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.http
@@ -39,11 +35,20 @@ export class SetupDonationComponent implements OnInit {
     if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
       return
     } else {
+      let amount = 0;
       if (this.inputMode) {
-        console.log(this.customAmount)
+        amount = this.customAmount
       } else {
-        console.log(this.currentSelected.value)
+        amount = this.currentSelected.value
       }
+      let paymentMethodId = "";
+      this.http.post('http://localhost:5000/api/donation/intent', {"amount": amount, "medium": "61f7ed014e4c0121c005.c00000000001", 'paymentMethod': 1}).subscribe(
+        res => {
+          // @ts-ignore
+          paymentMethodId = res['paymentMethodId'];
+          console.log(paymentMethodId)
+        }
+      )
     }
   }
 
