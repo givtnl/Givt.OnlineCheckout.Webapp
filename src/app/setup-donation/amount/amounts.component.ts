@@ -17,6 +17,9 @@ export class AmountsComponent implements OnInit {
   @Output()
   InputModeEventEmitter = new EventEmitter<boolean>()
 
+  @Output()
+  CustomAmountEventEmitter = new EventEmitter<number>()
+
   constructor() { }
 
   ngOnInit(): void {
@@ -34,5 +37,9 @@ export class AmountsComponent implements OnInit {
   toggleAmount() {
     this.customAmountInputShown = !this.customAmountInputShown
     this.InputModeEventEmitter.emit(this.customAmountInputShown)
+  }
+
+  sendAmount(event: any) {
+    this.CustomAmountEventEmitter.emit(event.target.value);
   }
 }

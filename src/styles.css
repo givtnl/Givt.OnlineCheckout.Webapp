@@ -37,6 +37,10 @@
   line-height: 19.5px;
 }
 
+.button-disabled {
+  background-color: #ABAAAA;
+}
+
 .custom-border {
   border: 3px solid #ABAAAA;
   border-radius: 15px;
