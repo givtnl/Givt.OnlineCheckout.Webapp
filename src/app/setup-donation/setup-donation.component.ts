@@ -15,11 +15,10 @@ export class SetupDonationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
   }
 
   submit() {
-
     this.router.navigate(['/payment'])
   }
 }

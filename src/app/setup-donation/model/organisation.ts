@@ -20,9 +20,7 @@ export class AmountData {
     this.id = id;
     this.value = value;
   }
-
 }
-
 
 export const DATA = [
   new Organisation(1, 'TestOrganisation', 'TestGoal', [new AmountData(1, 5), new AmountData(2, 10), new AmountData(3, 15)]),
