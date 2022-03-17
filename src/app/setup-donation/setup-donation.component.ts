@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AmountData, DATA, Organisation} from "./model/organisation";
-import {AmountsComponent} from "./amount/amounts.component";
-import {$e} from "@angular/compiler/src/chars";
+import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-setup-donation',
@@ -12,21 +12,27 @@ import {$e} from "@angular/compiler/src/chars";
 export class SetupDonationComponent implements OnInit {
 
   organisation: Organisation;
-  currentSelected: AmountData;
-  inputMode: boolean;
-  customAmount: number;
+  currentSelected = new AmountData(0,0,);
+  inputMode = false;
+  customAmount = 0;
 
   mainGiveButtonDisabled = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this.organisation = DATA[0];
-    this.currentSelected = new AmountData(0,0,);
-    this.inputMode = false
-    this.customAmount = 0
   }
 
   ngOnInit(): void {
-
+    this.http
+      .get('http://localhost:5000/api/medium?mediumid=61f7ed014e4c0121c005.c00000000001')
+      .subscribe(responseData => {
+        // @ts-ignore
+        this.organisation.amounts = AmountData.fromAmounts(responseData['amounts'])
+        // @ts-ignore
+        this.organisation.name = responseData['organisationName']
+        // @ts-ignore
+        this.organisation.goal = responseData['goal']
+      })
   }
 
   submit() {
@@ -39,7 +45,6 @@ export class SetupDonationComponent implements OnInit {
         console.log(this.currentSelected.value)
       }
     }
-    //this.router.navigate(['/payment'])
   }
 
   setCurrentSelected(event: AmountData) {

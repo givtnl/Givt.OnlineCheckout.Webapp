@@ -9,6 +9,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { AmountsComponent } from './setup-donation/amount/amounts.component';
 import { ReceiptComponent } from './setup-donation/receipt/receipt.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ReceiptComponent } from './setup-donation/receipt/receipt.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgxStripeModule.forRoot('pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P'),
   ],
   providers: [],
