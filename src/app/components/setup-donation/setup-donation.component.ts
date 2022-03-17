@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {AmountData, DATA, Organisation} from "./model/organisation";
-import {HttpClient} from "@angular/common/http";
+import {AmountData, DATA, IncomingOrganisation} from "../../models/organisation";
+import {OrganisationsService} from '../../services/organisations.service'
 
 @Component({
   selector: 'app-setup-donation',
   templateUrl: './setup-donation.component.html',
-  styleUrls: ['./setup-donation.component.css']
+  styleUrls: ['./setup-donation.component.css'],
+  providers: [OrganisationsService]
 })
 export class SetupDonationComponent implements OnInit {
   organisation = DATA[0];
@@ -14,24 +15,22 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
+  code: string = '';
 
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private orgService: OrganisationsService) { }
 
   ngOnInit(): void {
-    this.http
-      .get('http://localhost:5000/api/medium?mediumid=61f7ed014e4c0121c005.c00000000001')
-      .subscribe(responseData => {
-        // @ts-ignore
-        this.organisation.amounts = AmountData.fromAmounts(responseData['amounts'])
-        // @ts-ignore
-        this.organisation.name = responseData['organisationName']
-        // @ts-ignore
-        this.organisation.goal = responseData['goal']
-      })
+    this.orgService.getByMediumId('61f7ed014e4c0121c005.c00000000001').subscribe(responseData => {
+      const organisation: IncomingOrganisation = responseData as IncomingOrganisation;
+      this.organisation.name = organisation.organisationName;
+      this.organisation.goal = organisation.goal;
+      this.organisation.thamkYou = organisation.thankYou
+      this.organisation.amounts = AmountData.fromAmounts(organisation.amounts)
+    })
   }
 
-  submit() {
+  async submit() {
     if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
       return
     } else {
@@ -42,13 +41,9 @@ export class SetupDonationComponent implements OnInit {
         amount = this.currentSelected.value
       }
       let paymentMethodId = "";
-      this.http.post('http://localhost:5000/api/donation/intent', {"amount": amount, "medium": "61f7ed014e4c0121c005.c00000000001", 'paymentMethod': 1}).subscribe(
-        res => {
-          // @ts-ignore
-          paymentMethodId = res['paymentMethodId'];
-          console.log(paymentMethodId)
-        }
-      )
+      //this.code = await this.orgService.postDonation(amount)
+      //console.log(this.code)
+      //this.router.navigate(['/payment'])
     }
   }
 

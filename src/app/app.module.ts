@@ -4,11 +4,11 @@ import { NgxStripeModule } from 'ngx-stripe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SetupDonationComponent } from './setup-donation/setup-donation.component';
-import { PaymentComponent } from './payment/payment.component';
-import { ThankYouComponent } from './thank-you/thank-you.component';
-import { AmountsComponent } from './setup-donation/amount/amounts.component';
-import { ReceiptComponent } from './setup-donation/receipt/receipt.component';
+import { SetupDonationComponent } from './components/setup-donation/setup-donation.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { AmountsComponent } from './components/setup-donation/amount/amounts.component';
+import { ReceiptComponent } from './components/setup-donation/receipt/receipt.component';
 import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({

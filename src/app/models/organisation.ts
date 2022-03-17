@@ -1,14 +1,32 @@
+export class IncomingOrganisation {
+  amounts: number[];
+  goal: string;
+  medium: string;
+  organisationName: string;
+  thankYou: string;
+
+  constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string) {
+    this.amounts = amounts;
+    this.goal = goal;
+    this.medium = medium;
+    this.organisationName = organisationName;
+    this.thankYou = thankYou
+  }
+}
+
 export class Organisation {
   id: number;
   name: string;
   goal: string;
   amounts: AmountData[]
+  thamkYou: string
 
-  constructor(id: number, name: string, goal: string, amounts: AmountData[]) {
+  constructor(id: number, name: string, goal: string, amounts: AmountData[], thankYou: string) {
     this.id = id;
     this.name = name;
     this.goal = goal;
     this.amounts = amounts;
+    this.thamkYou = thankYou;
   }
 }
 
@@ -31,5 +49,5 @@ export class AmountData {
 }
 
 export const DATA = [
-  new Organisation(1, 'TestOrganisation', 'TestGoal', AmountData.fromAmounts([3,15,27])),
+  new Organisation(0,'','',[], '')
 ];
