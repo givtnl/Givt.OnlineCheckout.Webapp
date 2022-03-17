@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AmountData, DATA, IncomingOrganisation} from "../../models/organisation";
-import {OrganisationsService} from '../../services/organisations.service'
+import {OrganisationsService, PaymentMethodId} from '../../services/organisations.service'
 
 @Component({
   selector: 'app-setup-donation',
@@ -15,22 +15,22 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
-  code: string = '';
+  paymentMethodId = '';
 
 
   constructor(private router: Router, private orgService: OrganisationsService) { }
 
   ngOnInit(): void {
-    this.orgService.getByMediumId('61f7ed014e4c0121c005.c00000000001').subscribe(responseData => {
-      const organisation: IncomingOrganisation = responseData as IncomingOrganisation;
-      this.organisation.name = organisation.organisationName;
-      this.organisation.goal = organisation.goal;
-      this.organisation.thamkYou = organisation.thankYou
-      this.organisation.amounts = AmountData.fromAmounts(organisation.amounts)
+    this.orgService.getByMediumId('61f7ed014e4c0121c005.c00000000001').then((incomingOrg) => {
+      this.organisation.name = incomingOrg.organisationName;
+      this.organisation.goal = incomingOrg.goal;
+      this.organisation.thamkYou = incomingOrg.thankYou
+      this.organisation.amounts = AmountData.fromAmounts(incomingOrg.amounts)
     })
   }
 
   async submit() {
+    this.mainGiveButtonDisabled = true
     if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
       return
     } else {
@@ -40,11 +40,14 @@ export class SetupDonationComponent implements OnInit {
       } else {
         amount = this.currentSelected.value
       }
-      let paymentMethodId = "";
-      //this.code = await this.orgService.postDonation(amount)
-      //console.log(this.code)
-      //this.router.navigate(['/payment'])
+      await this.orgService.postDonation(amount).then((incomingPaymentMethodId: PaymentMethodId) => {
+        console.log(incomingPaymentMethodId);
+        this.paymentMethodId = incomingPaymentMethodId.paymentMethodId
+      })
+      console.log(this.paymentMethodId)
+      await this.router.navigate(['/payment'])
     }
+    this.mainGiveButtonDisabled = false
   }
 
   setCurrentSelected(event: AmountData) {
@@ -54,19 +57,11 @@ export class SetupDonationComponent implements OnInit {
 
   setInputMode(inputMode: boolean) {
     this.inputMode = inputMode;
-    if (this.inputMode && this.customAmount > 0) {
-      this.mainGiveButtonDisabled = false
-    } else {
-      this.mainGiveButtonDisabled = true;
-    }
+    this.mainGiveButtonDisabled = !(this.inputMode && this.customAmount > 0);
   }
 
   saveCustomAmount(customAmount: number) {
     this.customAmount = customAmount;
-    if (this.customAmount > 0) {
-      this.mainGiveButtonDisabled = false;
-    } else {
-      this.mainGiveButtonDisabled = true;
-    }
+    this.mainGiveButtonDisabled = this.customAmount <= 0;
   }
 }
