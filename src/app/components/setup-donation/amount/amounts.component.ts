@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
-import {AmountData} from "../model/organisation";
+import {AmountData} from "../../../models/organisation";
 
 @Component({
   selector: 'app-amounts',
