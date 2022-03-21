@@ -8,7 +8,4 @@ COPY docker/default.conf /etc/nginx/conf.d/default.conf
 # Copy the built files
 COPY ./dist/givt-online-checkout /usr/share/nginx/html
 
-# Copy the assets
-COPY ./assets /assets
-
 EXPOSE 80
