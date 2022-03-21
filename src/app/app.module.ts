@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxStripeModule } from 'ngx-stripe';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SetupDonationComponent } from './components/setup-donation/setup-donation.component';
@@ -12,7 +11,7 @@ import { ReceiptComponent } from './components/setup-donation/receipt/receipt.co
 import { HttpClientModule } from "@angular/common/http";
 import { ErrorComponent } from './components/error/error.component';
 import { OrganisationResolver } from "./resolvers/organisation.resolver";
-import {DonationResolver} from "./resolvers/donation.resolver";
+import { DonationResolver } from "./resolvers/donation.resolver";
 
 @NgModule({
   declarations: [
