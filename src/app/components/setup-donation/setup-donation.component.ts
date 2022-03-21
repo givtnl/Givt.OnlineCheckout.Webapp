@@ -18,7 +18,9 @@ export class SetupDonationComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.organisation = this.route.snapshot.data['organisation']
+    let data = this.route.snapshot.data['organisation'];
+    this.organisation = data
+    this.organisation.name = data.organisationName
     this.organisation.amounts = AmountData.fromAmounts(this.route.snapshot.data['organisation'].amounts)
   }
 
