@@ -12,6 +12,7 @@ import { ReceiptComponent } from './components/setup-donation/receipt/receipt.co
 import { HttpClientModule } from "@angular/common/http";
 import { ApplicationService } from "./services/application.service";
 import { OrganisationResolver } from "./services/organisation.resolver";
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { OrganisationResolver } from "./services/organisation.resolver";
     ThankYouComponent,
     AmountsComponent,
     ReceiptComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
