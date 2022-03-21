@@ -15,7 +15,6 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
-  paymentMethodId = '';
 
 
   constructor(private router: Router, private orgService: OrganisationsService) { }
@@ -40,10 +39,11 @@ export class SetupDonationComponent implements OnInit {
       } else {
         amount = this.currentSelected.value
       }
-      await this.orgService.postDonation(amount).then((incomingPaymentMethodId: PaymentMethodId) => {
-        this.paymentMethodId = incomingPaymentMethodId.paymentMethodId
+      let paymentMethodId: string;
+      this.orgService.postDonation(amount).then((incomingPaymentMethodId: PaymentMethodId) => {
+        paymentMethodId = incomingPaymentMethodId.paymentMethodId
+        this.router.navigate(['/payment'], {queryParams: {'paymentMethodId': paymentMethodId}})
       })
-      await this.router.navigate(['/payment'], {queryParams: {'paymentMethodId': this.paymentMethodId}})
     }
     this.mainGiveButtonDisabled = false
   }
