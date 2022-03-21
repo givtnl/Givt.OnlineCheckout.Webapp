@@ -1,16 +1,10 @@
 import {HttpClient} from "@angular/common/http";
-import {IncomingOrganisation} from "../models/organisation";
 import {Injectable} from "@angular/core";
-import {firstValueFrom, Observable} from "rxjs";
+import {firstValueFrom} from "rxjs";
 
 @Injectable()
-export class OrganisationsService {
-
+export class ApplicationService {
   constructor(private http: HttpClient) { }
-
-  async getByMediumId(mediumId: string): Promise<IncomingOrganisation> {
-    return await firstValueFrom(this.http.get<IncomingOrganisation>('http://localhost:5000/api/medium?mediumid='+mediumId))
-  }
 
   async postDonation(amount: number): Promise<PaymentMethodId> {
     return await firstValueFrom(this.http.post<PaymentMethodId>('http://localhost:5000/api/donation/intent', {

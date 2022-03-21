@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StripeElementsOptions} from "@stripe/stripe-js";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-payment',
@@ -9,14 +10,20 @@ import {StripeElementsOptions} from "@stripe/stripe-js";
 export class PaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'nl',
-    clientSecret: 'pi_3KdGStLgFatYzb8p2ogTeTzY_secret_ueS2aWoy18SYa5yknewZwkWMq',
+    clientSecret: '',
     appearance: {
       disableAnimations: false,
       theme: "flat",
     }
   };
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) {
+    const paymentMethodId = this.route.snapshot.queryParamMap.get('paymentMethodId');
+    if (paymentMethodId != null) {
+      this.elementsOptions.clientSecret = paymentMethodId;
+    }
+    console.log(this.elementsOptions.clientSecret);
+  }
 
   ngOnInit(): void {
   }

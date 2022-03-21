@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {AmountData, DATA, IncomingOrganisation} from "../../models/organisation";
-import {OrganisationsService, PaymentMethodId} from '../../services/organisations.service'
+import {ActivatedRoute, Router} from "@angular/router";
+import {AmountData, DATA} from "../../models/organisation";
 
 @Component({
   selector: 'app-setup-donation',
   templateUrl: './setup-donation.component.html',
-  styleUrls: ['./setup-donation.component.css'],
-  providers: [OrganisationsService]
+  styleUrls: ['./setup-donation.component.css']
 })
 export class SetupDonationComponent implements OnInit {
   organisation = DATA[0];
@@ -15,18 +13,13 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
-  paymentMethodId = '';
 
 
-  constructor(private router: Router, private orgService: OrganisationsService) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.orgService.getByMediumId('61f7ed014e4c0121c005.c00000000001').then((incomingOrg) => {
-      this.organisation.name = incomingOrg.organisationName;
-      this.organisation.goal = incomingOrg.goal;
-      this.organisation.thamkYou = incomingOrg.thankYou
-      this.organisation.amounts = AmountData.fromAmounts(incomingOrg.amounts)
-    })
+    this.organisation = this.route.snapshot.data['organisation']
+    this.organisation.amounts = AmountData.fromAmounts(this.route.snapshot.data['organisation'].amounts)
   }
 
   async submit() {
@@ -40,12 +33,9 @@ export class SetupDonationComponent implements OnInit {
       } else {
         amount = this.currentSelected.value
       }
-      await this.orgService.postDonation(amount).then((incomingPaymentMethodId: PaymentMethodId) => {
-        console.log(incomingPaymentMethodId);
-        this.paymentMethodId = incomingPaymentMethodId.paymentMethodId
-      })
-      console.log(this.paymentMethodId)
-      await this.router.navigate(['/payment'])
+
+      /*let paymentMethodId = await this.orgService.postDonation(amount)
+      await this.router.navigate(['/payment'], {queryParams: {'paymentMethodId': paymentMethodId.paymentMethodId}})*/
     }
     this.mainGiveButtonDisabled = false
   }
