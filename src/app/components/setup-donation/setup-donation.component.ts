@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {AmountData, DATA, IncomingOrganisation} from "../../models/organisation";
+import {AmountData, DATA} from "../../models/organisation";
 import {OrganisationsService, PaymentMethodId} from '../../services/organisations.service'
 
 @Component({
