@@ -39,11 +39,9 @@ export class SetupDonationComponent implements OnInit {
       } else {
         amount = this.currentSelected.value
       }
-      let paymentMethodId: string;
-      this.orgService.postDonation(amount).then((incomingPaymentMethodId: PaymentMethodId) => {
-        paymentMethodId = incomingPaymentMethodId.paymentMethodId
-        this.router.navigate(['/payment'], {queryParams: {'paymentMethodId': paymentMethodId}})
-      })
+
+      let paymentMethodId = await this.orgService.postDonation(amount)
+      await this.router.navigate(['/payment'], {queryParams: {'paymentMethodId': paymentMethodId.paymentMethodId}})
     }
     this.mainGiveButtonDisabled = false
   }
