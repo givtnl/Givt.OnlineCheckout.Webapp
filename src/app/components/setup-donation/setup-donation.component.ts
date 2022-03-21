@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AmountData, DATA} from "../../models/organisation";
 
@@ -18,7 +18,9 @@ export class SetupDonationComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.organisation = this.route.snapshot.data['organisation']
+    let data = this.route.snapshot.data['organisation'];
+    this.organisation = data
+    this.organisation.name = data.organisationName
     this.organisation.amounts = AmountData.fromAmounts(this.route.snapshot.data['organisation'].amounts)
   }
 
@@ -34,8 +36,8 @@ export class SetupDonationComponent implements OnInit {
         amount = this.currentSelected.value
       }
 
-      /*let paymentMethodId = await this.orgService.postDonation(amount)
-      await this.router.navigate(['/payment'], {queryParams: {'paymentMethodId': paymentMethodId.paymentMethodId}})*/
+      localStorage.setItem('amount', String(amount));
+      await this.router.navigate(['/payment'])
     }
     this.mainGiveButtonDisabled = false
   }

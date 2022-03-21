@@ -51,3 +51,11 @@ export class AmountData {
 export const DATA = [
   new Organisation(0,'','',[], '')
 ];
+
+export class PaymentMethodId {
+  paymentMethodId: string;
+
+  constructor(paymentMethodId: string) {
+    this.paymentMethodId = paymentMethodId;
+  }
+}
