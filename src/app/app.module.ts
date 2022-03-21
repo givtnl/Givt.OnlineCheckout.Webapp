@@ -10,9 +10,9 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { AmountsComponent } from './components/setup-donation/amount/amounts.component';
 import { ReceiptComponent } from './components/setup-donation/receipt/receipt.component';
 import { HttpClientModule } from "@angular/common/http";
-import { ApplicationService } from "./services/application.service";
-import { OrganisationResolver } from "./services/organisation.resolver";
 import { ErrorComponent } from './components/error/error.component';
+import { OrganisationResolver } from "./resolvers/organisation.resolver";
+import {DonationResolver} from "./resolvers/donation.resolver";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ErrorComponent } from './components/error/error.component';
     HttpClientModule,
     NgxStripeModule.forRoot('pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P'),
   ],
-  providers: [ApplicationService, OrganisationResolver],
+  providers: [OrganisationResolver, DonationResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
