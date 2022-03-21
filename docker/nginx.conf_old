@@ -10,13 +10,13 @@ http {
     default_type  application/octet-stream;
     # Browser preferred language detection (does NOT require
     # AcceptLanguageModule)
-    map $http_accept_language $accept_language {
-        ~*^de de;
-        ~*^nl nl;
-        ~*^en en;
-        ~*^en-GB en-GB;
-        ~*^en-US en-US;
-    }
+    # map $http_accept_language $accept_language {
+    #     ~*^de de;
+    #     ~*^nl nl;
+    #     ~*^en en;
+    #     ~*^en-GB en-GB;
+    #     ~*^en-US en-US;
+    # }
 
     gzip on;
     gzip_comp_level 1;
@@ -32,23 +32,19 @@ http {
         listen 80;
         listen [::]:80;
 
-        # Fallback to default language if no preference defined by browser
-        if ($accept_language ~ "^$") {
-            set $accept_language "en";
-        }
+        # # Fallback to default language if no preference defined by browser
+        # if ($accept_language ~ "^$") {
+        #     set $accept_language "en";
+        # }
 
-        # Redirect "/" to Angular application in the preferred language of the browser
-        rewrite ^/$ /$accept_language permanent;
+        # # Redirect "/" to Angular application in the preferred language of the browser
+        # rewrite ^/$ /$accept_language permanent;
 
-        # Everything under the Angular application is always redirected to Angular in the
-        # correct language
-        location ~ ^/(de|nl|en) {
-            try_files $uri $uri/ /$1/index.html?$args;
-        }
-
-        location ~* \.(js|css|txt|svg|ico|ttf)$ {
-            try_files $uri /$accept_language/$uri;
-        }
+        # # Everything under the Angular application is always redirected to Angular in the
+        # # correct language
+        # location ~ ^/(de|nl|en) {
+        #     try_files $uri /$1/index.html?$args;
+        # }
 
         location = /favicon.ico {
             log_not_found off;
@@ -60,6 +56,10 @@ http {
             log_not_found off;
             access_log off;
         }
+
+        location / {
+			try_files $uri $uri/ /index.html =404;
+		}
 
         location ~ ^/sites/.*/private/ {
             return 403;

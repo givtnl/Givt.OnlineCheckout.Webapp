@@ -1,4 +1,8 @@
 FROM nginx:mainline-alpine-perl
-RUN mkdir -p /home/site/wwwroot
-COPY conf /etc/nginx
-COPY ./dist/givt-online-checkout /home/site/wwwroot
+
+# COPY index.html /usr/share/nginx/html
+COPY docker/nginx.default.conf /etc/nginx/nginx.conf
+COPY docker/default.conf /etc/nginx/conf.d/default.conf
+COPY ./dist/givt-online-checkout /usr/share/nginx/html
+
+EXPOSE 80
