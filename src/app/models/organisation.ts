@@ -19,14 +19,14 @@ export class Organisation {
   name: string;
   goal: string;
   amounts: AmountData[]
-  thamkYou: string
+  thankYou: string
 
   constructor(id: number, name: string, goal: string, amounts: AmountData[], thankYou: string) {
     this.id = id;
     this.name = name;
     this.goal = goal;
     this.amounts = amounts;
-    this.thamkYou = thankYou;
+    this.thankYou = thankYou;
   }
 }
 
