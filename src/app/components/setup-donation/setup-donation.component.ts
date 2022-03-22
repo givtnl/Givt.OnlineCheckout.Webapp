@@ -13,7 +13,9 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
+  continueButtonDisabled = false;
   email = '';
+  given = false;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -24,6 +26,7 @@ export class SetupDonationComponent implements OnInit {
 
   async submit() {
     this.mainGiveButtonDisabled = true
+
     if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
       return
     } else {
@@ -37,12 +40,15 @@ export class SetupDonationComponent implements OnInit {
         amount = this.currentSelected.value
       }
 
-      console.log(amount)
       localStorage.setItem('amount', String(amount));
-      await this.router.navigate(['/payment'])
-
+      this.given = true;
     }
-    this.mainGiveButtonDisabled = false
+  }
+
+  async submitEmail() {
+    if (SetupDonationComponent.isValidEmail(this.email)) {
+      await this.router.navigate(['/payment'])
+    }
   }
 
   setCurrentSelected(event: AmountData) {
@@ -60,18 +66,29 @@ export class SetupDonationComponent implements OnInit {
     this.mainGiveButtonDisabled = !SetupDonationComponent.isValidCustomAmount(this.customAmount);
   }
 
-
-  /*saveEmail(event: string) {
+  saveEmail(event: string) {
     this.email = event;
-    this.mainGiveButtonDisabled = !SetupDonationComponent.isValidEmail(this.email);
-  }*/
+    this.continueButtonDisabled = !SetupDonationComponent.isValidEmail(this.email);
+  }
+
+  determineDisabledPropForContinueButton(event: boolean) {
+    if (event) {
+      if (!SetupDonationComponent.isValidEmail(this.email)) {
+        this.continueButtonDisabled = true
+      } else {
+        this.continueButtonDisabled = false
+      }
+    } else {
+      this.continueButtonDisabled = false
+    }
+  }
 
   private static isValidCustomAmount(amount: number): boolean {
     return amount >= .25 && amount <= 25000;
   }
 
-  /*private static isValidEmail(email: string): boolean {
+  private static isValidEmail(email: string): boolean {
     let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return regexp.test(email)
-  }*/
+  }
 }
