@@ -1,14 +1,20 @@
 <div class="centered-container top-container">
-  <img  class="logo" src="/assets/givt_logo.svg"/>
+  <img  class="logo" src="/assets/givt_logo.svg" alt="Givt Logo"/>
 </div>
 <div>
-  <div class="page1-margin">
-    <div class="centered-container">
-      <h1 class="title">Give to {{organisation.name}}</h1>
-      <h2 class="subtitle custom-border">{{organisation.goal}}</h2>
-      <app-amounts [values]="organisation.amounts" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
-      <app-receipt></app-receipt>
+  <div>
+    <div class="backdrop" *ngIf="given" (click)="given=false; mainGiveButtonDisabled=false"></div>
+    <div class="page1-margin">
+      <div class="centered-container">
+        <h1 class="title">Give to {{organisation.name}}</h1>
+        <h2 class="subtitle custom-border">{{organisation.goal}}</h2>
+        <app-amounts [values]="organisation.amounts" [currency]="organisation.currency" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
+      </div>
     </div>
+    <button (click)="submit()" class="button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled">Give</button>
   </div>
-  <button (click)="submit()" class="button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled">Give</button>
+  <div class="email-container" *ngIf="given">
+    <app-receipt (emailChanged)="saveEmail($event)" (emailShownChanged)="determineDisabledPropForContinueButton($event)"></app-receipt>
+    <button class="button" [ngClass]="{'button-disabled': continueButtonDisabled}" [disabled]="continueButtonDisabled" (click)="submitEmail()">Continue</button>
+  </div>
 </div>

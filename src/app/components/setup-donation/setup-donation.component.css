@@ -12,9 +12,22 @@
   margin-bottom: 20px;
 }
 
-
-
 .page1-margin {
   margin-top: 40px;
   margin-bottom: 20px;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ABAAAA;
+  opacity: .5;
+}
+
+.email-container {
+  position: relative;
+  margin: 0 auto;
 }

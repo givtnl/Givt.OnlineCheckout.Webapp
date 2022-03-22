@@ -2,7 +2,7 @@
   <div class="presets-container">
     <div class="input-container" *ngFor="let widget of values">
       <input class="radio-input" type="radio" name="amount" id="{{widget.id}}" (click)="closeAmount(); itemClickedEvent(widget.id, widget.value)">
-      <label class="container-radio" for="{{widget.id}}">{{widget.value}}</label>
+      <label class="container-radio" for="{{widget.id}}">{{currencySymbol + ' ' + widget.value}}</label>
     </div>
     <input class="radio-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
   </div>
@@ -10,6 +10,6 @@
   <button (click)="toggleAmount()" class="button button-small">Choose a different amount</button>
 
   <div class="amount-container" [ngClass]="{'not-shown': !customAmountInputShown}">
-    <span class="currency-symbol">€<input type="number" id="custom-amount-input" class="currency-input" (input)="sendAmount($event)"/></span>
+    <span class="currency-symbol">{{this.currencySymbol}}<input type="number" id="custom-amount-input" class="currency-input" (input)="sendAmount($event)"/></span>
   </div>
 </div>

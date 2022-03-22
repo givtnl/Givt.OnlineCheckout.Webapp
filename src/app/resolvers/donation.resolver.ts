@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {PaymentMethodId} from '../models/organisation'
+import {PaymentMethodId} from '../models/models'
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom, Observable} from "rxjs";

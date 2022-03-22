@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AmountData, DATA} from "../../models/organisation";
+import {AmountData, DATA, Organisation} from "../../models/models";
 
 @Component({
   selector: 'app-setup-donation',
@@ -13,33 +13,41 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
-
+  continueButtonDisabled = false;
+  email = '';
+  given = false;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let data = this.route.snapshot.data['organisation'];
-    this.organisation = data
-    this.organisation.name = data.organisationName
-    this.organisation.amounts = AmountData.fromAmounts(this.route.snapshot.data['organisation'].amounts)
+    let incomingOrganisation = this.route.snapshot.data['organisation'];
+    this.organisation = Organisation.fromIncomingOrganisation(incomingOrganisation)
   }
 
   async submit() {
     this.mainGiveButtonDisabled = true
+
     if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
       return
     } else {
       let amount = 0;
       if (this.inputMode) {
-        amount = this.customAmount
+        amount = Math.round(this.customAmount * 100) / 100
+        if (!SetupDonationComponent.isValidCustomAmount(amount)) {
+          return
+        }
       } else {
         amount = this.currentSelected.value
       }
 
       localStorage.setItem('amount', String(amount));
-      await this.router.navigate(['/payment'])
+      this.given = true;
     }
-    this.mainGiveButtonDisabled = false
+  }
+
+  async submitEmail() {
+    localStorage.setItem('email', this.email);
+    await this.router.navigate(['/payment'])
   }
 
   setCurrentSelected(event: AmountData) {
@@ -49,11 +57,37 @@ export class SetupDonationComponent implements OnInit {
 
   setInputMode(inputMode: boolean) {
     this.inputMode = inputMode;
-    this.mainGiveButtonDisabled = !(this.inputMode && this.customAmount > 0);
+    this.mainGiveButtonDisabled = !(this.inputMode && SetupDonationComponent.isValidCustomAmount(this.customAmount));
   }
 
   saveCustomAmount(customAmount: number) {
     this.customAmount = customAmount;
-    this.mainGiveButtonDisabled = this.customAmount <= 0;
+    this.mainGiveButtonDisabled = !SetupDonationComponent.isValidCustomAmount(this.customAmount);
+  }
+
+  saveEmail(event: string) {
+    this.email = event;
+    this.continueButtonDisabled = !SetupDonationComponent.isValidEmail(this.email);
+  }
+
+  determineDisabledPropForContinueButton(event: boolean) {
+    if (event) {
+      if (!SetupDonationComponent.isValidEmail(this.email)) {
+        this.continueButtonDisabled = true
+      } else {
+        this.continueButtonDisabled = false
+      }
+    } else {
+      this.continueButtonDisabled = false
+    }
+  }
+
+  private static isValidCustomAmount(amount: number): boolean {
+    return amount >= .25 && amount <= 25000;
+  }
+
+  private static isValidEmail(email: string): boolean {
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return regexp.test(email)
   }
 }
