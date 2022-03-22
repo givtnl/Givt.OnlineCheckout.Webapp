@@ -1,14 +1,13 @@
 /**------------------------------------------------------------------------------------------------**/
 /**----------------------------------------------- Title and subtitle Stylings --------------------**/
 .title {
-  font-size: 20px;
-  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .subtitle {
-  font-size: 25px;
-  line-height: 35px;
-  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
   margin-bottom: 20px;
 }
 
@@ -33,4 +32,11 @@
   margin: 0 auto;
   background-color: white;
   overflow: auto
+}
+
+.donate-button {
+  border-radius: 0;
+  width: 175px;
+  height: 50px;
+  transform: translateX(-41%);
 }
