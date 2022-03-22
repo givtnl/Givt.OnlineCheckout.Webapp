@@ -13,6 +13,7 @@ export class SetupDonationComponent implements OnInit {
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
+  email = '';
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -28,13 +29,18 @@ export class SetupDonationComponent implements OnInit {
     } else {
       let amount = 0;
       if (this.inputMode) {
-        amount = this.customAmount
+        amount = Math.round(this.customAmount * 100) / 100
+        if (!SetupDonationComponent.isValidCustomAmount(amount)) {
+          return
+        }
       } else {
         amount = this.currentSelected.value
       }
 
+      console.log(amount)
       localStorage.setItem('amount', String(amount));
-      await this.router.navigate(['/payment'])
+      //await this.router.navigate(['/payment'])
+
     }
     this.mainGiveButtonDisabled = false
   }
@@ -46,11 +52,26 @@ export class SetupDonationComponent implements OnInit {
 
   setInputMode(inputMode: boolean) {
     this.inputMode = inputMode;
-    this.mainGiveButtonDisabled = !(this.inputMode && this.customAmount > 0);
+    this.mainGiveButtonDisabled = !(this.inputMode && SetupDonationComponent.isValidCustomAmount(this.customAmount));
   }
 
   saveCustomAmount(customAmount: number) {
     this.customAmount = customAmount;
-    this.mainGiveButtonDisabled = this.customAmount <= 0;
+    this.mainGiveButtonDisabled = !SetupDonationComponent.isValidCustomAmount(this.customAmount);
   }
+
+
+  /*saveEmail(event: string) {
+    this.email = event;
+    this.mainGiveButtonDisabled = !SetupDonationComponent.isValidEmail(this.email);
+  }*/
+
+  private static isValidCustomAmount(amount: number): boolean {
+    return amount >= .25 && amount <= 25000;
+  }
+
+  /*private static isValidEmail(email: string): boolean {
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return regexp.test(email)
+  }*/
 }

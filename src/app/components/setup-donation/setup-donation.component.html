@@ -7,7 +7,7 @@
       <h1 class="title">Give to {{organisation.name}}</h1>
       <h2 class="subtitle custom-border">{{organisation.goal}}</h2>
       <app-amounts [values]="organisation.amounts" [currency]="organisation.currency" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
-      <app-receipt></app-receipt>
+      <!--<app-receipt (emailChanged)="saveEmail($event)"></app-receipt>-->
     </div>
   </div>
   <button (click)="submit()" class="button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled">Give</button>

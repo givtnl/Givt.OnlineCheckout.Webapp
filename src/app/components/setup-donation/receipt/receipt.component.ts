@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-receipt',
@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class ReceiptComponent implements OnInit {
   emailShown: boolean = false;
 
+  @Output()
+  emailChanged = new EventEmitter<string>()
+
   constructor() { }
 
   ngOnInit(): void {
@@ -15,5 +18,9 @@ export class ReceiptComponent implements OnInit {
 
   toggleEmail() {
     this.emailShown = !this.emailShown
+  }
+
+  emailChangedListener(event: any) {
+    this.emailChanged.emit(event.target.value)
   }
 }
