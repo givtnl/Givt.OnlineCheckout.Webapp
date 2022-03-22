@@ -46,9 +46,8 @@ export class SetupDonationComponent implements OnInit {
   }
 
   async submitEmail() {
-    if (SetupDonationComponent.isValidEmail(this.email)) {
-      await this.router.navigate(['/payment'])
-    }
+    localStorage.setItem('email', this.email);
+    await this.router.navigate(['/payment'])
   }
 
   setCurrentSelected(event: AmountData) {
