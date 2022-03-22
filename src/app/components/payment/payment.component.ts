@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StripeElementsOptions} from "@stripe/stripe-js";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PaymentMethodId} from "../../models/organisation";
+import {PaymentMethodId} from "../../models/models";
 
 @Component({
   selector: 'app-payment',

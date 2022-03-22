@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AmountData, DATA} from "../../models/organisation";
+import {AmountData, DATA, Organisation} from "../../models/models";
 
 @Component({
   selector: 'app-setup-donation',
@@ -14,14 +14,11 @@ export class SetupDonationComponent implements OnInit {
   customAmount = 0;
   mainGiveButtonDisabled = true;
 
-
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let data = this.route.snapshot.data['organisation'];
-    this.organisation = data
-    this.organisation.name = data.organisationName
-    this.organisation.amounts = AmountData.fromAmounts(this.route.snapshot.data['organisation'].amounts)
+    let incomingOrganisation = this.route.snapshot.data['organisation'];
+    this.organisation = Organisation.fromIncomingOrganisation(incomingOrganisation)
   }
 
   async submit() {

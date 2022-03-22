@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
-import {IncomingOrganisation} from "../models/organisation";
+import {IncomingOrganisation} from "../models/models";
 import {catchError, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 

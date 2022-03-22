@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
-import {AmountData} from "../../../models/organisation";
+import {AmountData, Currency} from "../../../models/models";
+import {getCurrencySymbol} from "../../../models/models";
 
 @Component({
   selector: 'app-amounts',
@@ -9,6 +10,9 @@ import {AmountData} from "../../../models/organisation";
 export class AmountsComponent implements OnInit {
   @Input()
   values: AmountData[] = []
+  @Input()
+  currency: Currency = 0;
+  currencySymbol: string = '€'
   @Output()
   presetClicked = new EventEmitter<AmountData>()
   customAmountInputShown: boolean = false
@@ -20,6 +24,7 @@ export class AmountsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.currencySymbol = getCurrencySymbol(this.currency)
   }
 
   itemClickedEvent(id: number, value: number) {
