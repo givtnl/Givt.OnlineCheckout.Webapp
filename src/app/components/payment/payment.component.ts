@@ -34,13 +34,6 @@ export class PaymentComponent implements OnInit {
     this.paying = true
     this.stripeService.confirmPayment({
       elements: this.paymentElement.elements,
-      confirmParams: {
-        payment_method_data: {
-          billing_details: {
-            name: "bjorn"
-          }
-        }
-      },
       redirect: 'if_required'
     }).subscribe(obj => {
       if (obj.paymentIntent) {

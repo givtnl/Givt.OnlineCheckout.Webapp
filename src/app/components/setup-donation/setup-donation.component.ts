@@ -39,7 +39,7 @@ export class SetupDonationComponent implements OnInit {
 
       console.log(amount)
       localStorage.setItem('amount', String(amount));
-      //await this.router.navigate(['/payment'])
+      await this.router.navigate(['/payment'])
 
     }
     this.mainGiveButtonDisabled = false
