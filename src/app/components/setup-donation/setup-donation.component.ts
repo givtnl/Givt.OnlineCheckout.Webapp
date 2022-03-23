@@ -82,6 +82,12 @@ export class SetupDonationComponent implements OnInit {
     }
   }
 
+  closeBackdrop() {
+    this.given=false;
+    this.mainGiveButtonDisabled=false;
+    this.email = "";
+  }
+
   private static isValidCustomAmount(amount: number): boolean {
     return amount >= .5 && amount <= 25000;
   }
