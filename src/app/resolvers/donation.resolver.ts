@@ -12,7 +12,6 @@ export class DonationResolver implements Resolve<PaymentMethodId> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PaymentMethodId> | Promise<PaymentMethodId> | PaymentMethodId {
     let amount = localStorage.getItem('amount');
     let medium = localStorage.getItem('medium');
-    console.log(environment)
     return firstValueFrom(this.http.post<PaymentMethodId>(environment.apiUrl + '/api/donation/intent', {
       "amount": amount,
       "medium": medium,
