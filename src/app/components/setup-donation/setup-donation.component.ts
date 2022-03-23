@@ -86,6 +86,7 @@ export class SetupDonationComponent implements OnInit {
     this.given=false;
     this.mainGiveButtonDisabled=false;
     this.email = "";
+    this.continueButtonDisabled=false;
   }
 
   private static isValidCustomAmount(amount: number): boolean {
