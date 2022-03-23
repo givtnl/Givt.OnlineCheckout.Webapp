@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@a
 import { IncomingOrganisation } from "../models/models";
 import { catchError, Observable, of } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class OrganisationResolver implements Resolve<IncomingOrganisation> {
@@ -12,8 +13,9 @@ export class OrganisationResolver implements Resolve<IncomingOrganisation> {
     try {
       let mediumIdEncoded = route.queryParams['code'];
       let mediumIdDecoded = atob(mediumIdEncoded);
-      localStorage.setItem('medium', mediumIdDecoded)
-      return this.http.get<IncomingOrganisation>('http://localhost:5000/api/medium?mediumid=' + mediumIdDecoded)
+      localStorage.setItem('medium', mediumIdDecoded);
+      console.log(environment)
+      return this.http.get<IncomingOrganisation>(environment.apiUrl + '/api/medium?mediumid=' + mediumIdDecoded)
         .pipe(catchError(async () => {
           await this.router.navigate(["/error"]);
           return of(false)

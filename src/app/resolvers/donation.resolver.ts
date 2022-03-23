@@ -3,6 +3,7 @@ import {PaymentMethodId} from '../models/models'
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom, Observable} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class DonationResolver implements Resolve<PaymentMethodId> {
@@ -11,7 +12,8 @@ export class DonationResolver implements Resolve<PaymentMethodId> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PaymentMethodId> | Promise<PaymentMethodId> | PaymentMethodId {
     let amount = localStorage.getItem('amount');
     let medium = localStorage.getItem('medium');
-    return firstValueFrom(this.http.post<PaymentMethodId>('http://localhost:5000/api/donation/intent', {
+    console.log(environment)
+    return firstValueFrom(this.http.post<PaymentMethodId>(environment.apiUrl + '/api/donation/intent', {
       "amount": amount,
       "medium": medium,
       'paymentMethod': 1
