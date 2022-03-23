@@ -4,7 +4,6 @@ import { SetupDonationComponent } from './setup-donation.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute} from "@angular/router";
 import {AmountData, Currency, IncomingOrganisation} from "../../models/models";
-import {AppComponent} from "../../app.component";
 import {AmountsComponent} from "./amount/amounts.component";
 
 describe('SetupDonationComponent', () => {
