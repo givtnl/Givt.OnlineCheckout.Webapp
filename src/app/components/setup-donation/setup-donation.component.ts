@@ -83,7 +83,7 @@ export class SetupDonationComponent implements OnInit {
   }
 
   private static isValidCustomAmount(amount: number): boolean {
-    return amount >= .25 && amount <= 25000;
+    return amount >= .5 && amount <= 25000;
   }
 
   private static isValidEmail(email: string): boolean {
