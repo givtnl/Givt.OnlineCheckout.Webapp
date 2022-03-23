@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SetupDonationComponent } from './setup-donation.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute} from "@angular/router";
-import {IncomingOrganisation} from "../../models/models";
+import {AmountData, Currency, IncomingOrganisation} from "../../models/models";
+import {AppComponent} from "../../app.component";
+import {AmountsComponent} from "./amount/amounts.component";
 
 describe('SetupDonationComponent', () => {
   let component: SetupDonationComponent;
@@ -25,6 +27,13 @@ describe('SetupDonationComponent', () => {
             }
           },
         },
+        {
+          provide: AmountsComponent,
+          useValue: {
+            values: [new AmountData(1,5), new AmountData(2, 7)],
+            currency: Currency.EUR
+          }
+        }
       ]
 
     })
@@ -39,5 +48,12 @@ describe('SetupDonationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(SetupDonationComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.title')?.textContent).toContain('Give to');
   });
 });

@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StripeService } from 'ngx-stripe';
-import { IncomingOrganisation } from 'src/app/models/models';
+import {StripeElementsService, StripePaymentElementComponent, StripeService} from 'ngx-stripe';
 import { PaymentComponent } from './payment.component';
 
 describe('PaymentComponent', () => {
@@ -11,20 +10,28 @@ describe('PaymentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaymentComponent ],
-      imports: [RouterTestingModule, StripeService],
+      declarations: [ PaymentComponent, StripePaymentElementComponent ],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             snapshot: {
               data: {
-                donation: "" 
+                donation: ""
               }
             }
           },
         },
-      StripeService
+        {
+          provide: StripeService,
+          useValue: {
+            NGX_STRIPE_VERSION: 1
+          }
+        },
+        {
+          provide: StripeElementsService
+        }
       ]
 
     })
