@@ -46,7 +46,7 @@ export class SetupDonationComponent implements OnInit {
   }
 
   async submitEmail() {
-    localStorage.setItem('email', this.email);
+    localStorage.setItem('email', this.email.trim());
     await this.router.navigate(['/payment'])
   }
 
@@ -95,6 +95,6 @@ export class SetupDonationComponent implements OnInit {
 
   private static isValidEmail(email: string): boolean {
     let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return regexp.test(email)
+    return regexp.test(email.trim())
   }
 }
