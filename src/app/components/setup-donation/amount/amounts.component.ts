@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
-import {AmountData, Currency} from "../../../models/models";
+import {AmountData} from "../../../models/models";
 import {getCurrencySymbol} from "../../../models/models";
 
 @Component({
@@ -11,7 +11,7 @@ export class AmountsComponent implements OnInit, AfterViewInit {
   @Input()
   values: AmountData[] = []
   @Input()
-  currency: Currency = 0;
+  currency: string = 'EUR';
   currencySymbol: string = '€'
   @Output()
   presetClicked = new EventEmitter<AmountData>()

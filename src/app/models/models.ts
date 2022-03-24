@@ -4,9 +4,9 @@ export class IncomingOrganisation {
   goal: string;
   amounts: number[];
   thankYou: string;
-  currency: number
+  currency: string
 
-  constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string, currency: number) {
+  constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string, currency: string) {
     this.amounts = amounts;
     this.goal = goal;
     this.medium = medium;
@@ -22,9 +22,9 @@ export class Organisation {
   goal: string;
   amounts: AmountData[]
   thankYou: string
-  currency: Currency
+  currency: string
 
-  constructor(id: string, name: string, goal: string, amounts: AmountData[], thankYou: string, currency: Currency) {
+  constructor(id: string, name: string, goal: string, amounts: AmountData[], thankYou: string, currency: string) {
     this.id = id;
     this.name = name;
     this.goal = goal;
@@ -57,7 +57,7 @@ export class AmountData {
 }
 
 export const DATA = [
-  new Organisation('','','',[], '', 0)
+  new Organisation('','','',[], '', 'EUR')
 ];
 
 export class PaymentMethodId {
@@ -68,17 +68,15 @@ export class PaymentMethodId {
   }
 }
 
-export enum Currency {
-  EUR, GBP, USD
-}
-
-export function getCurrencySymbol(currency: Currency) {
+export function getCurrencySymbol(currency: string) {
   switch (currency) {
-    case Currency.EUR:
+    case 'EUR':
       return '€'
-    case Currency.GBP:
+    case 'GBP':
       return '£'
-    case Currency.USD:
+    case 'USD':
       return '$'
+    default:
+      return ''
   }
 }
