@@ -48,11 +48,4 @@ describe('SetupDonationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(SetupDonationComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.title')?.textContent).toContain('Give to');
-  });
 });
