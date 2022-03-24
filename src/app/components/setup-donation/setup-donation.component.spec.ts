@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SetupDonationComponent } from './setup-donation.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute} from "@angular/router";
-import {AmountData, Currency, IncomingOrganisation} from "../../models/models";
+import {AmountData, IncomingOrganisation} from "../../models/models";
 import {AmountsComponent} from "./amount/amounts.component";
 
 describe('SetupDonationComponent', () => {
@@ -21,7 +21,7 @@ describe('SetupDonationComponent', () => {
           useValue: {
             snapshot: {
               data: {
-                organisation: new IncomingOrganisation([1,2,3], "goal", "medium", "name", "ty", 1)
+                organisation: new IncomingOrganisation([1,2,3], "goal", "medium", "name", "ty", "EUR")
               }
             }
           },
@@ -30,7 +30,7 @@ describe('SetupDonationComponent', () => {
           provide: AmountsComponent,
           useValue: {
             values: [new AmountData(1,5), new AmountData(2, 7)],
-            currency: Currency.EUR
+            currency: "EUR"
           }
         }
       ]
