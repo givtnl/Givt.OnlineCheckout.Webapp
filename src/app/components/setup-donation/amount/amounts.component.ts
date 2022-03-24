@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, Input, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
 import {AmountData, Currency} from "../../../models/models";
 import {getCurrencySymbol} from "../../../models/models";
 
@@ -7,7 +7,7 @@ import {getCurrencySymbol} from "../../../models/models";
   templateUrl: './amounts.component.html',
   styleUrls: ['./amounts.component.css']
 })
-export class AmountsComponent implements OnInit {
+export class AmountsComponent implements OnInit, AfterViewInit {
   @Input()
   values: AmountData[] = []
   @Input()
@@ -25,6 +25,11 @@ export class AmountsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currencySymbol = getCurrencySymbol(this.currency)
+    this.itemClickedEvent(this.values[1].id, this.values[1].value)
+  }
+
+  ngAfterViewInit(): void {
+    (document.getElementById('1') as HTMLInputElement).checked = true;
   }
 
   itemClickedEvent(id: number, value: number) {
