@@ -72,12 +72,12 @@
 
 .container-radio {
   margin: 0 auto;
-  padding: 10px 20px;
-  align-content: center;
-  display: flex;
-  flex-direction: column;
+  padding: 10px 15px;
   background-color: #BEDED0;
   color: white;
+  width: 40px;
+  box-sizing: content-box;
+  text-align: center;
 }
 
 .radio-input {
