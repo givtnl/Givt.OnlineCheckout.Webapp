@@ -37,6 +37,7 @@ export class PaymentComponent implements OnInit {
       redirect: 'if_required'
     }).subscribe(obj => {
       if (obj.paymentIntent) {
+        localStorage.clear()
         this.router.navigate(['/thank-you'])
       } else {
         console.log(obj.error)
