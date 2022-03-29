@@ -46,3 +46,9 @@
   border-radius: 15px;
 }
 
+@media (min-width: 600px) {
+  body {
+    width: 550px;
+    margin: 0 auto;
+  }
+}

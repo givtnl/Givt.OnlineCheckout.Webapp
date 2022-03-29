@@ -1,3 +1,8 @@
+.currency-div {
+  width: 245px;
+  margin: 0 auto;
+}
+
 .currency-symbol {
   display: flex;
   flex-direction: row;
@@ -6,7 +11,7 @@
   background: white;
   border: black 2px solid;
   height: 40px;
-  width: 100%;
+  width: 245px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -15,12 +20,13 @@
   color: black;
   margin-bottom: 15px;
   margin-top: 10px;
+  text-align: center;
 }
 
 .currency-input {
   background: white;
   height: 40px;
-  width: calc(100% - 40px);
+  width: 205px;
   padding-left: 8px;
   border: none;
   border-top: black 2px solid;

@@ -10,7 +10,7 @@
 
   <div (click)="toggleAmount()" class="other-amount" [ngClass]="{'not-shown': customAmountInputShown}">Choose a different amount</div>
 
-  <div [ngClass]="{'not-shown': !customAmountInputShown}">
+  <div [ngClass]="{'not-shown': !customAmountInputShown}" class="currency-div">
     <span class="currency-symbol">{{this.currencySymbol}}<input type="number" id="custom-amount-input" class="currency-input" (input)="sendAmount($event)"/></span>
   </div>
 </div>
