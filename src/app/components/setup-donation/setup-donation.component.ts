@@ -10,17 +10,19 @@ import {AmountData, Organisation, PaymentMethodTile} from "../../models/models";
 export class SetupDonationComponent implements OnInit {
   organisation!: Organisation
   currentSelected!: AmountData
+  currentSelectedPaymentMethod: PaymentMethodTile | undefined
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
-  continueButtonDisabled = false;
   email = '';
 
+  private imgFolder = "../../../assets/paymentMethodIcons/"
+
   paymentMethods: PaymentMethodTile[] = [
-    new PaymentMethodTile("bc", "bancontact", "../../../assets/paymentMethodIcons/bancontact.svg"),
-    new PaymentMethodTile("ap", "Apple Pay", "../../../assets/paymentMethodIcons/apay.svg"),
-    new PaymentMethodTile("gp", "Google Pay", "../../../assets/paymentMethodIcons/gpay.svg"),
-    new PaymentMethodTile("cc", "Credit card", "../../../assets/paymentMethodIcons/cc.svg")
+    new PaymentMethodTile("bc", "bancontact", this.imgFolder + "bancontact.svg"),
+    new PaymentMethodTile("ap", "Apple Pay", this.imgFolder + "apay.svg"),
+    new PaymentMethodTile("gp", "Google Pay", this.imgFolder + "gpay.svg"),
+    new PaymentMethodTile("cc", "Credit card", this.imgFolder + "cc.svg")
   ]
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -28,6 +30,7 @@ export class SetupDonationComponent implements OnInit {
   ngOnInit(): void {
     let incomingOrganisation = this.route.snapshot.data['organisation'];
     this.organisation = Organisation.fromIncomingOrganisation(incomingOrganisation)
+    this.mainGiveButtonDisabled = true
   }
 
   async submit() {
@@ -51,23 +54,38 @@ export class SetupDonationComponent implements OnInit {
     }
   }
 
-
-
   setCurrentSelected(event: AmountData) {
     this.currentSelected = event;
-    this.mainGiveButtonDisabled = false;
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
   setInputMode(inputMode: boolean) {
     this.inputMode = inputMode;
-    this.mainGiveButtonDisabled = !(this.inputMode && SetupDonationComponent.isValidCustomAmount(this.customAmount));
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
   saveCustomAmount(customAmount: number) {
     this.customAmount = customAmount;
-    this.mainGiveButtonDisabled = !SetupDonationComponent.isValidCustomAmount(this.customAmount);
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
+  setCurrentSelectedPaymentMethod(event: any) {
+    let paymentMethodsCopy = [...this.paymentMethods]
+    this.currentSelectedPaymentMethod = paymentMethodsCopy.filter(tile => tile.id == event.target.id).pop();
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
+  }
+
+  private determineMainButtonDisabled() {
+    if (this.inputMode) {
+      if (SetupDonationComponent.isValidCustomAmount(this.customAmount)) {
+        return this.currentSelectedPaymentMethod === undefined;
+      } else {
+        return true
+      }
+    } else {
+      return this.currentSelectedPaymentMethod === undefined;
+    }
+  }
 
   private static isValidCustomAmount(amount: number): boolean {
     return amount >= .5 && amount <= 25000;

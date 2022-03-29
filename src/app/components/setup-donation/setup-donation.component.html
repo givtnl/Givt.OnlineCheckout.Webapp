@@ -8,10 +8,9 @@
         <app-amounts [values]="organisation.amounts" [currency]="organisation.currency" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
     </div>
 
-
     <div class="payment-method-container">
       <div *ngFor="let paymentMethod of paymentMethods">
-        <input class="radio-input" type="radio" name="payment-method" id="{{paymentMethod.id}}">
+        <input class="radio-input" type="radio" name="payment-method" id="{{paymentMethod.id}}" (click)="setCurrentSelectedPaymentMethod($event)">
         <label class="payment-method-tile" for="{{paymentMethod.id}}">
           <span class="helper"></span>
           <img src="{{paymentMethod.imgLoc}}" class="payment-method-image" alt="{{paymentMethod.name}}">

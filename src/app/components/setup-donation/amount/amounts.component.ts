@@ -43,6 +43,9 @@ export class AmountsComponent implements OnInit, AfterViewInit {
 
   toggleAmount() {
     this.customAmountInputShown = !this.customAmountInputShown
+    if (this.customAmountInputShown) {
+      document.getElementsByClassName('presets-title').item(0)!.innerHTML = "anything is good, really"
+    }
     this.inputModeChanged.emit(this.customAmountInputShown)
   }
 

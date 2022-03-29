@@ -22,6 +22,8 @@
   height: 50px;
 }
 
+/**** PAYMENT METHOD TILE STYLINGS ******/
+
 .payment-method-container {
   display: flex;
   flex-direction: row;
