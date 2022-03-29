@@ -30,6 +30,7 @@
 }
 
 .payment-method-tile {
+  position: relative;
   width: 75px;
   height: 75px;
   box-shadow: 2px 2px 8px rgba(0,0,0,.1);
@@ -46,6 +47,15 @@
   vertical-align: middle;
 }
 
+.payment-method-checkmark {
+  display: none;
+  position: absolute;
+  top: -9.5px;
+  right: -9.5px;
+  background: white;
+  border-radius: 50px;
+}
+
 .radio-input {
   position: absolute;
   opacity: 0;
@@ -56,4 +66,8 @@
 
 .radio-input:checked + .payment-method-tile {
   border: #7DBDA1 2px solid;
+}
+
+.radio-input:checked + .payment-method-tile > .payment-method-checkmark {
+  display: inline-block;
 }
