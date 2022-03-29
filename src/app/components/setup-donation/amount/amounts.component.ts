@@ -14,12 +14,12 @@ export class AmountsComponent implements OnInit, AfterViewInit {
   currency: string = 'EUR';
   currencySymbol: string = '€'
   @Output()
-  presetClicked = new EventEmitter<AmountData>()
+  onPresetClick = new EventEmitter<AmountData>()
   customAmountInputShown: boolean = false
   @Output()
-  inputModeChanged = new EventEmitter<boolean>()
+  onInputModeChange = new EventEmitter<boolean>()
   @Output()
-  amountChanged = new EventEmitter<number>()
+  onAmountChange = new EventEmitter<number>()
 
   constructor() { }
 
@@ -33,12 +33,12 @@ export class AmountsComponent implements OnInit, AfterViewInit {
   }
 
   itemClickedEvent(id: number, value: number) {
-    this.presetClicked.emit(new AmountData(id,value,));
+    this.onPresetClick.emit(new AmountData(id,value,));
   }
 
   closeAmount() {
     this.customAmountInputShown = false
-    this.inputModeChanged.emit(this.customAmountInputShown)
+    this.onInputModeChange.emit(this.customAmountInputShown)
   }
 
   toggleAmount() {
@@ -46,10 +46,10 @@ export class AmountsComponent implements OnInit, AfterViewInit {
     if (this.customAmountInputShown) {
       document.getElementsByClassName('presets-title').item(0)!.innerHTML = "anything is good, really"
     }
-    this.inputModeChanged.emit(this.customAmountInputShown)
+    this.onInputModeChange.emit(this.customAmountInputShown)
   }
 
   sendAmount(event: any) {
-    this.amountChanged.emit(event.target.value);
+    this.onAmountChange.emit(event.target.value);
   }
 }

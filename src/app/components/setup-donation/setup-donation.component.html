@@ -5,7 +5,7 @@
         <h1 class="title">{{organisation.name}}</h1>
         <h2 class="subtitle">{{organisation.goal}}</h2>
       </div>
-        <app-amounts [values]="organisation.amounts" [currency]="organisation.currency" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
+        <app-amounts [values]="organisation.amounts" [currency]="organisation.currency" (onPresetClick)="setCurrentSelected($event)" (onInputModeChange)="setInputMode($event)" (onAmountChange)="saveCustomAmount($event)"></app-amounts>
     </div>
 
     <div class="payment-method-container">
@@ -18,6 +18,6 @@
         </label>
       </div>
     </div>
-    <button (click)="submit()" class="button donate-button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" style="position: absolute">Give</button>
+    <button (click)="submit()" class="button donate-button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" style="position: absolute">give</button>
   </div>
 </div>
