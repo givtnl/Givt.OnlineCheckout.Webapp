@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AmountData, DATA, Organisation} from "../../models/models";
+import {AmountData, Organisation} from "../../models/models";
 
 @Component({
   selector: 'app-setup-donation',
@@ -15,8 +15,6 @@ export class SetupDonationComponent implements OnInit {
   mainGiveButtonDisabled = true;
   continueButtonDisabled = false;
   email = '';
-  given = false;
-  userWantReceipt = false;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -42,15 +40,11 @@ export class SetupDonationComponent implements OnInit {
       }
 
       localStorage.setItem('amount', String(amount));
-      this.given = true;
+      await this.router.navigate(['/payment']);
     }
   }
 
-  async submitEmail() {
-    localStorage.setItem('taxReport', String(this.userWantReceipt));
-    localStorage.setItem('email', this.email!.trim());
-    await this.router.navigate(['/payment']);
-  }
+
 
   setCurrentSelected(event: AmountData) {
     this.currentSelected = event;
@@ -67,37 +61,8 @@ export class SetupDonationComponent implements OnInit {
     this.mainGiveButtonDisabled = !SetupDonationComponent.isValidCustomAmount(this.customAmount);
   }
 
-  saveEmail(event: string) {
-    this.email = event;
-    this.continueButtonDisabled = !SetupDonationComponent.isValidEmail(this.email);
-  }
-
-  determineDisabledPropForContinueButton(event: boolean) {
-    this.userWantReceipt = event
-    if (event) {
-      if (!SetupDonationComponent.isValidEmail(this.email)) {
-        this.continueButtonDisabled = true
-      } else {
-        this.continueButtonDisabled = false
-      }
-    } else {
-      this.continueButtonDisabled = false
-    }
-  }
-
-  closeBackdrop() {
-    this.given=false;
-    this.mainGiveButtonDisabled=false;
-    this.email = "";
-    this.continueButtonDisabled=false;
-  }
 
   private static isValidCustomAmount(amount: number): boolean {
     return amount >= .5 && amount <= 25000;
-  }
-
-  private static isValidEmail(email: string): boolean {
-    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return regexp.test(email.trim())
   }
 }

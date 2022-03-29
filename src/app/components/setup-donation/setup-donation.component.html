@@ -3,7 +3,6 @@
 </div>
 <div>
   <div>
-    <div class="backdrop" *ngIf="given" (click)="closeBackdrop()"></div>
     <div class="page1-margin">
       <div class="centered-container">
         <h1 class="title">{{organisation.name}}</h1>
@@ -12,9 +11,5 @@
       </div>
     </div>
     <button (click)="submit()" class="button donate-button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled">Give</button>
-  </div>
-  <div class="email-container" *ngIf="given">
-    <app-receipt (emailChanged)="saveEmail($event)" (emailShownChanged)="determineDisabledPropForContinueButton($event)"></app-receipt>
-    <button class="button" [ngClass]="{'button-disabled': continueButtonDisabled}" [disabled]="continueButtonDisabled" (click)="submitEmail()">Continue</button>
   </div>
 </div>
