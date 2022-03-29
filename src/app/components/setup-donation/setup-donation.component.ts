@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AmountData, Organisation} from "../../models/models";
+import {AmountData, Organisation, PaymentMethodTile} from "../../models/models";
 
 @Component({
   selector: 'app-setup-donation',
@@ -15,6 +15,13 @@ export class SetupDonationComponent implements OnInit {
   mainGiveButtonDisabled = true;
   continueButtonDisabled = false;
   email = '';
+
+  paymentMethods: PaymentMethodTile[] = [
+    new PaymentMethodTile("bc", "bancontact", "../../../assets/paymentMethodIcons/bancontact.svg"),
+    new PaymentMethodTile("ap", "Apple Pay", "../../../assets/paymentMethodIcons/apay.svg"),
+    new PaymentMethodTile("gp", "Google Pay", "../../../assets/paymentMethodIcons/gpay.svg"),
+    new PaymentMethodTile("cc", "Credit card", "../../../assets/paymentMethodIcons/cc.svg")
+  ]
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 

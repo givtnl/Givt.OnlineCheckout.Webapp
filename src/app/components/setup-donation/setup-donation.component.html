@@ -1,15 +1,23 @@
-<div class="centered-container top-container">
-  <img  class="logo" src="/assets/givt_logo.svg" alt="Givt Logo"/>
-</div>
 <div>
   <div>
     <div class="page1-margin">
       <div class="centered-container">
         <h1 class="title">{{organisation.name}}</h1>
         <h2 class="subtitle">{{organisation.goal}}</h2>
+      </div>
         <app-amounts [values]="organisation.amounts" [currency]="organisation.currency" (presetClicked)="setCurrentSelected($event)" (inputModeChanged)="setInputMode($event)" (amountChanged)="saveCustomAmount($event)"></app-amounts>
+    </div>
+
+
+    <div class="payment-method-container">
+      <div *ngFor="let paymentMethod of paymentMethods">
+        <input class="radio-input" type="radio" name="payment-method" id="{{paymentMethod.id}}">
+        <label class="payment-method-tile" for="{{paymentMethod.id}}">
+          <span class="helper"></span>
+          <img src="{{paymentMethod.imgLoc}}" class="payment-method-image" alt="{{paymentMethod.name}}">
+        </label>
       </div>
     </div>
-    <button (click)="submit()" class="button donate-button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled">Give</button>
+    <button (click)="submit()" class="button donate-button" [ngClass]="{'button-disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" style="position: absolute">Give</button>
   </div>
 </div>

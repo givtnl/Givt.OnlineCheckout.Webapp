@@ -21,3 +21,39 @@
   width: 175px;
   height: 50px;
 }
+
+.payment-method-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 105px;
+}
+
+.payment-method-tile {
+  width: 75px;
+  height: 75px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,.1);
+  text-align: center;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.payment-method-image {
+  vertical-align: middle;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radio-input:checked + .payment-method-tile {
+  border: #7DBDA1 2px solid;
+}

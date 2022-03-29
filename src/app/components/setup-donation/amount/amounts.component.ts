@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
-import {AmountData} from "../../../models/models";
+import {AmountData, PaymentMethodTile} from "../../../models/models";
 import {getCurrencySymbol} from "../../../models/models";
 
 @Component({
