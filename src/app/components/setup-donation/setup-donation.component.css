@@ -16,26 +16,60 @@
   margin-bottom: 20px;
 }
 
-.backdrop {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #ABAAAA;
-  opacity: .75;
-}
-
-.email-container {
-  position: relative;
-  width: 350px;
-  margin: 0 auto;
-  background-color: white;
-  overflow: auto
-}
-
 .donate-button {
   border-radius: 0;
   width: 175px;
   height: 50px;
+}
+
+/**** PAYMENT METHOD TILE STYLINGS ******/
+
+.payment-method-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 105px;
+}
+
+.payment-method-tile {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,.1);
+  text-align: center;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.payment-method-image {
+  vertical-align: middle;
+}
+
+.payment-method-checkmark {
+  display: none;
+  position: absolute;
+  top: -9.5px;
+  right: -9.5px;
+  background: white;
+  border-radius: 50px;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radio-input:checked + .payment-method-tile {
+  border: #7DBDA1 2px solid;
+}
+
+.radio-input:checked + .payment-method-tile > .payment-method-checkmark {
+  display: inline-block;
 }

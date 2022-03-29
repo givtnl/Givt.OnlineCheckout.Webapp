@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AmountData, DATA, Organisation} from "../../models/models";
+import {AmountData, Organisation, PaymentMethodTile} from "../../models/models";
 
 @Component({
   selector: 'app-setup-donation',
@@ -10,19 +10,27 @@ import {AmountData, DATA, Organisation} from "../../models/models";
 export class SetupDonationComponent implements OnInit {
   organisation!: Organisation
   currentSelected!: AmountData
+  currentSelectedPaymentMethod: PaymentMethodTile | undefined
   inputMode = false;
   customAmount = 0;
   mainGiveButtonDisabled = true;
-  continueButtonDisabled = false;
   email = '';
-  given = false;
-  userWantReceipt = false;
+
+  private imgFolder = "../../../assets/paymentMethodIcons/"
+
+  paymentMethods: PaymentMethodTile[] = [
+    new PaymentMethodTile("bc", "bancontact", this.imgFolder + "bancontact.svg"),
+    new PaymentMethodTile("ap", "Apple Pay", this.imgFolder + "apay.svg"),
+    new PaymentMethodTile("gp", "Google Pay", this.imgFolder + "gpay.svg"),
+    new PaymentMethodTile("cc", "Credit card", this.imgFolder + "cc.svg")
+  ]
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let incomingOrganisation = this.route.snapshot.data['organisation'];
     this.organisation = Organisation.fromIncomingOrganisation(incomingOrganisation)
+    this.mainGiveButtonDisabled = true
   }
 
   async submit() {
@@ -42,62 +50,44 @@ export class SetupDonationComponent implements OnInit {
       }
 
       localStorage.setItem('amount', String(amount));
-      this.given = true;
+      await this.router.navigate(['/payment']);
     }
-  }
-
-  async submitEmail() {
-    localStorage.setItem('taxReport', String(this.userWantReceipt));
-    localStorage.setItem('email', this.email!.trim());
-    await this.router.navigate(['/payment']);
   }
 
   setCurrentSelected(event: AmountData) {
     this.currentSelected = event;
-    this.mainGiveButtonDisabled = false;
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
   setInputMode(inputMode: boolean) {
     this.inputMode = inputMode;
-    this.mainGiveButtonDisabled = !(this.inputMode && SetupDonationComponent.isValidCustomAmount(this.customAmount));
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
   saveCustomAmount(customAmount: number) {
     this.customAmount = customAmount;
-    this.mainGiveButtonDisabled = !SetupDonationComponent.isValidCustomAmount(this.customAmount);
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
-  saveEmail(event: string) {
-    this.email = event;
-    this.continueButtonDisabled = !SetupDonationComponent.isValidEmail(this.email);
+  setCurrentSelectedPaymentMethod(event: any) {
+    let paymentMethodsCopy = [...this.paymentMethods]
+    this.currentSelectedPaymentMethod = paymentMethodsCopy.filter(tile => tile.id == event.target.id).pop();
+    this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
   }
 
-  determineDisabledPropForContinueButton(event: boolean) {
-    this.userWantReceipt = event
-    if (event) {
-      if (!SetupDonationComponent.isValidEmail(this.email)) {
-        this.continueButtonDisabled = true
+  private determineMainButtonDisabled() {
+    if (this.inputMode) {
+      if (SetupDonationComponent.isValidCustomAmount(this.customAmount)) {
+        return this.currentSelectedPaymentMethod === undefined;
       } else {
-        this.continueButtonDisabled = false
+        return true
       }
     } else {
-      this.continueButtonDisabled = false
+      return this.currentSelectedPaymentMethod === undefined;
     }
-  }
-
-  closeBackdrop() {
-    this.given=false;
-    this.mainGiveButtonDisabled=false;
-    this.email = "";
-    this.continueButtonDisabled=false;
   }
 
   private static isValidCustomAmount(amount: number): boolean {
     return amount >= .5 && amount <= 25000;
-  }
-
-  private static isValidEmail(email: string): boolean {
-    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return regexp.test(email.trim())
   }
 }

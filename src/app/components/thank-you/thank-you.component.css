@@ -33,3 +33,21 @@
 .thank-you-closing-text-link {
   font-weight: 800;
 }
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ABAAAA;
+  opacity: .75;
+}
+
+.email-container {
+  position: relative;
+  width: 350px;
+  margin: 0 auto;
+  background-color: white;
+  overflow: auto
+}

@@ -7,7 +7,7 @@ import { SetupDonationComponent } from './components/setup-donation/setup-donati
 import { PaymentComponent } from './components/payment/payment.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { AmountsComponent } from './components/setup-donation/amount/amounts.component';
-import { ReceiptComponent } from './components/setup-donation/receipt/receipt.component';
+import { ReceiptComponent } from './components/thank-you/receipt/receipt.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ErrorComponent } from './components/error/error.component';
 import { OrganisationResolver } from "./resolvers/organisation.resolver";

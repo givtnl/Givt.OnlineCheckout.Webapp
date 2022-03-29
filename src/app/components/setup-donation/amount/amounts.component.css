@@ -1,3 +1,8 @@
+.currency-div {
+  width: 245px;
+  margin: 0 auto;
+}
+
 .currency-symbol {
   display: flex;
   flex-direction: row;
@@ -6,7 +11,7 @@
   background: white;
   border: black 2px solid;
   height: 40px;
-  width: 100%;
+  width: 245px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -14,12 +19,14 @@
   line-height: 15px;
   color: black;
   margin-bottom: 15px;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .currency-input {
   background: white;
   height: 40px;
-  width: calc(100% - 40px);
+  width: 205px;
   padding-left: 8px;
   border: none;
   border-top: black 2px solid;
@@ -55,7 +62,9 @@
 
 .choose-amount-container {
   background-color: #F8F8F8;
-  padding: 40px 35px;
+  padding: 35px 35px;
+  margin-top: 65px;
+  margin-bottom: 35px;
 }
 
 /**------------------------------ Radio Buttons Stylings -------------------------------------------------**/
@@ -63,7 +72,8 @@
   padding: 15px 0 10px;
   display: flex;
   flex-direction: row;
-  justify-items: auto;
+  align-content: center;
+  width: 250px;
 }
 
 .input-container {
@@ -71,7 +81,6 @@
 }
 
 .container-radio {
-  margin: 0 auto;
   padding: 10px 15px;
   background-color: #BEDED0;
   color: white;
@@ -102,5 +111,4 @@
   line-height: 14px;
   text-decoration: underline;
   cursor: pointer;
-  margin-bottom: 20px;
 }

@@ -26,7 +26,7 @@
   width: 318px;
   height: 40px;
   color: white;
-  background-color: black;
+  background-color: #7DBDA1;
   justify-content: center;
   border-radius: 12px;
   border-style: none;
@@ -38,7 +38,7 @@
 }
 
 .button-disabled {
-  background-color: #ABAAAA;
+  background-color: #808080;
 }
 
 .custom-border {
@@ -46,3 +46,9 @@
   border-radius: 15px;
 }
 
+@media (min-width: 600px) {
+  body {
+    width: 550px;
+    margin: 0 auto;
+  }
+}
