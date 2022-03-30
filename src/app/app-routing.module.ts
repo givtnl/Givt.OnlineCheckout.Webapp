@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ErrorComponent } from './scenes/error/error.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
     path: 'thank-you',
     loadChildren: () =>
       import('./scenes/thank-you/thank-you.module').then((m) => m.ThankYouModule)
-  }
+  },
+  { path: 'error', component: ErrorComponent }
 ];
 
 @NgModule({
