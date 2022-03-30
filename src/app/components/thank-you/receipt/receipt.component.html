@@ -1,8 +1,0 @@
-<label class="container-checkbox">I would like a tax certificate for this donation
-  <input type="checkbox" (click)="toggleEmail()">
-  <span class="checkmark"></span>
-</label>
-<div class="util--centered-container" [ngClass]="{'not-shown': !emailShown}">
-  <label class="label" type="email">Email</label>
-  <input class="input" (input)="emailChangedListener($event)" />
-</div>
