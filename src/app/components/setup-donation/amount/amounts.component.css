@@ -1,9 +1,9 @@
-.currency-div {
+.custom-amount__input-container {
   width: 245px;
   margin: 0 auto;
 }
 
-.currency-symbol {
+.custom-amount__currency-symbol {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.currency-input {
+.custom-amount__currency-input {
   background: white;
   height: 40px;
   width: 205px;
@@ -38,29 +38,29 @@
   line-height: 15px;
 }
 
-.currency-input:focus {
+.custom-amount__currency-input:focus {
   outline: none;
 }
 
 /* Hide the qrrows from number input field */
 /* Chrome, Safari, Edge, Opera */
-.currency-input::-webkit-outer-spin-button,
-.currency-input::-webkit-inner-spin-button {
+.custom-amount__currency-input::-webkit-outer-spin-button,
+.custom-amount__currency-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 /* Firefox */
-.currency-input[type=number] {
+.custom-amount__currency-input[type=number] {
   -moz-appearance: textfield;
 }
 
-.presets-title {
+.presets__title {
   text-align: center;
   font-size: 16px;
   color: #7DBDA1;
 }
 
-.choose-amount-container {
+.amount__container {
   background-color: #F8F8F8;
   padding: 35px 35px;
   margin-top: 65px;
@@ -68,7 +68,7 @@
 }
 
 /**------------------------------ Radio Buttons Stylings -------------------------------------------------**/
-.presets-container {
+.presets__container {
   padding: 15px 0 10px;
   display: flex;
   flex-direction: row;
@@ -76,11 +76,11 @@
   width: 250px;
 }
 
-.input-container {
+.util--space-evenly {
   margin: 0 auto;
 }
 
-.container-radio {
+.presets__label {
   padding: 10px 15px;
   background-color: #BEDED0;
   color: white;
@@ -89,7 +89,7 @@
   text-align: center;
 }
 
-.radio-input {
+.presets__hide-input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -97,7 +97,7 @@
   width: 0;
 }
 
-.radio-input:checked + .container-radio{
+.presets__hide-input:checked + .presets__label{
   background-color: #7DBDA1;
 }
 
@@ -105,7 +105,7 @@
   display: none;
 }
 
-.other-amount {
+.custom-amount__title {
   text-align: center;
   font-size: 11px;
   line-height: 14px;

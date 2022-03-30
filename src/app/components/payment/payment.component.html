@@ -1,7 +1,7 @@
-<div class="centered-container top-container put-margin-bottom">
+<div class="util--centered-container util--align-center util--margin-bot-30">
   <img  class="logo" src="assets/givt_logo.svg"/>
 </div>
-<div class="centered-container">
+<div class="util--centered-container">
   <ngx-stripe-payment [elementsOptions]="elementsOptions" ></ngx-stripe-payment>
   <button [disabled]="paying" (click)="submitPayment()" style="width: 100%;" type="button" class="button" style="width: 320px">submit</button>
 </div>

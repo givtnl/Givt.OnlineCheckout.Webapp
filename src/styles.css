@@ -1,5 +1,5 @@
 /**------------------------------------------------ Logo Stylings ---------------------------------**/
-.top-container {
+.util--align-center {
   text-align: center;
 }
 
@@ -9,13 +9,13 @@
   align-content: center
 }
 
-.centered-container {
+.util--centered-container {
   display: block;
   margin: auto;
   width: 320px;
 }
 
-.put-margin-bottom {
+.util--margin-bot-30 {
   margin-bottom: 30px;
 }
 /**------------------------------------------------------------------------------------------------**/
@@ -37,13 +37,17 @@
   line-height: 20px;
 }
 
-.button-disabled {
-  background-color: #808080;
+.button--white {
+  background-color: white;
+  color: black;
 }
 
-.custom-border {
-  border: 3px solid #ABAAAA;
-  border-radius: 15px;
+.button--black {
+  background-color: black
+}
+
+.button--disabled {
+  background-color: #808080;
 }
 
 @media (min-width: 600px) {

@@ -1,22 +1,26 @@
 /**------------------------------------------------------------------------------------------------**/
 /**----------------------------------------------- Title and subtitle Stylings --------------------**/
-.title {
+.header__title {
   font-size: 22px;
   font-weight: 800;
 }
 
-.subtitle {
+.header__subtitle {
   font-size: 12px;
   line-height: 15px;
   margin-bottom: 20px;
 }
 
-.page1-margin {
+.header--margin {
   margin-top: 40px;
   margin-bottom: 20px;
 }
 
-.donate-button {
+.button--align-left {
+  position: absolute;
+}
+
+.button--no-border-radius {
   border-radius: 0;
   width: 175px;
   height: 50px;
@@ -24,14 +28,14 @@
 
 /**** PAYMENT METHOD TILE STYLINGS ******/
 
-.payment-method-container {
+.payment-method__container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 105px;
 }
 
-.payment-method-tile {
+.payment-method__tile {
   position: relative;
   width: 75px;
   height: 75px;
@@ -39,17 +43,17 @@
   text-align: center;
 }
 
-.helper {
+.payment-method__helper {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
 }
 
-.payment-method-image {
+.payment-method__image {
   vertical-align: middle;
 }
 
-.payment-method-checkmark {
+.payment-method__checkmark {
   display: none;
   position: absolute;
   top: -9.5px;
@@ -58,7 +62,7 @@
   border-radius: 50px;
 }
 
-.radio-input {
+.payment-method__hide-input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -66,10 +70,10 @@
   width: 0;
 }
 
-.radio-input:checked + .payment-method-tile {
+.payment-method__hide-input:checked + .payment-method__tile {
   border: #7DBDA1 2px solid;
 }
 
-.radio-input:checked + .payment-method-tile > .payment-method-checkmark {
+.payment-method__hide-input:checked + .payment-method__tile > .payment-method__checkmark {
   display: inline-block;
 }

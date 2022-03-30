@@ -1,16 +1,16 @@
-<div class="choose-amount-container">
-  <h2 class="presets-title">give as much as you want</h2>
-  <div class="presets-container centered-container" [ngClass]="{'not-shown': customAmountInputShown}">
-    <div class="input-container" *ngFor="let widget of values">
-      <input class="radio-input" type="radio" name="amount" id="{{widget.id}}" (click)="closeAmount(); itemClickedEvent(widget.id, widget.value)">
-      <label class="container-radio" for="{{widget.id}}">{{currencySymbol + ' ' + widget.value}}</label>
+<div class="amount__container">
+  <h2 class="presets__title">give as much as you want</h2>
+  <div class="presets__container util--centered-container" [ngClass]="{'not-shown': customAmountInputShown}">
+    <div class="util--space-evenly" *ngFor="let widget of values">
+      <input class="presets__hide-input" type="radio" name="amount" id="{{widget.id}}" (click)="closeAmount(); itemClickedEvent(widget.id, widget.value)">
+      <label class="presets__label" for="{{widget.id}}">{{currencySymbol + ' ' + widget.value}}</label>
     </div>
-    <input class="radio-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
+    <input class="presets__hide-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
   </div>
 
-  <div (click)="toggleAmount()" class="other-amount" [ngClass]="{'not-shown': customAmountInputShown}">Choose a different amount</div>
+  <div (click)="toggleAmount()" class="custom-amount__title" [ngClass]="{'not-shown': customAmountInputShown}">Choose a different amount</div>
 
-  <div [ngClass]="{'not-shown': !customAmountInputShown}" class="currency-div">
-    <span class="currency-symbol">{{this.currencySymbol}}<input type="number" id="custom-amount-input" class="currency-input" (input)="sendAmount($event)"/></span>
+  <div [ngClass]="{'not-shown': !customAmountInputShown}" class="custom-amount__input-container">
+    <span class="custom-amount__currency-symbol">{{this.currencySymbol}}<input type="number" id="custom-amount-input" class="custom-amount__currency-input" (input)="sendAmount($event)"/></span>
   </div>
 </div>
