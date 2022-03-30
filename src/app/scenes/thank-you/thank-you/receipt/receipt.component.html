@@ -1,1 +1,8 @@
-<p>receipt works!</p>
+<label class="container-checkbox">I would like a tax certificate for this donation
+    <input type="checkbox" (click)="toggleEmail()">
+    <span class="checkmark"></span>
+</label>
+<form [formGroup]="emailForm" class="util--centered-container" [ngClass]="{'not-shown': !emailShown}">
+    <label class="label" type="email">Email</label>
+    <input formControlName="email" class="input" (input)="emailChangedListener($event)" />
+</form>
