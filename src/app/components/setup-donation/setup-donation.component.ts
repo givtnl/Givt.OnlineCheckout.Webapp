@@ -20,7 +20,7 @@ export class SetupDonationComponent implements OnInit {
   private imgFolder = "../../../assets/paymentMethodIcons/"
 
   paymentMethods: PaymentMethodTile[] = [
-    new PaymentMethodTile("bc", "bancontact", this.imgFolder + "bancontact.svg", PaymentMethod.Bancontact),
+    new PaymentMethodTile("id", "Ideal", this.imgFolder + "ideal.svg", PaymentMethod.Ideal),
     new PaymentMethodTile("ap", "Apple Pay", this.imgFolder + "apay.svg",  PaymentMethod.Card),
     new PaymentMethodTile("gp", "Google Pay", this.imgFolder + "gpay.svg",  PaymentMethod.Card),
     new PaymentMethodTile("cc", "Credit card", this.imgFolder + "cc.svg",  PaymentMethod.Card)
