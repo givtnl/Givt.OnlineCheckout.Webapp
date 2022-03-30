@@ -33,6 +33,9 @@ export class PaymentComponent implements OnInit {
   submitPayment(): void {
     this.paying = true
     this.stripeService.confirmPayment({
+      confirmParams: {
+        return_url: "http://localhost:4200/thank-you"
+      },
       elements: this.paymentElement.elements,
       redirect: 'if_required'
     }).subscribe(obj => {

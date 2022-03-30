@@ -1,3 +1,5 @@
+import { PaymentMethod } from "./paymentmethod.enum";
+
 export class IncomingOrganisation {
   medium: string;
   organisationName: string;
@@ -85,10 +87,12 @@ export class PaymentMethodTile {
   id: string
   name: string
   imgLoc: string
+  paymentMethod: PaymentMethod;
 
-  constructor(id: string, name: string, imgLoc: string) {
+  constructor(id: string, name: string, imgLoc: string, paymentMethod: PaymentMethod) {
     this.id = id;
     this.name = name;
     this.imgLoc = imgLoc;
+    this.paymentMethod = paymentMethod;
   }
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import { PaymentMethod } from '../../models/paymentmethod.enum';
 import {AmountData, Organisation, PaymentMethodTile} from "../../models/models";
 
 @Component({
@@ -19,10 +20,10 @@ export class SetupDonationComponent implements OnInit {
   private imgFolder = "../../../assets/paymentMethodIcons/"
 
   paymentMethods: PaymentMethodTile[] = [
-    new PaymentMethodTile("bc", "bancontact", this.imgFolder + "bancontact.svg"),
-    new PaymentMethodTile("ap", "Apple Pay", this.imgFolder + "apay.svg"),
-    new PaymentMethodTile("gp", "Google Pay", this.imgFolder + "gpay.svg"),
-    new PaymentMethodTile("cc", "Credit card", this.imgFolder + "cc.svg")
+    new PaymentMethodTile("bc", "bancontact", this.imgFolder + "bancontact.svg", PaymentMethod.Bancontact),
+    new PaymentMethodTile("ap", "Apple Pay", this.imgFolder + "apay.svg",  PaymentMethod.Card),
+    new PaymentMethodTile("gp", "Google Pay", this.imgFolder + "gpay.svg",  PaymentMethod.Card),
+    new PaymentMethodTile("cc", "Credit card", this.imgFolder + "cc.svg",  PaymentMethod.Card)
   ]
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -50,6 +51,10 @@ export class SetupDonationComponent implements OnInit {
       }
 
       localStorage.setItem('amount', String(amount));
+      console.log(PaymentMethod.Bancontact.toString());
+      if (this.currentSelectedPaymentMethod)
+        localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.paymentMethod.toString()) // this is to store a number in localstorage
+
       await this.router.navigate(['/payment']);
     }
   }

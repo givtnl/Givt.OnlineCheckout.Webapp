@@ -12,10 +12,11 @@ export class DonationResolver implements Resolve<PaymentMethodId> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PaymentMethodId> | Promise<PaymentMethodId> | PaymentMethodId {
     let amount = localStorage.getItem('amount');
     let medium = localStorage.getItem('medium');
+    let paymentMethod = +localStorage.getItem('paymentMethod')!; // I get the number out of localstorage and sent that to the api
     return firstValueFrom(this.http.post<PaymentMethodId>(environment.apiUrl + '/api/donation/intent', {
       "amount": amount,
       "medium": medium,
-      'paymentMethod': 1
+      "paymentMethod": paymentMethod
     }));
   }
 }
