@@ -8,28 +8,16 @@
   margin-top: 40px;
   align-content: center
 }
-
-.util--centered-container {
-  display: block;
-  margin: auto;
-  width: 320px;
-}
-
-.util--margin-bot-30 {
-  margin-bottom: 30px;
-}
-
 /**------------------------------------------------------------------------------------------------**/
 /**------------------------------------------------ Button Stylings -------------------------------**/
 .button {
   display: block;
   margin: 20px auto;
   width: 318px;
-  height: 40px;
+  height: 50px;
   color: white;
   background-color: #7DBDA1;
   justify-content: center;
-  border-radius: 12px;
   border-style: none;
   font-family: Montserrat, sans-serif;
   font-style: normal;
@@ -47,6 +35,10 @@
   background-color: black
 }
 
+.button--green {
+    background-color: #7DBDA1;
+}
+
 .button--disabled {
   background-color: #808080;
 }
@@ -57,8 +49,20 @@
     height: 50px;
 }
 
-.button--no-border-radius {
-    border-radius: 0;
+/************** UTIL STUFF **************/
+
+.util--centered-container {
+    display: block;
+    margin: auto;
+    width: 320px;
+}
+
+.util--margin-bot-30 {
+    margin-bottom: 30px;
+}
+
+.util--full-width {
+    width: 100%;
 }
 
 @media (min-width: 600px) {
