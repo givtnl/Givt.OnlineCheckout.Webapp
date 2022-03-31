@@ -14,7 +14,7 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
       let mediumIdEncoded = route.queryParams['code'];
       let mediumIdDecoded = atob(mediumIdEncoded);
       localStorage.setItem('medium', mediumIdDecoded);
-      return this.http.get<OrganisationDto>(environment.apiUrl + '/api/medium?code=' + mediumIdDecoded)
+      return this.http.get<OrganisationDto>(environment.apiUrl + '/api/medium?code=' + mediumIdDecoded + '&locale=' + navigator.language)
         .pipe(catchError(async () => {
           await this.router.navigate(["/error"]);
           return of(false)
