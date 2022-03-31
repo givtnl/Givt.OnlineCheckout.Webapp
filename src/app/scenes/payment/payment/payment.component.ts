@@ -3,6 +3,7 @@ import { StripeElementsOptions } from "@stripe/stripe-js";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StripePaymentElementComponent, StripeService } from 'ngx-stripe';
 import PaymentMethod from '../../../shared/models/payment-methods/payment-method';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment',
@@ -33,6 +34,9 @@ export class PaymentComponent implements OnInit {
   submitPayment(): void {
     this.paying = true
     this.stripeService.confirmPayment({
+      confirmParams: {
+        return_url: environment.returnUrl
+      },
       elements: this.paymentElement.elements,
       redirect: 'if_required'
     }).subscribe(obj => {

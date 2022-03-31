@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000'
+  apiUrl: 'https://givtonlinecheckoutapidebug.azurewebsites.net',
+  returnUrl: 'https://givtonlinecheckoutwebappdebug.azurewebsites.net/thank-you'
 }
