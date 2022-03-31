@@ -1,0 +1,95 @@
+/** CHECKBOX HACK **/
+/* The container */
+.container-checkbox {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 25px;
+    padding-left: 35px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    content: url("/assets/checkmark.svg");
+    bottom: 2px;
+    left: 6px;
+}
+
+/**------------------------------------------------------------------------------------------------**/
+/**------------------------------------------------ Text Input & Label Stylings -------------------**/
+.label {
+    display: block;
+    margin: 20px auto 8px auto;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #abaaaa;
+}
+
+.input {
+    height: 40px;
+    width: 318px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    border: none;
+    padding-left: 16px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.not-shown {
+    display: none;
+}

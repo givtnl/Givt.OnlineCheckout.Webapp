@@ -1,0 +1,27 @@
+<div>
+    <div>
+        <div class="header--margin">
+            <div class="util--centered-container">
+                <h1 class="header__title">{{organisation.name}}</h1>
+                <h2 class="header__subtitle">{{organisation.goal}}</h2>
+            </div>
+            <app-amounts [values]="organisation.amounts" [currency]="organisation.currency"
+                (onPresetClick)="setCurrentSelected($event)" (onInputModeChange)="setInputMode($event)"
+                (onAmountChange)="saveCustomAmount($event)"></app-amounts>
+        </div>
+
+        <div class="payment-method__container">
+            <div *ngFor="let paymentMethod of paymentMethods">
+                <input class="payment-method__hide-input" type="radio" name="payment-method" id="{{paymentMethod.id}}"
+                    (click)="setCurrentSelectedPaymentMethod($event)">
+                <label class="payment-method__tile" for="{{paymentMethod.id}}">
+                    <span class="payment-method__helper"></span>
+                    <img src="{{paymentMethod.imgLoc}}" class="payment-method__image" alt="{{paymentMethod.name}}">
+                    <img src="assets/vinkje.svg" class="payment-method__checkmark">
+                </label>
+            </div>
+        </div>
+        <button (click)="submit()" class="button button--align-left button--no-border-radius"
+            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled">give</button>
+    </div>
+</div>
