@@ -17,7 +17,8 @@ export class DonationResolver implements Resolve<PaymentMethod> {
     return firstValueFrom(this.http.post<PaymentMethod>(environment.apiUrl + '/api/donation/intent', {
       "amount": amount,
       "medium": medium,
-      "paymentMethod": paymentMethod
+      "paymentMethod": paymentMethod,
+      "timezoneOffset": new Date().getTimezoneOffset()
     }));
   }
 }
