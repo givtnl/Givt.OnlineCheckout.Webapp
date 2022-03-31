@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PaymentMethod, StripeElementsOptions } from "@stripe/stripe-js";
+import { StripeElementsOptions } from "@stripe/stripe-js";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StripePaymentElementComponent, StripeService } from 'ngx-stripe';
+import PaymentMethod from '../../../shared/models/payment-methods/payment-method';
 
 @Component({
   selector: 'app-payment',
