@@ -2,7 +2,10 @@
     <img class="logo" src="assets/givt_logo.svg" />
 </div>
 <div class="util--centered-container">
-    <ngx-stripe-payment [elementsOptions]="elementsOptions"></ngx-stripe-payment>
-    <button [disabled]="paying" (click)="submitPayment()" style="width: 100%;" type="button" class="button"
-        style="width: 320px">submit</button>
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+    <div>
+        <ngx-stripe-payment [elementsOptions]="elementsOptions"></ngx-stripe-payment>
+        <button [disabled]="paying" (click)="submitPayment()" style="width: 100%;" type="button" class="button"
+                style="width: 320px">submit</button>
+    </div>
 </div>

@@ -1,38 +1,80 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$givt-online-checkout-primary: mat.define-palette(mat.$indigo-palette);
+$givt-online-checkout-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$givt-online-checkout-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$givt-online-checkout-theme: mat.define-light-theme((
+    color: (
+        primary: $givt-online-checkout-primary,
+        accent: $givt-online-checkout-accent,
+        warn: $givt-online-checkout-warn,
+    )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($givt-online-checkout-theme);
+
 /**------------------------------------------------ Logo Stylings ---------------------------------**/
 .util--align-center {
-  text-align: center;
+    text-align: center;
 }
 
 .logo {
-  display: inline-block;
-  margin-top: 40px;
-  align-content: center
+    display: inline-block;
+    margin-top: 40px;
+    align-content: center
 }
+
+mat-progress-spinner {
+    position: absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /**------------------------------------------------------------------------------------------------**/
 /**------------------------------------------------ Button Stylings -------------------------------**/
 .button {
-  display: block;
-  margin: 20px auto;
-  width: 318px;
-  height: 50px;
-  color: white;
-  background-color: #7DBDA1;
-  justify-content: center;
-  border-style: none;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
+    display: block;
+    margin: 20px auto;
+    width: 318px;
+    height: 50px;
+    color: white;
+    background-color: #7DBDA1;
+    justify-content: center;
+    border-style: none;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .button--white {
-  background-color: white;
-  color: black;
+    background-color: white;
+    color: black;
 }
 
 .button--black {
-  background-color: black
+    background-color: black
 }
 
 .button--green {
@@ -40,7 +82,7 @@
 }
 
 .button--disabled {
-  background-color: #808080;
+    background-color: #808080;
 }
 
 .button--align-left {
@@ -66,8 +108,17 @@
 }
 
 @media (min-width: 600px) {
-  body {
-    width: 550px;
-    margin: 0 auto;
-  }
+    body {
+        width: 550px;
+        margin: 0 auto;
+    }
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
