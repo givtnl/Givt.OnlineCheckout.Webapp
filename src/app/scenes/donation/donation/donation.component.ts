@@ -34,8 +34,7 @@ export class DonationComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        let incomingOrganisation = this.route.snapshot.data['organisation'];
-        this.organisation = Organisation.fromIncomingOrganisation(incomingOrganisation)
+        this.organisation = Organisation.fromIncomingOrganisation(this.route.snapshot.data['organisation'])
         this.mainGiveButtonDisabled = true
     }
 
@@ -55,6 +54,7 @@ export class DonationComponent implements OnInit {
                 amount = this.currentSelected.value;
             }
 
+            localStorage.setItem('organisationName', this.organisation.name)
             localStorage.setItem('amount', String(amount));
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.paymentMethod.toString()) // this is to store a number in localstorage
