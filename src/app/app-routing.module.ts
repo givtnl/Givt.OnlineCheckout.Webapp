@@ -15,9 +15,9 @@ const routes: Routes = [
             import('./scenes/payment/payment.module').then((m) => m.PaymentModule)
     },
     {
-        path: 'thank-you',
+        path: 'result',
         loadChildren: () =>
-            import('./scenes/thank-you/thank-you.module').then((m) => m.ThankYouModule)
+            import('./scenes/result/result.module').then((m) => m.ResultModule)
     },
     {
         path: 'error',

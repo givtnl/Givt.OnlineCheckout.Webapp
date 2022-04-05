@@ -9,9 +9,7 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
     CoreModule,
-
     AppRoutingModule,
   ],
   declarations: [AppComponent],

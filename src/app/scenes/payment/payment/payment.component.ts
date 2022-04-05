@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {StripeElementsOptions} from "@stripe/stripe-js";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StripePaymentElementComponent, StripeService} from 'ngx-stripe';
