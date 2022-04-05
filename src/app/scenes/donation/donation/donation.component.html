@@ -1,6 +1,7 @@
 <div>
     <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
     <div *ngIf="!(loading$ | async)">
+        <app-logos></app-logos>
         <div class="header--margin">
             <div class="util--centered-container">
                 <h1 class="header__title">{{organisation.name}}</h1>

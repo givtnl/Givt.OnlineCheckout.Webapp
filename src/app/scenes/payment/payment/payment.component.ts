@@ -15,6 +15,7 @@ export class PaymentComponent implements OnInit {
     @ViewChild(StripePaymentElementComponent) paymentElement!: StripePaymentElementComponent;
     paymentMethod: PaymentMethod | undefined
     loading$ = this.loader.loading$;
+    organisationName!: string
 
     paying: boolean = false
 
@@ -32,6 +33,7 @@ export class PaymentComponent implements OnInit {
 
     ngOnInit(): void {
         this.elementsOptions.clientSecret = this.route.snapshot.data['donation'].paymentMethodId;
+        this.organisationName = localStorage.getItem('organisationName')!
     }
 
     submitPayment(): void {
@@ -44,7 +46,6 @@ export class PaymentComponent implements OnInit {
             redirect: 'if_required'
         }).subscribe(obj => {
             if (obj.paymentIntent) {
-                localStorage.clear()
                 this.router.navigate(['/thank-you'])
             } else {
                 console.log(obj.error)

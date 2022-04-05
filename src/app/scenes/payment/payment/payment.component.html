@@ -1,11 +1,13 @@
-<div class="util--centered-container util--align-center util--margin-bot-30">
-    <img class="logo" src="assets/givt_logo.svg" />
-</div>
-<div class="util--centered-container">
+<app-logos></app-logos>
+<div class="util--centered-container" style="margin-top: 50px">
     <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
     <div>
+        <div class="header--margin">
+            <div class="util--centered-container">
+                <h1 class="header__title">{{organisationName}}</h1>
+            </div>
+        </div>
         <ngx-stripe-payment [elementsOptions]="elementsOptions"></ngx-stripe-payment>
-        <button [disabled]="paying" (click)="submitPayment()" style="width: 100%;" type="button" class="button"
-                style="width: 320px">submit</button>
+        <button [disabled]="paying" (click)="submitPayment()" type="button" class="util--centered-container button button--payment">submit</button>
     </div>
 </div>
