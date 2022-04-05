@@ -4,7 +4,7 @@ import {catchError, finalize, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import OrganisationDto from "src/app/shared/models/organisations/organisation-dto";
-import {LoadingService} from "../loading.service";
+import {LoadingService} from "../services/loading.service";
 
 @Injectable()
 export class OrganisationResolver implements Resolve<OrganisationDto> {

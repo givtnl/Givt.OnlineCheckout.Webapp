@@ -4,7 +4,7 @@ import AmountData from 'src/app/shared/models/donations/amount-data';
 import Organisation from 'src/app/shared/models/organisations/organisation';
 import {PaymentMethodType} from 'src/app/shared/models/payment-methods/payment-method-enum';
 import PaymentMethodTile from 'src/app/shared/models/payment-methods/payment-method-tile';
-import {LoadingService} from "../../../core/loading.service";
+import {LoadingService} from "../../../core/services/loading.service";
 
 @Component({
     selector: 'app-donation',

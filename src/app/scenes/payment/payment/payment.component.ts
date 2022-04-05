@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {StripePaymentElementComponent, StripeService} from 'ngx-stripe';
 import PaymentMethod from '../../../shared/models/payment-methods/payment-method';
 import {environment} from 'src/environments/environment';
-import {LoadingService} from "../../../core/loading.service";
+import {LoadingService} from "../../../core/services/loading.service";
 
 @Component({
     selector: 'app-payment',
