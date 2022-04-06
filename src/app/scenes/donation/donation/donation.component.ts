@@ -34,7 +34,7 @@ export class DonationComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.organisation = Organisation.fromIncomingOrganisation(this.route.snapshot.data['organisation'])
+        this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
     }
 

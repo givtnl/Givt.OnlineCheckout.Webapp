@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
-import {catchError, finalize, Observable, of} from "rxjs";
+import {catchError, finalize, map, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import OrganisationDto from "src/app/shared/models/organisations/organisation-dto";
 import {LoadingService} from "../services/loading.service";
+import Organisation from "../../shared/models/organisations/organisation";
 
 @Injectable()
 export class OrganisationResolver implements Resolve<OrganisationDto> {
@@ -18,6 +19,9 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             localStorage.setItem('medium', mediumIdDecoded);
             this.loader.show();
             return this.http.get<OrganisationDto>(environment.apiUrl + '/api/medium?code=' + mediumIdDecoded + '&locale=' + navigator.language)
+                .pipe(map((data) => {
+                    return Organisation.fromIncomingOrganisation(data)
+                }))
                 .pipe(catchError(async () => {
                     await this.router.navigate(["/error"]);
                     return of(false)
