@@ -9,7 +9,8 @@ export class PaymentGuard implements CanActivate{
         if (ls.getItem('medium') != null &&
             ls.getItem('paymentMethod') != null &&
             ls.getItem('organisationName') != null &&
-            ls.getItem('amount') != null
+            ls.getItem('amount') != null &&
+            ls.getItem('logoUrl') != null
         ) {
             return true
         } else {

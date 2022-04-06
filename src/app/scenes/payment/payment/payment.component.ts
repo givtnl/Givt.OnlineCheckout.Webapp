@@ -16,6 +16,7 @@ export class PaymentComponent implements OnInit {
     paymentMethod: PaymentMethod | undefined
     loading$ = this.loader.loading$;
     organisationName!: string
+    logoUrl!: string
 
     paying: boolean = false
 
@@ -33,7 +34,8 @@ export class PaymentComponent implements OnInit {
 
     ngOnInit(): void {
         this.elementsOptions.clientSecret = this.route.snapshot.data['donation'].paymentMethodId;
-        this.organisationName = localStorage.getItem('organisationName')!
+        this.organisationName = localStorage.getItem('organisationName')!;
+        this.logoUrl = localStorage.getItem('logoUrl')!;
     }
 
     submitPayment(): void {

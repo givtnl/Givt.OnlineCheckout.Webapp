@@ -1,5 +1,5 @@
-<app-logos></app-logos>
-<div class="util--centered-container" style="margin-top: 50px">
+<app-logos [logoUrl]="logoUrl"></app-logos>
+<div class="util--centered-container" style="margin-top: 100px">
     <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
     <div>
         <div class="header--margin">
