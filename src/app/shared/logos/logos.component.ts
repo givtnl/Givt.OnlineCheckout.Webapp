@@ -13,7 +13,6 @@ export class LogosComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.logoUrl)
     }
 
 }
