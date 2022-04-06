@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { CoreModule } from './core/core.module';
+import { NotFoundComponent } from './scenes/error/not-found/not-found.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     AppRoutingModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotFoundComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

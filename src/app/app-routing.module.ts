@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {ErrorComponent} from './scenes/error/error.component';
+import {ErrorComponent} from './scenes/error/unknown-code/error.component';
+import {NotFoundComponent} from "./scenes/error/not-found/not-found.component";
 
 const routes: Routes = [
     {
@@ -12,16 +13,20 @@ const routes: Routes = [
     {
         path: 'payment',
         loadChildren: () =>
-            import('./scenes/payment/payment.module').then((m) => m.PaymentModule)
+            import('./scenes/payment/payment.module').then((m) => m.PaymentModule),
     },
     {
         path: 'result',
         loadChildren: () =>
-            import('./scenes/result/result.module').then((m) => m.ResultModule)
+            import('./scenes/result/result.module').then((m) => m.ResultModule),
     },
     {
         path: 'error',
-        component: ErrorComponent
+        component: ErrorComponent,
+    },
+    {
+        path: '**', /*redirect to error for all unknown paths*/
+        component: NotFoundComponent
     }
 ];
 
@@ -33,7 +38,7 @@ const routes: Routes = [
             relativeLinkResolution: 'legacy'
         })
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 
 export class AppRoutingModule {

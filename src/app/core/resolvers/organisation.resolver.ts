@@ -26,7 +26,7 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
                     this.loader.hide()
                 }))
         } catch (e) {
-            this.router.navigate(["/error"]);
+            this.router.navigate(["/not-found"]);
             return of(false)
         }
     }

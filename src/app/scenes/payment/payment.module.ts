@@ -8,6 +8,7 @@ import {DonationResolver} from 'src/app/core/resolvers/donation.resolver';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {DonationModule} from "../donation/donation.module";
 import {SharedModule} from "../../shared/shared.module";
+import {PaymentGuard} from "./payment.guard";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {SharedModule} from "../../shared/shared.module";
         SharedModule,
     ],
     providers: [
-        DonationResolver
+        DonationResolver,
+        PaymentGuard
     ]
 })
 export class PaymentModule {

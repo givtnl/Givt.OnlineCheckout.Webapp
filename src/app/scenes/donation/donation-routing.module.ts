@@ -6,8 +6,8 @@ import { DonationComponent } from './donation/donation.component';
 const routes: Routes = [
   {
     path: '',
-    component: DonationComponent, 
-    resolve: { organisation: OrganisationResolver } 
+    component: DonationComponent,
+    resolve: { organisation: OrganisationResolver }
   }
 ];
 
