@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {NotificationService} from "../../../core/notification/notification.service";
 
 @Component({
     selector: 'app-thank-you',
@@ -10,7 +11,7 @@ export class ThankYouComponent implements OnInit {
     userWantsReceipt = false;
     organisationName: string;
 
-    constructor(private route: ActivatedRoute, private router: Router) {
+    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) {
         this.organisationName = localStorage.getItem('organisationName')!;
     }
 
@@ -25,6 +26,7 @@ export class ThankYouComponent implements OnInit {
     }
 
     sendEmail($event: string) {
-        this.userWantsReceipt = false
+        this.userWantsReceipt = false;
+        this.notificationService.success("Email sent!");
     }
 }

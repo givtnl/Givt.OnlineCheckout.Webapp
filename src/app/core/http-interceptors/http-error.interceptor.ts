@@ -23,7 +23,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         error: (err: any) => {
           if (err instanceof HttpErrorResponse) {
             const appErrorHandler = this.injector.get(ErrorHandler);
-            appErrorHandler.handleError(err);
+            //appErrorHandler.handleError(err);
           }
         }
       })

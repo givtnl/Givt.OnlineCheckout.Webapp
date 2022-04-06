@@ -5,6 +5,7 @@ import {ResultRoutingModule} from './result-routing.module';
 import {ThankYouComponent} from './thank-you/thank-you.component';
 import {NoThanksComponent} from './no-thanks/no-thanks.component';
 import {ReceiptComponent} from "./thank-you/receipt/receipt.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ReceiptComponent} from "./thank-you/receipt/receipt.component";
     ],
     imports: [
         CommonModule,
-        ResultRoutingModule
+        ResultRoutingModule,
+        MatProgressSpinnerModule
     ]
 })
 export class ResultModule {
