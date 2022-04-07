@@ -33,7 +33,9 @@ export class PaymentComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.elementsOptions.clientSecret = this.route.snapshot.data['donation'].paymentMethodId;
+        let paymentMethod = this.route.snapshot.data['donation'];
+        this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
+        localStorage.setItem('token', paymentMethod.token);
         this.organisationName = localStorage.getItem('organisationName')!;
         this.logoUrl = localStorage.getItem('logoUrl')!;
     }
