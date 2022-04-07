@@ -10,9 +10,11 @@ import {NotificationService} from "../../../core/notification/notification.servi
 export class ThankYouComponent implements OnInit {
     userWantsReceipt = false;
     organisationName: string;
+    token: string;
 
     constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) {
         this.organisationName = localStorage.getItem('organisationName')!;
+        this.token = localStorage.getItem('token')!
     }
 
     ngOnInit(): void {

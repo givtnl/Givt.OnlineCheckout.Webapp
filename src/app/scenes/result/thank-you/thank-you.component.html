@@ -16,6 +16,6 @@
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
     <div class="receipt__overlay" *ngIf="userWantsReceipt">
-        <app-receipt (onEmailSubmit)="sendEmail($event)"></app-receipt>
+        <app-receipt (onEmailSubmit)="sendEmail($event)" [token]="token"></app-receipt>
     </div>
 </div>

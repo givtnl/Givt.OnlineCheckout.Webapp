@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {LoadingService} from "../../../../core/services/loading.service";
 import {environment} from "../../../../../environments/environment";
 import {NotificationService} from "../../../../core/notification/notification.service";
@@ -11,6 +10,8 @@ import {NotificationService} from "../../../../core/notification/notification.se
     styleUrls: ['./receipt.component.scss']
 })
 export class ReceiptComponent implements OnInit {
+    @Input()
+    token!: string;
     email = "";
     invalidEmail = false;
     emailFormShown: boolean = false;
@@ -51,6 +52,28 @@ export class ReceiptComponent implements OnInit {
     emailChanged($event: any) {
         if (this.invalidEmail) this.invalidEmail = false;
         this.email = $event.target.value;
+    }
+
+
+    downloadReport() {
+        this.loadingService.show();
+        const headers = {
+            'Authorization': 'Bearer ' + this.token
+        }
+        this.http.get(environment.apiUrl + '/api/report/singleDonation', {observe: "response", responseType: "blob", headers: new HttpHeaders(headers)}).subscribe(
+            response => {
+                this.downloadFile(response.body!)
+                this.loadingService.hide();
+            }, error => {
+                this.notificationService.error('something went wrong, please try again in a few minutes')
+                this.loadingService.hide();
+            }
+        )
+    }
+
+    private downloadFile(data: Blob) {
+        const url = window.URL.createObjectURL(data);
+        window.open(url);
     }
 
     private static isValidEmail(email: string): boolean {
