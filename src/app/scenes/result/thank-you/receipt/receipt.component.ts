@@ -34,8 +34,6 @@ export class ReceiptComponent implements OnInit {
             this.loadingService.show()
             this.http.get(environment.apiUrl + '/api/validate/email?email=' + this.email).subscribe(
                 () => {
-                    this.loadingService.hide();
-                    this.emailFormShown = false;
                     this.onEmailSubmit.emit(this.email);
                 }, (error) => {
                     this.loadingService.hide();
@@ -62,7 +60,7 @@ export class ReceiptComponent implements OnInit {
         }
         this.http.get(environment.apiUrl + '/api/report/singleDonation', {observe: "response", responseType: "blob", headers: new HttpHeaders(headers)}).subscribe(
             response => {
-                this.downloadFile(response.body!)
+                ReceiptComponent.downloadFile(response.body!)
                 this.loadingService.hide();
             }, error => {
                 this.notificationService.error('something went wrong, please try again in a few minutes')
@@ -71,7 +69,7 @@ export class ReceiptComponent implements OnInit {
         )
     }
 
-    private downloadFile(data: Blob) {
+    private static downloadFile(data: Blob) {
         const url = window.URL.createObjectURL(data);
         window.open(url);
     }
