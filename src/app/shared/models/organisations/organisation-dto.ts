@@ -6,8 +6,9 @@ export default class OrganisationDto {
     thankYou: string;
     currency: string;
     organisationLogoLink: string
+    paymentMethods: number[]
 
-    constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string, currency: string, organisationLogoLink: string) {
+    constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string, currency: string, organisationLogoLink: string, paymentMethods: number[]) {
         this.amounts = amounts;
         this.goal = goal;
         this.medium = medium;
@@ -15,6 +16,7 @@ export default class OrganisationDto {
         this.thankYou = thankYou;
         this.currency = currency;
         this.organisationLogoLink = organisationLogoLink;
+        this.paymentMethods = paymentMethods;
     }
 }
 

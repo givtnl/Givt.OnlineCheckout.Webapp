@@ -13,7 +13,7 @@
         </div>
 
         <div class="payment-method__container">
-            <div *ngFor="let paymentMethod of paymentMethods">
+            <div *ngFor="let paymentMethod of organisation.paymentMethods">
                 <input class="payment-method__hide-input" type="radio" name="payment-method" id="{{paymentMethod.id}}"
                     (click)="setCurrentSelectedPaymentMethod($event)">
                 <label class="payment-method__tile" for="{{paymentMethod.id}}">

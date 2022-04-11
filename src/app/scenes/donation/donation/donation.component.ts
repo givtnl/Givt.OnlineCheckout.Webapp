@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import AmountData from 'src/app/shared/models/donations/amount-data';
 import Organisation from 'src/app/shared/models/organisations/organisation';
-import {PaymentMethodType} from 'src/app/shared/models/payment-methods/payment-method-enum';
 import PaymentMethodTile from 'src/app/shared/models/payment-methods/payment-method-tile';
 import {LoadingService} from "../../../core/services/loading.service";
 
@@ -20,15 +19,6 @@ export class DonationComponent implements OnInit {
     mainGiveButtonDisabled = true;
     email = '';
     loading$ = this.loader.loading$;
-
-    private imgFolder = "../../../assets/paymentMethodIcons/"
-
-    paymentMethods: PaymentMethodTile[] = [
-        new PaymentMethodTile("id", "Ideal", this.imgFolder + "ideal.svg", PaymentMethodType.Ideal),
-        new PaymentMethodTile("ap", "Apple Pay", this.imgFolder + "apay.svg", PaymentMethodType.Card),
-        new PaymentMethodTile("gp", "Google Pay", this.imgFolder + "gpay.svg", PaymentMethodType.Card),
-        new PaymentMethodTile("cc", "Credit card", this.imgFolder + "cc.svg", PaymentMethodType.Card)
-    ]
 
     constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
     }
@@ -79,8 +69,7 @@ export class DonationComponent implements OnInit {
     }
 
     setCurrentSelectedPaymentMethod(event: any) {
-        let paymentMethodsCopy = [...this.paymentMethods]
-        this.currentSelectedPaymentMethod = paymentMethodsCopy.filter(tile => tile.id == event.target.id).pop();
+        this.currentSelectedPaymentMethod = [...this.organisation.paymentMethods].filter(tile => tile.id == event.target.id).pop();
         if (this.currentSelectedPaymentMethod?.id == "ap" || this.currentSelectedPaymentMethod?.id == "gp") {
             document.getElementById("main-button")!.innerHTML = "give";
         } else {
