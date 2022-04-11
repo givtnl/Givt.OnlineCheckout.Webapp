@@ -1,24 +1,45 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { SetupDonationComponent } from "./components/setup-donation/setup-donation.component";
-import { PaymentComponent } from "./components/payment/payment.component";
-import { ThankYouComponent } from "./components/thank-you/thank-you.component";
-import { ErrorComponent } from "./components/error/error.component";
-import { OrganisationResolver } from "./resolvers/organisation.resolver";
-import { DonationResolver } from "./resolvers/donation.resolver";
-import { PaymentGuard } from './guards/payment-guard/payment.guard';
-import { ThankYouGuard } from './guards/thank-you-guard/thank-you.guard';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {ErrorComponent} from './scenes/error/unknown-code/error.component';
+import {NotFoundComponent} from "./scenes/error/not-found/not-found.component";
 
 const routes: Routes = [
-  { path: '', component: SetupDonationComponent, resolve: { organisation: OrganisationResolver } },
-  { path: 'payment', component: PaymentComponent, resolve: { donation: DonationResolver }, canActivate: [PaymentGuard] },
-  { path: 'thank-you', component: ThankYouComponent, canActivate: [ThankYouGuard] },
-  { path: 'error', component: ErrorComponent }
+    {
+        path: '',
+        loadChildren: () =>
+            import('./scenes/donation/donation.module').then((m) => m.DonationModule)
+
+    },
+    {
+        path: 'payment',
+        loadChildren: () =>
+            import('./scenes/payment/payment.module').then((m) => m.PaymentModule),
+    },
+    {
+        path: 'result',
+        loadChildren: () =>
+            import('./scenes/result/result.module').then((m) => m.ResultModule),
+    },
+    {
+        path: 'error',
+        component: ErrorComponent,
+    },
+    {
+        path: '**', /*redirect to error for all unknown paths*/
+        component: NotFoundComponent
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(routes, {
+            scrollPositionRestoration: 'enabled',
+            preloadingStrategy: PreloadAllModules,
+            relativeLinkResolution: 'legacy'
+        })
+    ],
+    exports: [RouterModule],
 })
-// @ts-ignore
-export class AppRoutingModule { }
+
+export class AppRoutingModule {
+}

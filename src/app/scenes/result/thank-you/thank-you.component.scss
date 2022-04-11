@@ -1,0 +1,56 @@
+.thank-you__body {
+    width: 100%;
+    height: 100vh;
+    background-color: #7DBDA1;
+    position: relative;
+  }
+
+.thank-you__title {
+    margin-top: 30px;
+    font-size: 28px;
+    line-height: 35px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.thank-you__subtitle {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: white;
+}
+
+.thank-you__title-container {
+    padding-top: 15vh;
+    margin-bottom: 15vh;
+}
+
+.thank-you__closing-text {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 500;
+    color: white;
+}
+
+.thank-you-closing-text-link {
+    font-weight: 800;
+}
+
+.util--backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.receipt__overlay {
+    position: absolute;
+    top: 65%;
+    width: 100%;
+    height: 35%;
+    margin: 0 auto;
+    background: rgba(248, 248, 248, 0.97);
+    box-shadow: 0px -5px 12px rgba(0, 0, 0, 0.15);
+}

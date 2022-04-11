@@ -1,0 +1,21 @@
+<div class="thank-you__body">
+    <div class="util--centered-container thank-you__title-container">
+        <img src="../../../../assets/thank-you-img.svg">
+        <h1 class="thank-you__title">Bedankt voor je donatie aan {{organisationName}}</h1>
+        <p class="thank-you__subtitle">Hier komt een gepersonaliseerde boodschap ter bedanking voor je donatie vanuit de
+            naam van de organisatie die je steunt. </p>
+    </div>
+    <div class="util--centered-container">
+        <button class="button button--black" (click)="userWantsReceipt=true">I want a receipt</button>
+        <button class="button button--white">download de Givt-app</button>
+    </div>
+    <div class="util--centered-container">
+        <p class="thank-you__closing-text">Givt biedt u een persoonlijke samenvatting en een overzicht voor je
+            belastingen. Uw belastingaangifte doen was nog nooit zo eenvoudig! <span
+                class="thank-you-closing-text-link">Meer weten?</span></p>
+    </div>
+    <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
+    <div class="receipt__overlay" *ngIf="userWantsReceipt">
+        <app-receipt (onEmailSubmit)="sendEmail($event)" [token]="token"></app-receipt>
+    </div>
+</div>

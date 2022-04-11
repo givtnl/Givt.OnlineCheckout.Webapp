@@ -1,0 +1,23 @@
+.logos__container {
+    margin-top: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.logo__organisation {
+    position: absolute;
+    top: 18px;
+    width: 75px;
+}
+
+.logo__givt {
+    position: absolute;
+    left: calc(100vw * 0.55);
+}
+
+@media (min-width: 600px) {
+    .logo__givt {
+        position: absolute;
+        left: calc(600px * 0.55);
+    }
+}
