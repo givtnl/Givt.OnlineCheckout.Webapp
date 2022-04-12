@@ -50,7 +50,7 @@ export class PaymentComponent implements OnInit {
             redirect: 'if_required'
         }).subscribe(obj => {
             if (obj.paymentIntent) {
-                this.router.navigate(['/thank-you'])
+                this.router.navigate(['result','success'])
             } else {
                 console.log(obj.error)
             }
