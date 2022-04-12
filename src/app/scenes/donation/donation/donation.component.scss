@@ -21,7 +21,7 @@
 .payment-method__container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-bottom: 15vh;
 }
 
@@ -31,6 +31,7 @@
     height: 75px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin: 0 10px;
 }
 
 .payment-method__helper {
