@@ -21,6 +21,8 @@ export class ThankYouComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.route)
+        console.log(this.route.snapshot.queryParams);
         if (this.route.snapshot.queryParams['redirect_status'] === 'failed') {
             this.router.navigate(['result', 'failure'])
         }
