@@ -46,7 +46,7 @@ export class AmountsComponent implements OnInit, AfterViewInit {
   toggleAmount() {
     this.customAmountInputShown = !this.customAmountInputShown
     if (this.customAmountInputShown) {
-      document.getElementsByClassName('presets__title').item(0)!.innerHTML = "anything is good, really"
+      document.getElementsByClassName('presets__title').item(0)!.innerHTML = "Geef het bedrag in dat je wilt geven"
     }
     this.onInputModeChange.emit(this.customAmountInputShown)
   }
