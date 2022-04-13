@@ -1,9 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StripeElementsOptions} from "@stripe/stripe-js";
 import {ActivatedRoute, Router} from "@angular/router";
-import {StripePaymentElementComponent, StripeService} from 'ngx-stripe';
 import PaymentMethod from '../../../shared/models/payment-methods/payment-method';
-import {environment} from 'src/environments/environment';
 import {LoadingService} from "../../../core/services/loading.service";
 
 @Component({
@@ -12,7 +10,6 @@ import {LoadingService} from "../../../core/services/loading.service";
     styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-    @ViewChild(StripePaymentElementComponent) paymentElement!: StripePaymentElementComponent;
     paymentMethod: PaymentMethod | undefined
     loading$ = this.loader.loading$;
     organisationName!: string
@@ -29,7 +26,14 @@ export class PaymentComponent implements OnInit {
         }
     };
 
-    constructor(private router: Router, private route: ActivatedRoute, private stripeService: StripeService, public loader: LoadingService) {
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    }
+
+    initializeStripe(): void {
+        let stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
+        const elements = stripe.elements(this.elementsOptions)
+        const paymentElement = elements.create("payment");
+        paymentElement.mount("#payment-element");
     }
 
     ngOnInit(): void {
@@ -38,9 +42,10 @@ export class PaymentComponent implements OnInit {
         localStorage.setItem('token', paymentMethod.token);
         this.organisationName = localStorage.getItem('organisationName')!;
         this.logoUrl = localStorage.getItem('logoUrl')!;
+        this.initializeStripe()
     }
 
-    submitPayment(): void {
+    /*submitPayment(): void {
         this.paying = true
         this.stripeService.confirmPayment({
             confirmParams: {
@@ -56,5 +61,5 @@ export class PaymentComponent implements OnInit {
             }
             this.paying = false
         })
-    }
+    }*/
 }
