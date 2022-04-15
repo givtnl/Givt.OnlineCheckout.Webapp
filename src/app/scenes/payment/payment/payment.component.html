@@ -16,7 +16,6 @@
                 </div>
                 <div *ngSwitchCase="1">
                     <div id="payment-element">
-                        &lt;!&ndash;Stripe.js injects the Payment Element&ndash;&gt;
                     </div>
                     <button (click)="confirmCardPayment($event)" class="button button--green">
                         Continue
@@ -25,7 +24,6 @@
                 <div *ngSwitchCase="2">
                     <div class="form-row">
                         <div id="ideal-bank-element">
-                            <!-- A Stripe Element will be inserted here. -->
                         </div>
                     </div>
                     <button (click)="confirmIdealPayment($event)" class="button button--green">
@@ -45,7 +43,9 @@
 
                 </div>
                 <div *ngSwitchCase="7">
-
+                    <div id="payment-request-button">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
                 </div>
             </div>
         </form>

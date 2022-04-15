@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     idealBank: any;
     elements: any
     clientSelectedPaymentMethodIndex!: number
+    paymentRequestButton: any
 
     elementsOptions: StripeElementsOptions = {
         locale: 'nl',
@@ -70,6 +71,26 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             case 6: //apple pay
                 break;
             case 7: //google pay
+                const paymentRequest = this.stripe.paymentRequest({
+                    country: 'BE',
+                    currency: 'eur',
+                    total: {
+                        label: 'test',
+                        amount: 25
+                    }
+                })
+
+                this.paymentRequestButton = this.elements.create('paymentRequestButton', {
+                    paymentRequest: paymentRequest
+                })
+
+                paymentRequest.canMakePayment().subscribe((result: boolean) => {
+                    if (result) {
+                        this.paymentRequestButton.mount('#payment-request-button')
+                    } else {
+                        document.getElementById('payment-request-button')!.style.display = 'none';
+                    }
+                })
                 break;
 
         }
