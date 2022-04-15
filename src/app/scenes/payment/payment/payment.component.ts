@@ -48,13 +48,11 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         const paymentMethod = this.route.snapshot.data['donation'];
-        console.log(paymentMethod)
         this.clientSelectedPaymentMethodIndex = +localStorage.getItem('paymentMethod')!
         this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
         localStorage.setItem('token', paymentMethod.token);
         this.organisationName = localStorage.getItem('organisationName')!;
         this.logoUrl = localStorage.getItem('logoUrl')!;
-        console.log(this.elementsOptions.clientSecret)
     }
 
     ngAfterViewInit(): void {
@@ -125,7 +123,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmBancontactPayment(event: Event) {
         event.preventDefault();
-        console.log(this.elementsOptions.clientSecret)
         this.stripe.confirmBancontactPayment(
             this.elementsOptions.clientSecret,
             {
