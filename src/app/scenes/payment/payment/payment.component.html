@@ -8,20 +8,44 @@
             </div>
         </div>
         <form id="payment-form">
-            <div id="payment-element">
-                <!--Stripe.js injects the Payment Element-->
-            </div>
-            <button id="submit" class="button button--green">
-                <div class="spinner hidden" id="spinner"></div>
-                <span id="button-text">Pay now</span>
-            </button>
+            <div [ngSwitch]="this.clientSelectedPaymentMethodIndex.toString()">
+                <div *ngSwitchCase="0">
+                    <button (click)="confirmBancontactPayment($event)" class="button button--green">
+                        Continue to bancontact
+                    </button>
+                </div>
+                <div *ngSwitchCase="1">
+                    <div id="payment-element">
+                        &lt;!&ndash;Stripe.js injects the Payment Element&ndash;&gt;
+                    </div>
+                    <button (click)="confirmCardPayment($event)" class="button button--green">
+                        Continue
+                    </button>
+                </div>
+                <div *ngSwitchCase="2">
+                    <div class="form-row">
+                        <div id="ideal-bank-element">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+                    </div>
+                    <button (click)="confirmIdealPayment($event)" class="button button--green">
+                        Continue to iDeal
+                    </button>
+                </div>
+                <div *ngSwitchCase="3">
 
-            <div class="form-row">
-                <label for="ideal-bank-element">
-                    iDEAL Bank
-                </label>
-                <div id="ideal-bank-element">
-                    <!-- A Stripe Element will be inserted here. -->
+                </div>
+                <div *ngSwitchCase="4">
+
+                </div>
+                <div *ngSwitchCase="5">
+
+                </div>
+                <div *ngSwitchCase="6">
+
+                </div>
+                <div *ngSwitchCase="7">
+
                 </div>
             </div>
         </form>
