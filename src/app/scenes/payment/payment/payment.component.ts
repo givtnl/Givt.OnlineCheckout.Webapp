@@ -75,7 +75,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     currency: 'eur',
                     total: {
                         label: 'test',
-                        amount: 25
+                        amount: 5
                     }
                 })
 
@@ -83,7 +83,9 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     paymentRequest: paymentRequest
                 })
 
-                paymentRequest.canMakePayment().then((result: boolean) => {
+                paymentRequest.canMakePayment().then((result: any, error: any) => {
+                    console.log(result)
+                    console.log(error)
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button')
                     } else {
