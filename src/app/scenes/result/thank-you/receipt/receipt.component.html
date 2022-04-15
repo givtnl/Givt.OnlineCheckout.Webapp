@@ -1,6 +1,6 @@
 <div class="receipt__container">
     <div *ngIf="!emailFormShown">
-        <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+        <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" class="util--position-absolute"></mat-progress-spinner>
         <div *ngIf="!(loading$ | async)">
             <p class="receipt__title">Hoe zou u uw bewijs willen ontvangen?</p>
             <button class="button button--black util--full-width" (click)="downloadReport()">Download nu</button>
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div *ngIf="emailFormShown">
-        <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+        <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" class="util--position-absolute"></mat-progress-spinner>
         <div *ngIf="!(loading$ | async)">
             <p class="receipt__title">Ontvang uw bewijs via email</p>
             <input class="receipt__input util--full-width" type="email" (input)="emailChanged($event)" [ngClass]="{'receipt__input--invalid': invalidEmail}" id="receiptInput">

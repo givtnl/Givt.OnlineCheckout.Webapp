@@ -71,6 +71,26 @@ export class ReceiptComponent implements OnInit {
 
     private static downloadFile(data: Blob) {
         const url = window.URL.createObjectURL(data);
+
+        // to download the pdf we need to recreate a clickable link after generating the blob from the server
+        // then programatically clicking on the link does the trick for downloading the pdf
+        // this is also the only way to provide a name with the
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = "receipt.pdf";
+        link.dispatchEvent(
+            new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            })
+        );
+        setTimeout(() => {
+            // For Firefox it is necessary to delay revoking the ObjectURL
+            window.URL.revokeObjectURL(url);
+            link.remove();
+        }, 100);
+
         window.open(url);
     }
 

@@ -103,6 +103,13 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                         document.getElementById('payment-request-button')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
                     }
                 })
+
+                paymentRequest.on('paymentmethod', (ev: any) => {
+                    this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, {payment_method: ev.paymentMethod.id}, {handleActions: false})
+                        .then((ahyeet: any) => {
+                            console.log(ahyeet)
+                        })
+                })
                 break;
 
         }

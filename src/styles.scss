@@ -108,6 +108,10 @@ mat-progress-spinner {
     width: 100%;
 }
 
+.util--position-absolute {
+    position: absolute !important;
+}
+
 @media (min-width: 600px) {
     body {
         width: 550px;
