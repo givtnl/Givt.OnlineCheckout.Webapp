@@ -84,7 +84,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     paymentRequest: paymentRequest
                 })
 
-                paymentRequest.canMakePayment().subscribe((result: boolean) => {
+                paymentRequest.canMakePayment().then((result: boolean) => {
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button')
                     } else {
