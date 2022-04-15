@@ -109,8 +109,10 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                         .then((result: any) => {
                             if (result.error) {
                                 ev.complete('fail');
+                                this.router.navigate(['result','success'])
                             } else {
                                 ev.complete('success');
+                                this.router.navigate(['result','fail'])
                             }
                         })
                 })
