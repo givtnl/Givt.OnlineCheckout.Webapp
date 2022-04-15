@@ -87,8 +87,9 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     console.log(result)
                     console.log(error)
                     if (result) {
-                        this.paymentRequestButton.mount('#payment-request-button')
+                        this.paymentRequestButton.mount('#payment-request-button');
                     } else {
+                        this.paymentRequestButton.mount('#payment-request-button');
                         document.getElementById('payment-request-button')!.style.display = 'none';
                     }
                 })
