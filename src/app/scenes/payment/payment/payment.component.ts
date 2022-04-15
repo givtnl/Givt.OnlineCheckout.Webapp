@@ -50,7 +50,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     initializeStripe(): void {
         this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
         this.elements = this.stripe.elements(this.elementsOptions)
-        console.log(this.clientSelectedPaymentMethodIndex)
         switch (this.clientSelectedPaymentMethodIndex) {
             case 0: //bancontact
                 break;
