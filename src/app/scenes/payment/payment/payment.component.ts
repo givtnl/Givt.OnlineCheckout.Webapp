@@ -106,8 +106,12 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
                 paymentRequest.on('paymentmethod', (ev: any) => {
                     this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, {payment_method: ev.paymentMethod.id}, {handleActions: false})
-                        .then((ahyeet: any) => {
-                            console.log(ahyeet)
+                        .then((result: any) => {
+                            if (result.error) {
+                                ev.complete('fail');
+                            } else {
+                                ev.complete('success');
+                            }
                         })
                 })
                 break;
