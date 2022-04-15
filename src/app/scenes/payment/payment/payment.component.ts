@@ -1,24 +1,26 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {StripeElementsOptions} from "@stripe/stripe-js";
 import {ActivatedRoute, Router} from "@angular/router";
-import {StripePaymentElementComponent, StripeService} from 'ngx-stripe';
 import PaymentMethod from '../../../shared/models/payment-methods/payment-method';
-import {environment} from 'src/environments/environment';
 import {LoadingService} from "../../../core/services/loading.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-payment',
     templateUrl: './payment.component.html',
     styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit {
-    @ViewChild(StripePaymentElementComponent) paymentElement!: StripePaymentElementComponent;
+export class PaymentComponent implements OnInit, AfterViewInit {
     paymentMethod: PaymentMethod | undefined
     loading$ = this.loader.loading$;
     organisationName!: string
     logoUrl!: string
-
-    paying: boolean = false
+    stripe: any;
+    cardPaymentElement: any;
+    idealBank: any;
+    elements: any
+    clientSelectedPaymentMethodIndex!: number
+    paymentRequestButton: any
 
     elementsOptions: StripeElementsOptions = {
         locale: 'nl',
@@ -29,32 +31,116 @@ export class PaymentComponent implements OnInit {
         }
     };
 
-    constructor(private router: Router, private route: ActivatedRoute, private stripeService: StripeService, public loader: LoadingService) {
+    idealElementsOptions = {
+        style: {
+            base: {
+                padding: '10px 12px',
+                color: '#32325d',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                },
+            },
+        },
+    };
+
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    }
+
+    initializeStripe(): void {
+        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
+        this.elements = this.stripe.elements(this.elementsOptions)
+        console.log(this.clientSelectedPaymentMethodIndex)
+        switch (this.clientSelectedPaymentMethodIndex) {
+            case 0: //bancontact
+                break;
+            case 1: //card
+                this.cardPaymentElement = this.elements.create("payment");
+                this.cardPaymentElement.mount("#payment-element");
+                break;
+            case 2: //iDeal
+                this.idealBank = this.elements.create("idealBank", this.idealElementsOptions);
+                this.idealBank.mount('#ideal-bank-element');
+                break;
+            case 3: //sofort
+                break;
+            case 4: //giropay
+                break;
+            case 5: //EPS
+                break;
+            case 6: //apple pay
+                break;
+            case 7: //google pay
+                const paymentRequest = this.stripe.paymentRequest({
+                    country: 'BE',
+                    currency: 'eur',
+                    total: {
+                        label: 'test',
+                        amount: 25
+                    }
+                })
+
+                this.paymentRequestButton = this.elements.create('paymentRequestButton', {
+                    paymentRequest: paymentRequest
+                })
+
+                paymentRequest.canMakePayment().subscribe((result: boolean) => {
+                    if (result) {
+                        this.paymentRequestButton.mount('#payment-request-button')
+                    } else {
+                        document.getElementById('payment-request-button')!.style.display = 'none';
+                    }
+                })
+                break;
+
+        }
+    }
+
+
+    ngAfterViewInit(): void {
+        this.initializeStripe()
     }
 
     ngOnInit(): void {
-        let paymentMethod = this.route.snapshot.data['donation'];
+        const paymentMethod = this.route.snapshot.data['donation'];
+        this.clientSelectedPaymentMethodIndex = +localStorage.getItem('paymentMethod')!
         this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
         localStorage.setItem('token', paymentMethod.token);
         this.organisationName = localStorage.getItem('organisationName')!;
         this.logoUrl = localStorage.getItem('logoUrl')!;
     }
 
-    submitPayment(): void {
-        this.paying = true
-        this.stripeService.confirmPayment({
-            confirmParams: {
-                return_url: environment.returnUrl
-            },
-            elements: this.paymentElement.elements,
-            redirect: 'if_required'
-        }).subscribe(obj => {
-            if (obj.paymentIntent) {
-                this.router.navigate(['result','success'])
-            } else {
-                console.log(obj.error)
+    confirmIdealPayment(event: Event) {
+        event.preventDefault();
+        this.stripe.confirmIdealPayment(
+            this.elementsOptions.clientSecret,
+            {
+                return_url: environment.returnUrl,
+                payment_method: {
+                    ideal: this.idealBank
+                }
             }
-            this.paying = false
-        })
+        )
+    }
+
+    confirmBancontactPayment(event: Event) {
+        event.preventDefault();
+        this.stripe.confirmBancontactPayment(
+            this.elementsOptions.clientSecret,
+            {
+                return_url: environment.returnUrl
+            }
+        )
+    }
+
+    confirmCardPayment(event: Event) {
+        event.preventDefault();
+        this.stripe.confirmPayment({
+                elements: this.elements,
+                confirmParams: {
+                    return_url: environment.returnUrl
+                }
+            }
+        )
     }
 }

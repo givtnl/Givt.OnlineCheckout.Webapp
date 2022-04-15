@@ -7,7 +7,47 @@
                 <h1 class="header__title">{{organisationName}}</h1>
             </div>
         </div>
-        <ngx-stripe-payment [elementsOptions]="elementsOptions"></ngx-stripe-payment>
-        <button [disabled]="paying" (click)="submitPayment()" type="button" class="util--centered-container button button--payment">submit</button>
+        <form id="payment-form">
+            <div [ngSwitch]="this.clientSelectedPaymentMethodIndex.toString()">
+                <div *ngSwitchCase="0">
+                    <button (click)="confirmBancontactPayment($event)" class="button button--green">
+                        Continue to bancontact
+                    </button>
+                </div>
+                <div *ngSwitchCase="1">
+                    <div id="payment-element">
+                    </div>
+                    <button (click)="confirmCardPayment($event)" class="button button--green">
+                        Continue
+                    </button>
+                </div>
+                <div *ngSwitchCase="2">
+                    <div class="form-row">
+                        <div id="ideal-bank-element">
+                        </div>
+                    </div>
+                    <button (click)="confirmIdealPayment($event)" class="button button--green">
+                        Continue to iDeal
+                    </button>
+                </div>
+                <div *ngSwitchCase="3">
+
+                </div>
+                <div *ngSwitchCase="4">
+
+                </div>
+                <div *ngSwitchCase="5">
+
+                </div>
+                <div *ngSwitchCase="6">
+
+                </div>
+                <div *ngSwitchCase="7">
+                    <div id="payment-request-button">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
