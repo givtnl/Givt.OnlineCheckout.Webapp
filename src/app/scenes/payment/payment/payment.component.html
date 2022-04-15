@@ -18,15 +18,15 @@
                         <input id="name" name="name" required>
                     </div>
 -->
-                    <button (click)="confirmBancontactPayment($event)" class="button button--green">
+                    <button (click)="confirmBancontactPayment($event)" class="button button--green"  style="position: absolute; top: 220px; margin: 0 auto;">
                         Continue to bancontact
                     </button>
                 </div>
                 <div *ngSwitchCase="1">
                     <div id="payment-element">
                     </div>
-                    <button (click)="confirmCardPayment($event)" class="button button--green">
-                        Continue
+                    <button (click)="confirmCardPayment($event)" class="button button--green" style="position: absolute; top: 470px; margin: 0 auto;">
+                        Give
                     </button>
                 </div>
                 <div *ngSwitchCase="2">
@@ -34,7 +34,7 @@
                         <div id="ideal-bank-element">
                         </div>
                     </div>
-                    <button (click)="confirmIdealPayment($event)" class="button button--green">
+                    <button (click)="confirmIdealPayment($event)" class="button button--green"  style="position: absolute; top: 270px; margin: 0 auto;">
                         Continue to iDeal
                     </button>
                 </div>
