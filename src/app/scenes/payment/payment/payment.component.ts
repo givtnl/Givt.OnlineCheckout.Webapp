@@ -132,7 +132,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 return_url: environment.returnUrl,
                 payment_method: {
                     billing_details: {
-                        name: (document.getElementById("name") as HTMLInputElement).value
+                        name: "anonymous"
                     }
                 }
             },

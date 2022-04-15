@@ -10,12 +10,14 @@
         <form id="payment-form">
             <div [ngSwitch]="this.clientSelectedPaymentMethodIndex.toString()">
                 <div *ngSwitchCase="0">
+<!--
                     <div class="form-row">
                         <label for="name">
                             Name
                         </label>
                         <input id="name" name="name" required>
                     </div>
+-->
                     <button (click)="confirmBancontactPayment($event)" class="button button--green">
                         Continue to bancontact
                     </button>
