@@ -75,7 +75,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     currency: 'eur',
                     total: {
                         label: 'test',
-                        amount: 5
+                        amount: (+localStorage.getItem('amount')! * 100)
                     }
                 })
 
