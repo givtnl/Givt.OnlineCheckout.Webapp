@@ -17,6 +17,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     logoUrl!: string
     stripe: any;
     cardPaymentElement: any;
+    bancontact: any;
     idealBank: any;
     elements: any
     clientSelectedPaymentMethodIndex!: number
@@ -30,7 +31,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             theme: "flat",
         }
     };
-
     idealElementsOptions = {
         style: {
             base: {
@@ -44,8 +44,23 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         },
     };
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) { }
+
+    ngOnInit(): void {
+        const paymentMethod = this.route.snapshot.data['donation'];
+        console.log(paymentMethod)
+        this.clientSelectedPaymentMethodIndex = +localStorage.getItem('paymentMethod')!
+        this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
+        localStorage.setItem('token', paymentMethod.token);
+        this.organisationName = localStorage.getItem('organisationName')!;
+        this.logoUrl = localStorage.getItem('logoUrl')!;
+        console.log(this.elementsOptions.clientSecret)
     }
+
+    ngAfterViewInit(): void {
+        this.initializeStripe()
+    }
+
 
     initializeStripe(): void {
         this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
@@ -83,32 +98,16 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     paymentRequest: paymentRequest
                 })
 
-                paymentRequest.canMakePayment().then((result: any, error: any) => {
-                    console.log(result)
-                    console.log(error)
+                paymentRequest.canMakePayment().then((result: any) => {
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button')
                     } else {
-                        document.getElementById('payment-request-button')!.style.display = 'none';
+                        document.getElementById('payment-request-button')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
                     }
                 })
                 break;
 
         }
-    }
-
-
-    ngAfterViewInit(): void {
-        this.initializeStripe()
-    }
-
-    ngOnInit(): void {
-        const paymentMethod = this.route.snapshot.data['donation'];
-        this.clientSelectedPaymentMethodIndex = +localStorage.getItem('paymentMethod')!
-        this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
-        localStorage.setItem('token', paymentMethod.token);
-        this.organisationName = localStorage.getItem('organisationName')!;
-        this.logoUrl = localStorage.getItem('logoUrl')!;
     }
 
     confirmIdealPayment(event: Event) {
@@ -126,11 +125,17 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmBancontactPayment(event: Event) {
         event.preventDefault();
+        console.log(this.elementsOptions.clientSecret)
         this.stripe.confirmBancontactPayment(
             this.elementsOptions.clientSecret,
             {
-                return_url: environment.returnUrl
-            }
+                return_url: environment.returnUrl,
+                payment_method: {
+                    billing_details: {
+                        name: (document.getElementById("name") as HTMLInputElement).value
+                    }
+                }
+            },
         )
     }
 
