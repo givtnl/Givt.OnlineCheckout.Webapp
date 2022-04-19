@@ -14,12 +14,15 @@ export class NoThanksComponent implements OnInit {
   }
 
   startOver(): void {
-    this.router.navigate(
-      ['donate'],
-      {
-        queryParams: { code: 'NjFmN2VkMDE0ZTRjMDEyMWMwMDUuYzAwMDAwMDAwMDAx' },
-      }
-    );
+    var decodedItem = localStorage.getItem('medium');
+    if (decodedItem) {
+      this.router.navigate(
+        ['donate'],
+        {
+          queryParams: { code: btoa(decodedItem) },
+        }
+      );
+    }
   }
 
 }
