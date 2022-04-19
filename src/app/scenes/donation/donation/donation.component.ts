@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import AmountData from 'src/app/shared/models/donations/amount-data';
 import Organisation from 'src/app/shared/models/organisations/organisation';
-import PaymentMethodTile from 'src/app/shared/models/payment-methods/payment-method-tile';
+import PaymentMethod from 'src/app/shared/models/payment-methods/payment-method';
 import {LoadingService} from "../../../core/services/loading.service";
 
 @Component({
@@ -13,7 +13,7 @@ import {LoadingService} from "../../../core/services/loading.service";
 export class DonationComponent implements OnInit {
     organisation!: Organisation
     currentSelected!: AmountData
-    currentSelectedPaymentMethod: PaymentMethodTile | undefined
+    currentSelectedPaymentMethod: PaymentMethod | undefined
     inputMode = false;
     customAmount = 0;
     mainGiveButtonDisabled = true;
