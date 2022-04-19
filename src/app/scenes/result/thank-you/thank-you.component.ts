@@ -21,11 +21,6 @@ export class ThankYouComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.route)
-        console.log(this.route.snapshot.queryParams);
-        if (this.route.snapshot.queryParams['redirect_status'] === 'failed') {
-            this.router.navigate(['result', 'failure'])
-        }
     }
 
     closeBackdrop() {
@@ -45,5 +40,9 @@ export class ThankYouComponent implements OnInit {
                 this.notificationService.error("Something went wrong, please try again")
             }
         )
+    }
+
+    downloadApp() {
+        document.location.href = 'https://givtapp.net/download'
     }
 }
