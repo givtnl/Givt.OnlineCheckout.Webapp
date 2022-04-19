@@ -5,7 +5,7 @@
         <p class="thank-you__subtitle">Here comes a personalised message from the organisation</p>
     </div>
     <div class="util--centered-container">
-        <button class="button button--black" (click)="userWantsReceipt=true">I want a receipt</button>
+        <button class="button button--black" (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);">I want a receipt</button>
         <button class="button button--white" (click)="downloadApp()">download the Givt-app</button>
     </div>
     <div class="util--centered-container">
@@ -14,7 +14,7 @@
                 class="thank-you-closing-text-link">Meer weten?</span></p>
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
-    <div class="receipt__overlay" *ngIf="userWantsReceipt">
-        <app-receipt (onEmailSubmit)="sendEmail($event)" [token]="token"></app-receipt>
+    <div class="receipt__overlay" [ngStyle]="{top: userWantsReceipt ? '65%' : '105%'}">
+        <app-receipt (onEmailSubmit)="sendEmail($event)" [token]="token" [openStatus]="receiptShownChanged"></app-receipt>
     </div>
 </div>
