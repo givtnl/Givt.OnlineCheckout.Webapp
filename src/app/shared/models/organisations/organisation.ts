@@ -1,29 +1,33 @@
 import AmountData from "../donations/amount-data";
 import OrganisationDto from "./organisation-dto";
-import PaymentMethodTile from "../payment-methods/payment-method-tile";
+import PaymentMethod from "../payment-methods/payment-method";
+import {PaymentMethodDto} from "../payment-methods/payment-method-dto";
 
 export default class Organisation {
-  id: string;
-  name: string;
-  goal: string;
-  amounts: AmountData[];
-  thankYou: string;
-  currency: string;
-  logoLink: string;
-  paymentMethods: PaymentMethodTile[]
+    id: string;
+    name: string;
+    goal: string;
+    amounts: AmountData[];
+    thankYou: string;
+    currency: string;
+    logoLink: string;
+    paymentMethods: PaymentMethod[]
 
-  constructor(id: string, name: string, goal: string, amounts: AmountData[], thankYou: string, currency: string, logoLink: string, paymentMethods: PaymentMethodTile[]) {
-    this.id = id;
-    this.name = name;
-    this.goal = goal;
-    this.amounts = amounts;
-    this.thankYou = thankYou;
-    this.currency = currency;
-    this.logoLink = logoLink;
-    this.paymentMethods = paymentMethods;
-  }
+    constructor(id: string, name: string, goal: string, amounts: AmountData[], thankYou: string, currency: string, logoLink: string, paymentMethods: PaymentMethod[]) {
+        this.id = id;
+        this.name = name;
+        this.goal = goal;
+        this.amounts = amounts;
+        this.thankYou = thankYou;
+        this.currency = currency;
+        this.logoLink = logoLink;
+        this.paymentMethods = paymentMethods;
+    }
 
-  static fromIncomingOrganisation(incomingOrg: OrganisationDto) {
-    return new Organisation(incomingOrg.medium, incomingOrg.organisationName, incomingOrg.goal, AmountData.fromAmounts(incomingOrg.amounts), incomingOrg.thankYou, incomingOrg.currency, incomingOrg.organisationLogoLink, incomingOrg.paymentMethods.map(pm => PaymentMethodTile.fromPaymentMethod(pm)));
-  }
+    static fromOrganisationDto(organisationDto: OrganisationDto) {
+        return new Organisation(organisationDto.medium, organisationDto.organisationName, organisationDto.goal, AmountData.fromAmounts(organisationDto.amounts), organisationDto.thankYou, organisationDto.currency, organisationDto.organisationLogoLink, organisationDto.paymentMethods.map(pm => {
+                return PaymentMethod.fromPaymentMethodDto(new PaymentMethodDto(pm)) //bit hacky but waiting for backend refactor to PaymentMethod(for frontend + Dto) Object.
+            })
+        );
+    }
 }

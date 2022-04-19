@@ -20,7 +20,10 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             this.loader.show();
             return this.http.get<OrganisationDto>(environment.apiUrl + '/api/medium?code=' + mediumIdDecoded + '&locale=' + navigator.language)
                 .pipe(map((data) => {
-                    return Organisation.fromIncomingOrganisation(data)
+                    if (!data.medium) {
+                        data.medium = mediumIdDecoded;
+                    }
+                    return Organisation.fromOrganisationDto(data)
                 }))
                 .pipe(catchError(async () => {
                     await this.router.navigate(["/error"]);

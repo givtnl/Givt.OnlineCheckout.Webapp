@@ -12,10 +12,8 @@ export class ResultComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.route.snapshot.queryParams['redirect_status']);
         if (this.route.snapshot.queryParams['redirect_status'] != null) {
             const redirectStatus = this.route.snapshot.queryParams['redirect_status'];
-            console.log(redirectStatus)
             if (redirectStatus === 'succeeded') {
                 this.router.navigate(['result', 'success'])
             } else if (redirectStatus === 'failed') {
