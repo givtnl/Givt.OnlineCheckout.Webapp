@@ -15,7 +15,9 @@ export class NoThanksComponent implements OnInit {
 
   startOver(): void {
     var decodedItem = localStorage.getItem('medium');
-    if (decodedItem) {
+    if (decodedItem) 
+    {
+      localStorage.clear();
       this.router.navigate(
         ['donate'],
         {
