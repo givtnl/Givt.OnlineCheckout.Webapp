@@ -11,6 +11,12 @@ const routes: Routes = [
 
     },
     {
+        path: 'donate',
+        loadChildren: () =>
+            import('./scenes/donation/donation.module').then((m) => m.DonationModule)
+
+    },
+    {
         path: 'payment',
         loadChildren: () =>
             import('./scenes/payment/payment.module').then((m) => m.PaymentModule),
