@@ -41,4 +41,8 @@ export class ThankYouComponent implements OnInit {
             }
         )
     }
+
+    downloadApp() {
+        document.location.href = 'https://givtapp.net/download'
+    }
 }
