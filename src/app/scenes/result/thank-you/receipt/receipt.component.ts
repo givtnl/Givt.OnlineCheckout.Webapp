@@ -30,7 +30,7 @@ export class ReceiptComponent implements OnInit {
 
     showEmailForm() {
         this.emailFormShown = true;
-        this.openStatus.subscribe(() => {setTimeout(() => {this.emailFormShown = false;}, 4)})
+        this.openStatus.subscribe(() => {setTimeout(() => {this.emailFormShown = false;}, 400)})
     }
 
     submitEmail() {
