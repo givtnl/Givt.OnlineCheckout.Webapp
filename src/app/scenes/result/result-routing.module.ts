@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ThankYouComponent} from "./thank-you/thank-you.component";
 import {NoThanksComponent} from "./no-thanks/no-thanks.component";
+import {ResultComponent} from "./result/result.component";
 
 const routes: Routes = [
     {
@@ -11,6 +12,10 @@ const routes: Routes = [
     {
         path: 'failure',
         component: NoThanksComponent,
+    },
+    {
+        path: '',
+        component: ResultComponent
     }
 ];
 

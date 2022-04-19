@@ -21,9 +21,6 @@ export class ThankYouComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.route.snapshot.queryParams['redirect_status'] === 'failed') {
-            this.router.navigate(['result', 'failure'])
-        }
     }
 
     closeBackdrop() {
