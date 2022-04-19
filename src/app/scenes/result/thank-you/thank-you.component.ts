@@ -4,6 +4,7 @@ import {NotificationService} from "../../../core/notification/notification.servi
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {LoadingService} from "../../../core/services/loading.service";
+import {Subject} from "rxjs";
 
 @Component({
     selector: 'app-thank-you',
@@ -14,6 +15,8 @@ export class ThankYouComponent implements OnInit {
     userWantsReceipt = false;
     organisationName: string;
     token: string;
+    receiptShownChanged: Subject<boolean> = new Subject<boolean>();
+
 
     constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private http: HttpClient, private loadingService: LoadingService) {
         this.organisationName = localStorage.getItem('organisationName')!;
@@ -25,6 +28,7 @@ export class ThankYouComponent implements OnInit {
 
     closeBackdrop() {
         this.userWantsReceipt = false;
+        this.receiptShownChanged.next(this.userWantsReceipt);
     }
 
     sendEmail($event: string) {
@@ -35,6 +39,7 @@ export class ThankYouComponent implements OnInit {
             next => {
                 this.loadingService.hide();
                 this.userWantsReceipt = false;
+                this.receiptShownChanged.next(this.userWantsReceipt);
                 this.notificationService.success("Email sent!");
             }, error => {
                 this.notificationService.error("Something went wrong, please try again")
