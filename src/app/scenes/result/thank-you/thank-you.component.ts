@@ -5,11 +5,27 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {LoadingService} from "../../../core/services/loading.service";
 import {Subject} from "rxjs";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+
+const receiptOverlayAnimation = [
+    trigger('receiptOverlay', [
+        state('open', style({
+            display: 'block',
+            top: '65%'
+        })),
+        state('closed', style({
+            display: 'none',
+            top: '105%'
+        })),
+        transition('open => closed', [animate('.4s')]),
+        transition('closed => open', [style({display: 'block'}), animate('.4s')])
+    ])]
 
 @Component({
     selector: 'app-thank-you',
     templateUrl: './thank-you.component.html',
-    styleUrls: ['./thank-you.component.scss']
+    styleUrls: ['./thank-you.component.scss'],
+    animations: receiptOverlayAnimation
 })
 export class ThankYouComponent implements OnInit {
     userWantsReceipt = false;
