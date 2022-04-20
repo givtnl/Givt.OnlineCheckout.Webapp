@@ -42,7 +42,7 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "localize": false
+            "localize": true
           },
           "configurations": {
             "production": {
