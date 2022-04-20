@@ -121,4 +121,5 @@ mat-progress-spinner {
 
 body {
     font-family: Mulish, sans-serif;
+    overflow-y: scroll; //if you remove this, the thank-you page will jump around on animations
 }
