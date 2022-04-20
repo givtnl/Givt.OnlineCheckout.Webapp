@@ -14,7 +14,7 @@
                 class="thank-you-closing-text-link">Meer weten?</span></p>
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
-    <div class="receipt__overlay" [ngStyle]="{top: userWantsReceipt ? '65%' : '105%'}">
+    <div class="receipt__overlay" [ngStyle]="{top: userWantsReceipt ? '65%' : '105%', display: userWantsReceipt ? 'block' : 'none'}">
         <app-receipt (onEmailSubmit)="sendEmail($event)" [token]="token" [openStatus]="receiptShownChanged"></app-receipt>
     </div>
 </div>
