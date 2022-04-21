@@ -19,7 +19,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
                 opacity: 1
             })),
             transition('shown => not-shown', [style({display: 'block', opacity: 1}), animate('.15s', style({display: 'block', opacity: 0}))]),
-            transition('not-shown => shown', [style({display: 'block'}), animate('0s .15s', style({display: 'block', opacity: 0.0001})), animate('.15s', style({display: 'block', opacity: 1}))]),
+            transition('not-shown => shown', [style({display: 'block'}), animate('0s .15s', style({display: 'block', opacity: 0})), animate('.15s', style({display: 'block', opacity: 1}))]),
         ])
     ]
 })
