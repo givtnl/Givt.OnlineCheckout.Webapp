@@ -158,6 +158,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 return_url: environment.returnUrl
             }
         }
-        );
+        )
     }
 }
