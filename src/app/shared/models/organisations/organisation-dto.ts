@@ -6,9 +6,9 @@ export default class OrganisationDto {
     thankYou: string;
     currency: string;
     organisationLogoLink: string
-    paymentMethods: number[]
+    paymentMethods: string[]
 
-    constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string, currency: string, organisationLogoLink: string, paymentMethods: number[]) {
+    constructor(amounts: number[], goal: string, medium: string, organisationName: string, thankYou: string, currency: string, organisationLogoLink: string, paymentMethods: string[]) {
         this.amounts = amounts;
         this.goal = goal;
         this.medium = medium;
