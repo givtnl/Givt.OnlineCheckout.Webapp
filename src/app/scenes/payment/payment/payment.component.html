@@ -10,22 +10,19 @@
         <form id="payment-form">
             <div [ngSwitch]="this.clientSelectedPaymentMethod">
                 <div *ngSwitchCase="'bancontact'">
-<!--
-                    <div class="form-row">
-                        <label for="name">
-                            Name
-                        </label>
-                        <input id="name" name="name" required>
-                    </div>
--->
-                    <button (click)="confirmBancontactPayment($event)" class="button button--green"  style="position: absolute; top: 220px; margin: 0 auto;">
+                    <input class="form-control mb-4" type="text" name="name" [(ngModel)]="bancontactHolderName" placeholder="Voor- en achternaam" autocomplete="billing name">
+                    <img src="../../../assets/paymentMethodIcons/bancontact.svg" alt="">
+                    <p class="bancontact__explanation">Na het invullen van je voor- en achternaam word je omgeleid naar de veilige omgeving van bancontact om je donatie te vervolledigen.</p>
+                    <button (click)="confirmBancontactPayment($event)" class="button button--green"
+                        style="position: absolute; top: 400px; margin: 0 auto;">
                         Continue to bancontact
                     </button>
                 </div>
                 <div *ngSwitchCase="'card'">
                     <div id="payment-element">
                     </div>
-                    <button (click)="confirmCardPayment($event)" class="button button--green" style="position: absolute; top: 470px; margin: 0 auto;">
+                    <button (click)="confirmCardPayment($event)" class="button button--green"
+                        style="position: absolute; top: 470px; margin: 0 auto;">
                         Give
                     </button>
                 </div>
@@ -34,7 +31,8 @@
                         <div id="ideal-bank-element">
                         </div>
                     </div>
-                    <button (click)="confirmIdealPayment($event)" class="button button--green"  style="position: absolute; top: 270px; margin: 0 auto;">
+                    <button (click)="confirmIdealPayment($event)" class="button button--green"
+                        style="position: absolute; top: 270px; margin: 0 auto;">
                         Continue to iDeal
                     </button>
                 </div>
