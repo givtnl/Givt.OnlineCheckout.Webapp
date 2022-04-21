@@ -1,22 +1,27 @@
 <div class="amount__container">
-    <h2 class="presets__title">Geef zoveel je maar wil!</h2>
-    <div class="presets__container util--centered-container" [ngClass]="{'not-shown': customAmountInputShown}">
-        <div class="util--space-evenly" *ngFor="let widget of values">
-            <input class="presets__hide-input" type="radio" name="amount" id="{{widget.id}}"
-                   (click)="closeAmount(); itemClickedEvent(widget.id, widget.value)">
-            <label class="presets__label" for="{{widget.id}}">{{currencySymbol + ' ' + widget.value}}</label>
+    <h2 class="presets__title" [@customAmountInputShownState]="customAmountInputShown ? 'not-shown' : 'shown'">Geef zoveel je maar wil!</h2>
+    <div [@customAmountInputShownState]="customAmountInputShown ? 'not-shown' : 'shown'">
+        <div class="presets__container util--centered-container">
+            <div class="util--space-evenly" *ngFor="let widget of values">
+                <input class="presets__hide-input" type="radio" name="amount" id="{{widget.id}}"
+                       (click)="closeAmount(); itemClickedEvent(widget.id, widget.value)">
+                <label class="presets__label" for="{{widget.id}}">{{currencySymbol + ' ' + widget.value}}</label>
+            </div>
+            <input class="presets__hide-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
         </div>
-        <input class="presets__hide-input" type="radio" name="amount" id="none" [checked]="customAmountInputShown">
     </div>
 
     <div (click)="toggleAmount()" class="custom-amount__title" [ngClass]="{'not-shown': customAmountInputShown}">Kies
         een ander bedrag
     </div>
 
-    <div [ngClass]="{'not-shown': !customAmountInputShown}" class="custom-amount__input-container">
+
+    <h2 [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="presets__title">Geef het bedrag in dat je wilt geven</h2>
+    <div [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="custom-amount__input-container">
         <span class="custom-amount__currency-symbol">{{this.currencySymbol}}<input type="number"
                                                                                    id="custom-amount-input"
                                                                                    class="custom-amount__currency-input"
-                                                                                   (input)="sendAmount($event)"/></span>
+                                                                                   (input)="sendAmount($event)"
+                                                                                   style="margin: 0 auto"/></span>
     </div>
 </div>
