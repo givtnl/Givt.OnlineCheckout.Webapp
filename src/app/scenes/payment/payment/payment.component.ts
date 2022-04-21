@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {StripeElementsOptions} from "@stripe/stripe-js";
-import {ActivatedRoute, Router} from "@angular/router";
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { StripeElementsOptions } from "@stripe/stripe-js";
+import { ActivatedRoute, Router } from "@angular/router";
 import PaymentIntent from '../../../shared/models/payment-intent/payment-intent';
-import {LoadingService} from "../../../core/services/loading.service";
-import {environment} from "../../../../environments/environment";
+import { LoadingService } from "../../../core/services/loading.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
     selector: 'app-payment',
@@ -19,9 +19,10 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     cardPaymentElement: any;
     bancontact: any;
     idealBank: any;
-    elements: any
-    clientSelectedPaymentMethod!: string
-    paymentRequestButton: any
+    elements: any;
+    clientSelectedPaymentMethod!: string;
+    paymentRequestButton: any;
+    bancontactHolderName: string = "";
 
     elementsOptions: StripeElementsOptions = {
         locale: 'nl',
@@ -105,14 +106,14 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 })
 
                 paymentRequest.on('paymentmethod', (ev: any) => {
-                    this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, {payment_method: ev.paymentMethod.id}, {handleActions: false})
+                    this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, { payment_method: ev.paymentMethod.id }, { handleActions: false })
                         .then((result: any) => {
                             if (result.error) {
                                 ev.complete('fail');
-                                this.router.navigate(['result','success'])
+                                this.router.navigate(['result', 'success']);
                             } else {
                                 ev.complete('success');
-                                this.router.navigate(['result','fail'])
+                                this.router.navigate(['result', 'fail']);
                             }
                         })
                 })
@@ -131,7 +132,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     ideal: this.idealBank
                 }
             }
-        )
+        );
     }
 
     confirmBancontactPayment(event: Event) {
@@ -142,21 +143,21 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 return_url: environment.returnUrl,
                 payment_method: {
                     billing_details: {
-                        name: "anonymous"
+                        name: this.bancontactHolderName
                     }
                 }
             },
-        )
+        );
     }
 
     confirmCardPayment(event: Event) {
         event.preventDefault();
         this.stripe.confirmPayment({
-                elements: this.elements,
-                confirmParams: {
-                    return_url: environment.returnUrl
-                }
+            elements: this.elements,
+            confirmParams: {
+                return_url: environment.returnUrl
             }
+        }
         )
     }
 }
