@@ -1,7 +1,7 @@
 export class PaymentMethodDto {
-    index: number;
+    id: string;
 
-    constructor(index: number) {
-        this.index = index
+    constructor(id: string) {
+        this.id = id
     }
 }

@@ -20,7 +20,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     bancontact: any;
     idealBank: any;
     elements: any
-    clientSelectedPaymentMethodIndex!: number
+    clientSelectedPaymentMethod!: string
     paymentRequestButton: any
 
     elementsOptions: StripeElementsOptions = {
@@ -48,7 +48,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         const paymentMethod = this.route.snapshot.data['donation'];
-        this.clientSelectedPaymentMethodIndex = +localStorage.getItem('paymentMethod')!
+        this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
         this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
         localStorage.setItem('token', paymentMethod.token);
         this.organisationName = localStorage.getItem('organisationName')!;
@@ -63,26 +63,26 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     initializeStripe(): void {
         this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
         this.elements = this.stripe.elements(this.elementsOptions)
-        switch (this.clientSelectedPaymentMethodIndex) {
-            case 0: //bancontact
+        switch (this.clientSelectedPaymentMethod) {
+            case "bancontact": //bancontact
                 break;
-            case 1: //card
+            case "card": //card
                 this.cardPaymentElement = this.elements.create("payment");
                 this.cardPaymentElement.mount("#payment-element");
                 break;
-            case 2: //iDeal
+            case "ideal": //iDeal
                 this.idealBank = this.elements.create("idealBank", this.idealElementsOptions);
                 this.idealBank.mount('#ideal-bank-element');
                 break;
-            case 3: //sofort
+            case "sofort": //sofort
                 break;
-            case 4: //giropay
+            case "giropay": //giropay
                 break;
-            case 5: //EPS
+            case "eps": //EPS
                 break;
-            case 6: //apple pay
+            case "applepay": //apple pay
                 break;
-            case 7: //google pay
+            case "googlepay": //google pay
                 const paymentRequest = this.stripe.paymentRequest({
                     country: 'BE',
                     currency: 'eur',

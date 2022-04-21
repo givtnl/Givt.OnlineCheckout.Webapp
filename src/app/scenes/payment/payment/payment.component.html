@@ -8,8 +8,8 @@
             </div>
         </div>
         <form id="payment-form">
-            <div [ngSwitch]="this.clientSelectedPaymentMethodIndex.toString()">
-                <div *ngSwitchCase="0">
+            <div [ngSwitch]="this.clientSelectedPaymentMethod">
+                <div *ngSwitchCase="'bancontact'">
 <!--
                     <div class="form-row">
                         <label for="name">
@@ -22,14 +22,14 @@
                         Continue to bancontact
                     </button>
                 </div>
-                <div *ngSwitchCase="1">
+                <div *ngSwitchCase="'card'">
                     <div id="payment-element">
                     </div>
                     <button (click)="confirmCardPayment($event)" class="button button--green" style="position: absolute; top: 470px; margin: 0 auto;">
                         Give
                     </button>
                 </div>
-                <div *ngSwitchCase="2">
+                <div *ngSwitchCase="'ideal'">
                     <div class="form-row">
                         <div id="ideal-bank-element">
                         </div>
@@ -38,19 +38,19 @@
                         Continue to iDeal
                     </button>
                 </div>
-                <div *ngSwitchCase="3">
+                <div *ngSwitchCase="'sofort'">
 
                 </div>
-                <div *ngSwitchCase="4">
+                <div *ngSwitchCase="'giropay'">
 
                 </div>
-                <div *ngSwitchCase="5">
+                <div *ngSwitchCase="'eps'">
 
                 </div>
-                <div *ngSwitchCase="6">
+                <div *ngSwitchCase="'googlepay'">
 
                 </div>
-                <div *ngSwitchCase="7">
+                <div *ngSwitchCase="'applepay'">
                     <div id="payment-request-button">
                         <!-- A Stripe Element will be inserted here. -->
                     </div>
