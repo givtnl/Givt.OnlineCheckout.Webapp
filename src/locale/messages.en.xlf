@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file original="" xml:space="preserve" source-language="nl" target-language="en">
+  <file original="" xml:space="preserve" source-language="en-us" target-language="en">
     <header>
       <tool tool-id="poeditor.com" tool-name="POEditor"/>
     </header>
     <body>
       <trans-unit id="DonateCharity">
-        <source>Charity - NL</source>
+        <source>Charity - US</source>
         <target>Charity</target>
+      </trans-unit>
+      <trans-unit id="Donate.Continue">
+        <source>Continue</source>
+        <target>Continue</target>
       </trans-unit>
     </body>
   </file>
