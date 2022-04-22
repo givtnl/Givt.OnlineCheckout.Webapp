@@ -101,7 +101,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button-gp')
                     } else {
-                        document.getElementById('payment-request-button')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
+                        document.getElementById('payment-request-button-gp')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
                     }
                 })
 
