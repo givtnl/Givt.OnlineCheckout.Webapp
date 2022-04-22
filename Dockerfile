@@ -7,5 +7,7 @@ COPY docker/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy the built files
 COPY ./dist/givt-online-checkout /usr/share/nginx/html
+# Copy the Stripe/ApplePay apple-developer-merchantid-domain-association
+COPY ./.well-known /usr/share/nginx/html/.well-known
 
 EXPOSE 80

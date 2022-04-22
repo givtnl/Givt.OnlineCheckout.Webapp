@@ -1,33 +1,34 @@
-import {PaymentMethodType} from "./payment-method-enum";
 import {PaymentMethodDto} from "./payment-method-dto";
 
 export default class PaymentMethod {
     private static imgFolder = "../../../assets/paymentMethodIcons/"
 
     private static paymentMethodTiles: PaymentMethod[] = [
-        new PaymentMethod("bc", "Bancontact", PaymentMethod.imgFolder + "bancontact.svg", PaymentMethodType.Bancontact),
-        new PaymentMethod("cc", "Credit card", PaymentMethod.imgFolder + "cc.svg", PaymentMethodType.Card),
-        new PaymentMethod("id", "Ideal", PaymentMethod.imgFolder + "ideal.svg", PaymentMethodType.Ideal),
-        new PaymentMethod("sf", "Sofort", PaymentMethod.imgFolder + "sofort.svg", PaymentMethodType.Sofort),
-        new PaymentMethod("gi", "Giropay", PaymentMethod.imgFolder + "cc.svg", PaymentMethodType.Giropay),
-        new PaymentMethod("ep", "EPS", PaymentMethod.imgFolder + "cc.svg", PaymentMethodType.EPS),
-        new PaymentMethod("ap", "Apple Pay", PaymentMethod.imgFolder + "apay.svg", PaymentMethodType.ApplePay),
-        new PaymentMethod("gp", "Google Pay", PaymentMethod.imgFolder + "gpay.svg", PaymentMethodType.GooglePay),
+        new PaymentMethod("bancontact", "Bancontact", PaymentMethod.imgFolder + "bancontact.svg"),
+        new PaymentMethod("card", "Credit card", PaymentMethod.imgFolder + "cc.svg"),
+        new PaymentMethod("ideal", "Ideal", PaymentMethod.imgFolder + "ideal.svg"),
+        new PaymentMethod("sofort", "Sofort", PaymentMethod.imgFolder + "sofort.svg"),
+        new PaymentMethod("giropay", "Giropay", PaymentMethod.imgFolder + "cc.svg"),
+        new PaymentMethod("eps", "EPS", PaymentMethod.imgFolder + "cc.svg"),
+        new PaymentMethod("applepay", "Apple Pay", PaymentMethod.imgFolder + "apay.svg"),
+        new PaymentMethod("googlepay", "Google Pay", PaymentMethod.imgFolder + "gpay.svg"),
     ]
 
     id: string;
     name: string;
     imgLoc: string;
-    paymentMethod: PaymentMethodType;
 
-    constructor(id: string, name: string, imgLoc: string, paymentMethod: PaymentMethodType) {
+    constructor(id: string, name: string, imgLoc: string) {
         this.id = id;
         this.name = name;
         this.imgLoc = imgLoc;
-        this.paymentMethod = paymentMethod;
     }
 
     static fromPaymentMethodDto(dto: PaymentMethodDto): PaymentMethod {
-        return this.paymentMethodTiles[dto.index];
+        var paymentMehod = this.paymentMethodTiles.find(x => x.id == dto.id);
+        if (!paymentMehod) {
+            throw new Error(`Payment method with id ${dto.id} was not found!`);
+        }
+        return paymentMehod;
     }
 }

@@ -1,13 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file original="" xml:space="preserve" source-language="nl" target-language="en">
+  <file original="" xml:space="preserve" source-language="en-us" target-language="en">
     <header>
       <tool tool-id="poeditor.com" tool-name="POEditor"/>
     </header>
     <body>
       <trans-unit id="DonateCharity">
-        <source>Charity - NL</source>
+        <source>Charity - US</source>
         <target>Charity</target>
+      </trans-unit>
+      <trans-unit id="Donate.Continue">
+        <source>Continue</source>
+        <target>Continue</target>
+      </trans-unit>
+      <trans-unit id="Donate.ChooseDifferentAmount">
+        <source>Choose a different amount</source>
+        <target>Choose a different amount</target>
+      </trans-unit>
+      <trans-unit id="Donate.ChooseAmount">
+        <source>Give as much as you'd like</source>
+        <target>Give as much as you'd like</target>
+      </trans-unit>
+      <trans-unit id="Payment.Continue">
+        <source>Give</source>
+        <target>Give</target>
+      </trans-unit>
+      <trans-unit id="Donate.Give">
+        <source>Give</source>
+        <target>Give</target>
+      </trans-unit>
+      <trans-unit id="Success.ThankYouTitle">
+        <source>Thank you for your donation to ${organisationName}</source>
+        <target>Thank you for your donation to ${organisationName}</target>
+      </trans-unit>
+      <trans-unit id="Success.WantReceipt">
+        <source>I want a receipt</source>
+        <target>I want a receipt</target>
+      </trans-unit>
+      <trans-unit id="Success.DownloadApp">
+        <source>Download the Givt app</source>
+        <target>Download the Givt app</target>
+      </trans-unit>
+      <trans-unit id="Success.GivtSummary">
+        <source>Givt offers you a personal summary and an overview for your tax statement. Managing your tax statement has never been so easy! Want to know more?</source>
+        <target>Givt offers you a personal summary and an overview for your tax statement. Managing your tax statement has never been so easy! Want to know more?</target>
+      </trans-unit>
+      <trans-unit id="Receipt.Title">
+        <source>How do you want to receive your receipt?</source>
+        <target>How do you want to receive your receipt?</target>
+      </trans-unit>
+      <trans-unit id="Receipt.Download">
+        <source>download now</source>
+        <target>download now</target>
+      </trans-unit>
+      <trans-unit id="Receipt.ViaEmail">
+        <source>via email</source>
+        <target>via email</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.Title">
+        <source>Receive your receipt via email</source>
+        <target>Receive your receipt via email</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.Send">
+        <source>send</source>
+        <target>send</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.SpamText">
+        <source>Don’t worry, we won’t send you any spam.</source>
+        <target>Don’t worry, we won’t send you any spam.</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.Title">
+        <source>We were unable to complete your donation</source>
+        <target>We were unable to complete your donation</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.SubTitle">
+        <source>If you didn't cancel the donation by yourself, try a different method.</source>
+        <target>If you didn't cancel the donation by yourself, try a different method.</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.StartOver">
+        <source>Start over</source>
+        <target>Start over</target>
+      </trans-unit>
+      <trans-unit id="Payment.BancontactExplanation">
+        <source>After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.</source>
+        <target>After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.</target>
+      </trans-unit>
+      <trans-unit id="Payment.BancontactContinue">
+        <source>Continue to Bancontact</source>
+        <target>Continue to Bancontact</target>
+      </trans-unit>
+      <trans-unit id="Payment.IdealContinue">
+        <source>Continue to IDeal</source>
+        <target>Continue to IDeal</target>
       </trans-unit>
     </body>
   </file>

@@ -1,13 +1,27 @@
-import { getCurrencySymbol } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CurrencyHelper } from 'src/app/shared/helpers/currency-helper';
 import AmountData from 'src/app/shared/models/donations/amount-data';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 
 @Component({
   selector: 'app-amounts',
   templateUrl: './amounts.component.html',
-  styleUrls: ['./amounts.component.scss']
+  styleUrls: ['./amounts.component.scss'],
+    animations: [
+        trigger('customAmountInputShownState', [
+            state('not-shown', style({
+                display: 'none',
+                opacity: 0
+            })),
+            state('shown', style({
+                display: 'block',
+                opacity: 1
+            })),
+            transition('shown => not-shown', [style({display: 'block', opacity: 1}), animate('.15s', style({display: 'block', opacity: 0}))]),
+            transition('not-shown => shown', [style({display: 'block'}), animate('0s .15s', style({display: 'block', opacity: 0})), animate('.15s', style({display: 'block', opacity: 1}))]),
+        ])
+    ]
 })
 export class AmountsComponent implements OnInit, AfterViewInit {
   @Input()
@@ -45,9 +59,6 @@ export class AmountsComponent implements OnInit, AfterViewInit {
 
   toggleAmount() {
     this.customAmountInputShown = !this.customAmountInputShown
-    if (this.customAmountInputShown) {
-      document.getElementsByClassName('presets__title').item(0)!.innerHTML = "Geef het bedrag in dat je wilt geven"
-    }
     this.onInputModeChange.emit(this.customAmountInputShown)
   }
 

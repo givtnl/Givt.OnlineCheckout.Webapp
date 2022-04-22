@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {StripeElementsOptions} from "@stripe/stripe-js";
+import {StripeElementLocale, StripeElementsOptions} from "@stripe/stripe-js";
 import {ActivatedRoute, Router} from "@angular/router";
 import PaymentIntent from '../../../shared/models/payment-intent/payment-intent';
 import {LoadingService} from "../../../core/services/loading.service";
@@ -19,12 +19,13 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     cardPaymentElement: any;
     bancontact: any;
     idealBank: any;
-    elements: any
-    clientSelectedPaymentMethodIndex!: number
-    paymentRequestButton: any
+    elements: any;
+    clientSelectedPaymentMethod!: string;
+    paymentRequestButton: any;
+    bancontactHolderName: string = "";
 
     elementsOptions: StripeElementsOptions = {
-        locale: 'nl',
+        locale: `${navigator.language}` as StripeElementLocale,
         clientSecret: '',
         appearance: {
             disableAnimations: false,
@@ -44,11 +45,12 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         },
     };
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) { }
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    }
 
     ngOnInit(): void {
         const paymentMethod = this.route.snapshot.data['donation'];
-        this.clientSelectedPaymentMethodIndex = +localStorage.getItem('paymentMethod')!
+        this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
         this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
         localStorage.setItem('token', paymentMethod.token);
         this.organisationName = localStorage.getItem('organisationName')!;
@@ -63,26 +65,25 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     initializeStripe(): void {
         this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
         this.elements = this.stripe.elements(this.elementsOptions)
-        switch (this.clientSelectedPaymentMethodIndex) {
-            case 0: //bancontact
+        switch (this.clientSelectedPaymentMethod) {
+            case "bancontact": //bancontact
                 break;
-            case 1: //card
+            case "card": //card
                 this.cardPaymentElement = this.elements.create("payment");
                 this.cardPaymentElement.mount("#payment-element");
                 break;
-            case 2: //iDeal
+            case "ideal": //iDeal
                 this.idealBank = this.elements.create("idealBank", this.idealElementsOptions);
                 this.idealBank.mount('#ideal-bank-element');
                 break;
-            case 3: //sofort
+            case "sofort": //sofort
                 break;
-            case 4: //giropay
+            case "giropay": //giropay
                 break;
-            case 5: //EPS
+            case "eps": //EPS
                 break;
-            case 6: //apple pay
-                break;
-            case 7: //google pay
+            case "applepay": //apple pay
+            case "googlepay": //google pay
                 const paymentRequest = this.stripe.paymentRequest({
                     country: 'BE',
                     currency: 'eur',
@@ -98,9 +99,17 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
                 paymentRequest.canMakePayment().then((result: any) => {
                     if (result) {
-                        this.paymentRequestButton.mount('#payment-request-button');
+                        if (this.clientSelectedPaymentMethod === 'applepay') {
+                            this.paymentRequestButton.mount('#payment-request-button-ap')
+                        } else {
+                            this.paymentRequestButton.mount('#payment-request-button-gp')
+                        }
                     } else {
-                        document.getElementById('payment-request-button')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
+                        if (this.clientSelectedPaymentMethod === 'applepay') {
+                            document.getElementById('payment-request-button-ap')!.innerHTML = 'To use apple pay, you must run safari on a Mac or iPhone and have a card in your wallet. Please try a different approach.'
+                        } else {
+                            document.getElementById('payment-request-button-gp')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
+                        }
                     }
                 })
 
@@ -109,10 +118,10 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                         .then((result: any) => {
                             if (result.error) {
                                 ev.complete('fail');
-                                this.router.navigate(['result','success'])
+                                this.router.navigate(['result', 'success']);
                             } else {
                                 ev.complete('success');
-                                this.router.navigate(['result','fail'])
+                                this.router.navigate(['result', 'fail']);
                             }
                         })
                 })
@@ -123,6 +132,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmIdealPayment(event: Event) {
         event.preventDefault();
+        this.loader.show()
         this.stripe.confirmIdealPayment(
             this.elementsOptions.clientSecret,
             {
@@ -131,26 +141,28 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                     ideal: this.idealBank
                 }
             }
-        )
+        );
     }
 
     confirmBancontactPayment(event: Event) {
         event.preventDefault();
+        this.loader.show()
         this.stripe.confirmBancontactPayment(
             this.elementsOptions.clientSecret,
             {
                 return_url: environment.returnUrl,
                 payment_method: {
                     billing_details: {
-                        name: "anonymous"
+                        name: this.bancontactHolderName
                     }
                 }
             },
-        )
+        );
     }
 
     confirmCardPayment(event: Event) {
         event.preventDefault();
+        this.loader.show()
         this.stripe.confirmPayment({
                 elements: this.elements,
                 confirmParams: {

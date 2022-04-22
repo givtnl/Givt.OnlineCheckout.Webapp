@@ -8,6 +8,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {DonationModule} from "../donation/donation.module";
 import {SharedModule} from "../../shared/shared.module";
 import {PaymentGuard} from "./payment.guard";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {PaymentGuard} from "./payment.guard";
         MatProgressSpinnerModule,
         DonationModule,
         SharedModule,
+        FormsModule
     ],
     providers: [
         DonationResolver,

@@ -48,7 +48,7 @@ export class DonationComponent implements OnInit {
             localStorage.setItem('logoUrl', this.organisation.logoLink);
             localStorage.setItem('amount', String(amount));
             if (this.currentSelectedPaymentMethod)
-                localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.paymentMethod.valueOf().toString()) // this is to store a number in localstorage
+                localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
             await this.router.navigate(['/payment']);
         }
     }
@@ -70,11 +70,6 @@ export class DonationComponent implements OnInit {
 
     setCurrentSelectedPaymentMethod(event: any) {
         this.currentSelectedPaymentMethod = [...this.organisation.paymentMethods].filter(tile => tile.id == event.target.id).pop();
-        if (this.currentSelectedPaymentMethod?.id == "ap" || this.currentSelectedPaymentMethod?.id == "gp") {
-            document.getElementById("main-button")!.innerHTML = "give";
-        } else {
-            document.getElementById("main-button")!.innerHTML = "continue";
-        }
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 

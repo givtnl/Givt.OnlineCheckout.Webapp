@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {LoadingService} from "../../../../core/services/loading.service";
 import {environment} from "../../../../../environments/environment";
 import {NotificationService} from "../../../../core/notification/notification.service";
+import {Subject} from "rxjs";
 
 @Component({
     selector: 'app-receipt',
@@ -12,6 +13,8 @@ import {NotificationService} from "../../../../core/notification/notification.se
 export class ReceiptComponent implements OnInit {
     @Input()
     token!: string;
+    @Input()
+    openStatus!: Subject<boolean>
     email = "";
     invalidEmail = false;
     emailFormShown: boolean = false;
@@ -27,6 +30,7 @@ export class ReceiptComponent implements OnInit {
 
     showEmailForm() {
         this.emailFormShown = true;
+        this.openStatus.subscribe(() => {setTimeout(() => {this.emailFormShown = false;}, 400)})
     }
 
     submitEmail() {
@@ -58,7 +62,11 @@ export class ReceiptComponent implements OnInit {
         const headers = {
             'Authorization': 'Bearer ' + this.token
         }
-        this.http.get(environment.apiUrl + '/api/report/singleDonation', {observe: "response", responseType: "blob", headers: new HttpHeaders(headers)}).subscribe(
+        this.http.get(environment.apiUrl + '/api/report/singleDonation', {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders(headers)
+        }).subscribe(
             response => {
                 ReceiptComponent.downloadFile(response.body!)
                 this.loadingService.hide();
