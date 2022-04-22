@@ -83,7 +83,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             case "eps": //EPS
                 break;
             case "applepay": //apple pay
-                break;
             case "googlepay": //google pay
                 const paymentRequest = this.stripe.paymentRequest({
                     country: 'BE',
@@ -100,9 +99,17 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
                 paymentRequest.canMakePayment().then((result: any) => {
                     if (result) {
-                        this.paymentRequestButton.mount('#payment-request-button-gp')
+                        if (this.clientSelectedPaymentMethod === 'applepay') {
+                            this.paymentRequestButton.mount('#payment-request-button-ap')
+                        } else {
+                            this.paymentRequestButton.mount('#payment-request-button-gp')
+                        }
                     } else {
-                        document.getElementById('payment-request-button-gp')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
+                        if (this.clientSelectedPaymentMethod === 'applepay') {
+                            document.getElementById('payment-request-button-ap')!.innerHTML = 'To use apple pay, you must run safari on a Mac or iPhone and have a card in your wallet. Please try a different approach.'
+                        } else {
+                            document.getElementById('payment-request-button-gp')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
+                        }
                     }
                 })
 
