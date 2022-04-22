@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file original="" xml:space="preserve" source-language="nl" target-language="nl">
+  <file original="" xml:space="preserve" source-language="en-us" target-language="nl">
     <header>
       <tool tool-id="poeditor.com" tool-name="POEditor"/>
     </header>
     <body>
       <trans-unit id="DonateCharity">
-        <source>Charity - NL</source>
+        <source>Charity - US</source>
         <target>Charity - NL</target>
+      </trans-unit>
+      <trans-unit id="Donate.Continue">
+        <source>Continue</source>
+        <target>Volgende</target>
+      </trans-unit>
+      <trans-unit id="Donate.ChooseDifferentAmount">
+        <source>Choose a different amount</source>
+        <target>Kies een ander bedrag</target>
+      </trans-unit>
+      <trans-unit id="Donate.ChooseAmount">
+        <source>Give as much as you'd like</source>
+        <target>Geef zoveel je maar wil</target>
+      </trans-unit>
+      <trans-unit id="Payment.Continue">
+        <source>Give</source>
+        <target>Geven</target>
+      </trans-unit>
+      <trans-unit id="Donate.Give">
+        <source>Give</source>
+        <target>Geven</target>
+      </trans-unit>
+      <trans-unit id="Success.ThankYouTitle">
+        <source>Thank you for your donation to {0}</source>
+        <target>Dankjewel voor je gift aan {0}</target>
+      </trans-unit>
+      <trans-unit id="Success.WantReceipt">
+        <source>I want a receipt</source>
+        <target>Ik wil een bonnetje</target>
+      </trans-unit>
+      <trans-unit id="Success.DownloadApp">
+        <source>Download the Givt app</source>
+        <target>download de Givt-app</target>
+      </trans-unit>
+      <trans-unit id="Success.GivtSummary">
+        <source>Givt offers you a personal summary and an overview for your tax statement. Managing your tax statement has never been so easy! Want to know more?</source>
+        <target>Givt biedt u een persoonlijke samenvatting en een overzicht voor je belastingen. Uw belastingsaangifte doen was nog nooit zo eenvoudig! Meer weten?</target>
+      </trans-unit>
+      <trans-unit id="Receipt.Title">
+        <source>How do you want to receive your receipt?</source>
+        <target>Hoe wil je je bonnetje ontvangen?</target>
+      </trans-unit>
+      <trans-unit id="Receipt.Download">
+        <source>download now</source>
+        <target>nu downloaden</target>
+      </trans-unit>
+      <trans-unit id="Receipt.ViaEmail">
+        <source>via email</source>
+        <target>via e-mail</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.Title">
+        <source>Receive your receipt via email</source>
+        <target>Ontvang je bonnetje via e-mail</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.Send">
+        <source>send</source>
+        <target>verstuur</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.SpamText">
+        <source>Don’t worry, we won’t send you any spam.</source>
+        <target>Geen zorgen, we sturen je geen spam.</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.Title">
+        <source>We were unable to complete your donation</source>
+        <target>We kunnen je donatie niet voltooien</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.SubTitle">
+        <source>If you didn't cancel the donation by yourself, try a different method.</source>
+        <target>Als je de donatie niet zelf hebt geannuleerd, probeer dan een andere methode.</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.StartOver">
+        <source>Start over</source>
+        <target>Probeer opnieuw</target>
       </trans-unit>
     </body>
   </file>

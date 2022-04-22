@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file original="" xml:space="preserve" source-language="nl" target-language="de">
+  <file original="" xml:space="preserve" source-language="en-us" target-language="de">
     <header>
       <tool tool-id="poeditor.com" tool-name="POEditor"/>
     </header>
     <body>
       <trans-unit id="DonateCharity">
-        <source>Charity - NL</source>
+        <source>Charity - US</source>
         <target>Charity - DE</target>
+      </trans-unit>
+      <trans-unit id="Donate.Continue">
+        <source>Continue</source>
+        <target>Weiter</target>
+      </trans-unit>
+      <trans-unit id="Donate.ChooseDifferentAmount">
+        <source>Choose a different amount</source>
+        <target>Wählen Sie einen anderen Betrag</target>
+      </trans-unit>
+      <trans-unit id="Donate.ChooseAmount">
+        <source>Give as much as you'd like</source>
+        <target>Geben Sie so viel Sie möchten</target>
+      </trans-unit>
+      <trans-unit id="Payment.Continue">
+        <source>Give</source>
+        <target>Geben</target>
+      </trans-unit>
+      <trans-unit id="Donate.Give">
+        <source>Give</source>
+        <target>Geben</target>
+      </trans-unit>
+      <trans-unit id="Success.ThankYouTitle">
+        <source>Thank you for your donation to {0}</source>
+        <target>Danke für deine Spende an {0}</target>
+      </trans-unit>
+      <trans-unit id="Success.WantReceipt">
+        <source>I want a receipt</source>
+        <target>Ich möchte eine Quittung</target>
+      </trans-unit>
+      <trans-unit id="Success.DownloadApp">
+        <source>Download the Givt app</source>
+        <target>Laden Sie die Give-App herunter</target>
+      </trans-unit>
+      <trans-unit id="Success.GivtSummary">
+        <source>Givt offers you a personal summary and an overview for your tax statement. Managing your tax statement has never been so easy! Want to know more?</source>
+        <target>Givt bietet dir eine persönliche Zusammenfassung und Übersicht für deinen Steuerauszug. Die Verwaltung Ihrer Steuererklärung war noch nie so einfach! Möchten Sie mehr wissen?</target>
+      </trans-unit>
+      <trans-unit id="Receipt.Title">
+        <source>How do you want to receive your receipt?</source>
+        <target>Wie möchten Sie Ihre Quittung erhalten?</target>
+      </trans-unit>
+      <trans-unit id="Receipt.Download">
+        <source>download now</source>
+        <target>jetzt downloaden</target>
+      </trans-unit>
+      <trans-unit id="Receipt.ViaEmail">
+        <source>via email</source>
+        <target>per Email</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.Title">
+        <source>Receive your receipt via email</source>
+        <target>Erhalten Sie Ihre Quittung per E-Mail</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.Send">
+        <source>send</source>
+        <target>senden</target>
+      </trans-unit>
+      <trans-unit id="ReceiptEmail.SpamText">
+        <source>Don’t worry, we won’t send you any spam.</source>
+        <target>Keine Sorge, wir senden Ihnen keinen Spam.</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.Title">
+        <source>We were unable to complete your donation</source>
+        <target>Wir konnten Ihre Spende nicht abschließen</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.SubTitle">
+        <source>If you didn't cancel the donation by yourself, try a different method.</source>
+        <target>Wenn Sie die Spende nicht selbst storniert haben, versuchen Sie es mit einer anderen Methode.</target>
+      </trans-unit>
+      <trans-unit id="PaymentFailure.StartOver">
+        <source>Start over</source>
+        <target>Von vorn anfangen</target>
       </trans-unit>
     </body>
   </file>

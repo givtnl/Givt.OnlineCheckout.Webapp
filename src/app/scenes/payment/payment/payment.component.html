@@ -22,7 +22,7 @@
                     <div id="payment-element">
                     </div>
                     <button (click)="confirmCardPayment($event)" class="button button--green"
-                        style="position: absolute; top: 470px; margin: 0 auto;">
+                        style="position: absolute; top: 550px; margin: 0 auto;">
                         Give
                     </button>
                 </div>
@@ -46,10 +46,12 @@
 
                 </div>
                 <div *ngSwitchCase="'googlepay'">
-
+                    <div id="payment-request-button-gp">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
                 </div>
                 <div *ngSwitchCase="'applepay'">
-                    <div id="payment-request-button">
+                    <div id="payment-request-button-ap">
                         <!-- A Stripe Element will be inserted here. -->
                     </div>
                 </div>
