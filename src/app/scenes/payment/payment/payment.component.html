@@ -12,10 +12,10 @@
                 <div *ngSwitchCase="'bancontact'">
                     <input class="form-control mb-4" type="text" name="name" [(ngModel)]="bancontactHolderName" placeholder="Voor- en achternaam" autocomplete="billing name">
                     <img src="../../../assets/paymentMethodIcons/bancontact.svg" alt="">
-                    <p class="bancontact__explanation">Na het invullen van je voor- en achternaam word je omgeleid naar de veilige omgeving van bancontact om je donatie te vervolledigen.</p>
+                    <p class="bancontact__explanation" i18n="@@Payment.BancontactExplanation">After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.</p>
                     <button (click)="confirmBancontactPayment($event)" class="button button--green"
-                        style="position: absolute; top: 400px; margin: 0 auto;">
-                        Continue to bancontact
+                        style="position: absolute; top: 400px; margin: 0 auto;" i18n="@@Payment.BancontactContinue">
+                        Continue to Bancontact
                     </button>
                 </div>
                 <div *ngSwitchCase="'card'">
@@ -32,8 +32,8 @@
                         </div>
                     </div>
                     <button (click)="confirmIdealPayment($event)" class="button button--green"
-                        style="position: absolute; top: 270px; margin: 0 auto;" i18n="@@Payment.Continue">
-                        Give
+                        style="position: absolute; top: 270px; margin: 0 auto;" i18n="@@Payment.IdealContinue">
+                        Continue to IDeal
                     </button>
                 </div>
                 <div *ngSwitchCase="'sofort'">
