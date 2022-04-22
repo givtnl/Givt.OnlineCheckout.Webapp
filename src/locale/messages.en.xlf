@@ -30,8 +30,8 @@
         <target>Give</target>
       </trans-unit>
       <trans-unit id="Success.ThankYouTitle">
-        <source>Thank you for your donation to {organisationName}</source>
-        <target>Thank you for your donation to {organisationName}</target>
+        <source>Thank you for your donation to ${organisationName}</source>
+        <target>Thank you for your donation to ${organisationName}</target>
       </trans-unit>
       <trans-unit id="Success.WantReceipt">
         <source>I want a receipt</source>
