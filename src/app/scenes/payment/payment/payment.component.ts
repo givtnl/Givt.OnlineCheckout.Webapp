@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {StripeElementsOptions} from "@stripe/stripe-js";
+import {StripeElementLocale, StripeElementsOptions} from "@stripe/stripe-js";
 import {ActivatedRoute, Router} from "@angular/router";
 import PaymentIntent from '../../../shared/models/payment-intent/payment-intent';
 import {LoadingService} from "../../../core/services/loading.service";
@@ -25,7 +25,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     bancontactHolderName: string = "";
 
     elementsOptions: StripeElementsOptions = {
-        locale: 'nl',
+        locale: `${navigator.language}` as StripeElementLocale,
         clientSecret: '',
         appearance: {
             disableAnimations: false,
@@ -124,8 +124,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     confirmIdealPayment(event: Event) {
-        this.loader.show()
         event.preventDefault();
+        this.loader.show()
         this.stripe.confirmIdealPayment(
             this.elementsOptions.clientSecret,
             {
@@ -135,7 +135,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             }
         );
-        this.loader.show()
+        this.loader.hide()
     }
 
     confirmBancontactPayment(event: Event) {
@@ -156,8 +156,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     confirmCardPayment(event: Event) {
-        this.loader.show()
         event.preventDefault();
+        this.loader.show()
         this.stripe.confirmPayment({
                 elements: this.elements,
                 confirmParams: {
@@ -165,6 +165,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             }
         )
-        this.loader.show()
+        this.loader.hide()
     }
 }

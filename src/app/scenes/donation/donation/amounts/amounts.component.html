@@ -1,5 +1,5 @@
 <div class="amount__container">
-    <h2 class="presets__title" [@customAmountInputShownState]="customAmountInputShown ? 'not-shown' : 'shown'">Geef zoveel je maar wil!</h2>
+    <h2 class="presets__title" [@customAmountInputShownState]="customAmountInputShown ? 'not-shown' : 'shown'"i18n="@@Donate.ChooseAmount">Give as much as you'd like</h2>
     <div [@customAmountInputShownState]="customAmountInputShown ? 'not-shown' : 'shown'">
         <div class="presets__container util--centered-container">
             <div class="util--space-evenly" *ngFor="let widget of values">
@@ -11,12 +11,11 @@
         </div>
     </div>
 
-    <div (click)="toggleAmount()" class="custom-amount__title" [ngClass]="{'not-shown': customAmountInputShown}">Kies
-        een ander bedrag
+    <div (click)="toggleAmount()" class="custom-amount__title" [ngClass]="{'not-shown': customAmountInputShown}" i18n="@@Donate.ChooseDifferentAmount">Choose a different amount
     </div>
 
 
-    <h2 [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="presets__title">Geef het bedrag in dat je wilt geven</h2>
+    <h2 [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="presets__title" i18n="@@Donate.ChooseAmount">Give as much as you'd like</h2>
     <div [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="custom-amount__input-container">
         <span class="custom-amount__currency-symbol">{{this.currencySymbol}}<input type="number"
                                                                                    id="custom-amount-input"
