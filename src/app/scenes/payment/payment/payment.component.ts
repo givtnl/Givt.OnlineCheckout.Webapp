@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { StripeElementsOptions } from "@stripe/stripe-js";
-import { ActivatedRoute, Router } from "@angular/router";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {StripeElementsOptions} from "@stripe/stripe-js";
+import {ActivatedRoute, Router} from "@angular/router";
 import PaymentIntent from '../../../shared/models/payment-intent/payment-intent';
-import { LoadingService } from "../../../core/services/loading.service";
-import { environment } from "../../../../environments/environment";
+import {LoadingService} from "../../../core/services/loading.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-payment',
@@ -45,7 +45,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         },
     };
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) { }
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    }
 
     ngOnInit(): void {
         const paymentMethod = this.route.snapshot.data['donation'];
@@ -106,7 +107,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 })
 
                 paymentRequest.on('paymentmethod', (ev: any) => {
-                    this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, { payment_method: ev.paymentMethod.id }, { handleActions: false })
+                    this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, {payment_method: ev.paymentMethod.id}, {handleActions: false})
                         .then((result: any) => {
                             if (result.error) {
                                 ev.complete('fail');
@@ -123,6 +124,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     confirmIdealPayment(event: Event) {
+        this.loader.show()
         event.preventDefault();
         this.stripe.confirmIdealPayment(
             this.elementsOptions.clientSecret,
@@ -133,10 +135,12 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             }
         );
+        this.loader.show()
     }
 
     confirmBancontactPayment(event: Event) {
         event.preventDefault();
+        this.loader.show()
         this.stripe.confirmBancontactPayment(
             this.elementsOptions.clientSecret,
             {
@@ -148,16 +152,19 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             },
         );
+        this.loader.hide()
     }
 
     confirmCardPayment(event: Event) {
+        this.loader.show()
         event.preventDefault();
         this.stripe.confirmPayment({
-            elements: this.elements,
-            confirmParams: {
-                return_url: environment.returnUrl
+                elements: this.elements,
+                confirmParams: {
+                    return_url: environment.returnUrl
+                }
             }
-        }
         )
+        this.loader.show()
     }
 }
