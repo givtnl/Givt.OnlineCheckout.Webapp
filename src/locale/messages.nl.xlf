@@ -30,8 +30,8 @@
         <target>Geven</target>
       </trans-unit>
       <trans-unit id="Success.ThankYouTitle">
-        <source>Thank you for your donation to {{organisationName}}</source>
-        <target>Dankjewel voor je gift aan {{organisationName}}</target>
+        <source>Thank you for your donation to {organisationName}</source>
+        <target>Dankjewel voor je gift aan {organisationName}</target>
       </trans-unit>
       <trans-unit id="Success.WantReceipt">
         <source>I want a receipt</source>
