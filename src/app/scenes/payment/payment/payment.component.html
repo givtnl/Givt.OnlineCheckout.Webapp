@@ -1,7 +1,7 @@
 <app-logos [logoUrl]="logoUrl"></app-logos>
 <div class="util--centered-container" style="margin-top: 100px">
     <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
-    <div>
+    <div [ngStyle]="{display :!(loading$ | async) === true ? 'block' : 'none'}">
         <div class="header--margin">
             <div class="util--centered-container">
                 <h1 class="header__title">{{organisationName}}</h1>
