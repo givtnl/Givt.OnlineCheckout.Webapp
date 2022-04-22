@@ -30,8 +30,8 @@
         <target>Geven</target>
       </trans-unit>
       <trans-unit id="Success.ThankYouTitle">
-        <source>Thank you for your donation to {0}</source>
-        <target>Dankjewel voor je gift aan {0}</target>
+        <source>Thank you for your donation to {{organisationName}}</source>
+        <target>Dankjewel voor je gift aan {{organisationName}}</target>
       </trans-unit>
       <trans-unit id="Success.WantReceipt">
         <source>I want a receipt</source>
@@ -80,6 +80,18 @@
       <trans-unit id="PaymentFailure.StartOver">
         <source>Start over</source>
         <target>Probeer opnieuw</target>
+      </trans-unit>
+      <trans-unit id="Payment.BancontactExplanation">
+        <source>After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.</source>
+        <target>Na het invullen van je voor- en achternaam word je omgeleid naar de veilige omgeving van bancontact om je donatie te vervolledigen.</target>
+      </trans-unit>
+      <trans-unit id="Payment.BancontactContinue">
+        <source>Continue to Bancontact</source>
+        <target>Ga naar Bancontact</target>
+      </trans-unit>
+      <trans-unit id="Payment.IdealContinue">
+        <source>Continue to IDeal</source>
+        <target>Ga naar IDeal</target>
       </trans-unit>
     </body>
   </file>
