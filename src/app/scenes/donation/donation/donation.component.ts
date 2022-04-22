@@ -70,11 +70,6 @@ export class DonationComponent implements OnInit {
 
     setCurrentSelectedPaymentMethod(event: any) {
         this.currentSelectedPaymentMethod = [...this.organisation.paymentMethods].filter(tile => tile.id == event.target.id).pop();
-        if (this.currentSelectedPaymentMethod?.id == "ap" || this.currentSelectedPaymentMethod?.id == "gp") {
-            document.getElementById("main-button")!.innerHTML = "give";
-        } else {
-            document.getElementById("main-button")!.innerHTML = "continue";
-        }
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
