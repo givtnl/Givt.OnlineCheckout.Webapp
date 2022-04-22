@@ -22,7 +22,7 @@
                     <div id="payment-element">
                     </div>
                     <button (click)="confirmCardPayment($event)" class="button button--green"
-                        style="position: absolute; top: 550px; margin: 0 auto;">
+                        style="position: absolute; top: 550px; margin: 0 auto;"  i18n="@@Payment.Continue">
                         Give
                     </button>
                 </div>
@@ -32,8 +32,8 @@
                         </div>
                     </div>
                     <button (click)="confirmIdealPayment($event)" class="button button--green"
-                        style="position: absolute; top: 270px; margin: 0 auto;">
-                        Continue to iDeal
+                        style="position: absolute; top: 270px; margin: 0 auto;" i18n="@@Payment.Continue">
+                        Give
                     </button>
                 </div>
                 <div *ngSwitchCase="'sofort'">

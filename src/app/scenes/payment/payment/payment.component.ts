@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { StripeElementsOptions } from "@stripe/stripe-js";
+import { StripeElementLocale, StripeElementsOptions } from "@stripe/stripe-js";
 import { ActivatedRoute, Router } from "@angular/router";
 import PaymentIntent from '../../../shared/models/payment-intent/payment-intent';
 import { LoadingService } from "../../../core/services/loading.service";
@@ -25,7 +25,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     bancontactHolderName: string = "";
 
     elementsOptions: StripeElementsOptions = {
-        locale: 'nl',
+        locale: `${navigator.language}` as StripeElementLocale,
         clientSecret: '',
         appearance: {
             disableAnimations: false,
