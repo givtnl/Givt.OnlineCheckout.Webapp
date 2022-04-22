@@ -135,7 +135,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             }
         );
-        this.loader.hide()
     }
 
     confirmBancontactPayment(event: Event) {
@@ -152,7 +151,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             },
         );
-        this.loader.hide()
     }
 
     confirmCardPayment(event: Event) {
@@ -165,6 +163,5 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 }
             }
         )
-        this.loader.hide()
     }
 }
