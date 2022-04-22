@@ -24,8 +24,8 @@
             </div>
         </div>
         <button id="main-button" (click)="submit()" class="button button--align-left"
-            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Continue" *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">Continue</button>
+            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Give" *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">Give</button>
         <button id="main-button" (click)="submit()" class="button button--align-left"
-            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Give" *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">Give</button>
+            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Continue" *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">Continue</button>
     </div>
 </div>
