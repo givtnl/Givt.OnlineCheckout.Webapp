@@ -154,15 +154,12 @@ export class DonationComponent implements OnInit {
                     paymentRequest.on('paymentmethod', (ev: any) => {
                         this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
                             .then((result: any) => {
-                                console.log(result)
                                 if (result.error) {
-                                    console.log(result);
-                                    console.log(result.error);
                                     ev.complete('fail');
-                                    this.router.navigate(['result', 'success']);
+                                    this.router.navigate(['result', 'failure']);
                                 } else {
                                     ev.complete('success');
-                                    this.router.navigate(['result', 'failure']);
+                                    this.router.navigate(['result', 'success']);
                                 }
                             })
                     })
