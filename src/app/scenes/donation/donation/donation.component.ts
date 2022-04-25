@@ -147,6 +147,7 @@ export class DonationComponent implements OnInit {
             })
 
             paymentRequest.canMakePayment().then((result: any) => {
+                    this.loader.hide()
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button')
                     }
@@ -163,8 +164,6 @@ export class DonationComponent implements OnInit {
                                 }
                             })
                     })
-
-                    this.loader.hide()
                 }
             )
         })
