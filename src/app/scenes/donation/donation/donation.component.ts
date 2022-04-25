@@ -4,6 +4,11 @@ import AmountData from 'src/app/shared/models/donations/amount-data';
 import Organisation from 'src/app/shared/models/organisations/organisation';
 import PaymentMethod from 'src/app/shared/models/payment-methods/payment-method';
 import {LoadingService} from "../../../core/services/loading.service";
+import {StripeElementLocale, StripeElementsOptions} from "@stripe/stripe-js";
+import {finalize, firstValueFrom} from "rxjs";
+import PaymentIntent from "../../../shared/models/payment-intent/payment-intent";
+import {environment} from "../../../../environments/environment";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-donation',
@@ -20,12 +25,27 @@ export class DonationComponent implements OnInit {
     email = '';
     loading$ = this.loader.loading$;
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    paymentRequestButton: any;
+    stripe: any;
+    elementsOptions: StripeElementsOptions = {
+        locale: `${navigator.language}` as StripeElementLocale,
+        clientSecret: '',
+        appearance: {
+            disableAnimations: false,
+            theme: "flat",
+        }
+    };
+    elements: any;
+
+
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient) {
     }
 
     ngOnInit(): void {
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
+        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
+        this.setupWalletPayment();
     }
 
     async submit() {
@@ -55,6 +75,7 @@ export class DonationComponent implements OnInit {
 
     setCurrentSelected(event: AmountData) {
         this.currentSelected = event;
+        this.setupWalletPayment()
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
@@ -65,6 +86,7 @@ export class DonationComponent implements OnInit {
 
     saveCustomAmount(customAmount: number) {
         this.customAmount = customAmount;
+        this.setupWalletPayment()
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
@@ -87,5 +109,65 @@ export class DonationComponent implements OnInit {
 
     private static isValidCustomAmount(amount: number): boolean {
         return amount >= .5 && amount <= 25000;
+    }
+
+    setupWalletPayment() {
+        this.loader.show();
+        let amount = 0;
+        if (this.inputMode) {
+            amount = Math.round(this.customAmount * 100) / 100;
+            if (!DonationComponent.isValidCustomAmount(amount)) {
+                return
+            }
+        } else {
+            amount = this.currentSelected ? this.currentSelected.value : 5.5; //TODO
+        }
+
+        this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
+            "amount": amount,
+            "medium": this.organisation.id,
+            "paymentMethod": "googlepay",
+            "timezoneOffset": new Date().getTimezoneOffset(),
+            "currency": "EUR"
+        }).subscribe(pi => {
+            this.elementsOptions.clientSecret = pi.paymentMethodId
+            const paymentRequest = this.stripe.paymentRequest({
+                country: 'BE',
+                currency: 'eur',
+                total: {
+                    label: 'test',
+                    amount: (+localStorage.getItem('amount')! * 100)
+                }
+            })
+
+            this.elements = this.stripe.elements(this.elementsOptions)
+            this.paymentRequestButton = this.elements.create('paymentRequestButton', {
+                paymentRequest: paymentRequest
+            })
+
+            paymentRequest.canMakePayment().then((result: any) => {
+                    if (result) {
+                        this.paymentRequestButton.mount('#payment-request-button')
+                    }
+                }
+            )
+
+            localStorage.setItem('token', pi.token);
+            paymentRequest.on('paymentmethod', (ev: any) => {
+                this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
+                    .then((result: any) => {
+                        if (result.error) {
+                            ev.complete('fail');
+                            this.router.navigate(['result', 'success']);
+                        } else {
+                            ev.complete('success');
+                            this.router.navigate(['result', 'fail']);
+                        }
+                    })
+            })
+        })
+
+
+        this.loader.hide()
     }
 }
