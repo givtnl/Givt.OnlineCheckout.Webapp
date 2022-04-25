@@ -9,6 +9,7 @@ import {DonationModule} from "../donation/donation.module";
 import {SharedModule} from "../../shared/shared.module";
 import {PaymentGuard} from "./payment.guard";
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
         MatProgressSpinnerModule,
         DonationModule,
         SharedModule,
-        FormsModule
+        FormsModule,
+        TranslateModule
     ],
     providers: [
         DonationResolver,

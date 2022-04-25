@@ -7,6 +7,7 @@ import {NoThanksComponent} from './no-thanks/no-thanks.component';
 import {ReceiptComponent} from "./thank-you/receipt/receipt.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { ResultComponent } from './result/result.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ResultComponent } from './result/result.component';
     imports: [
         CommonModule,
         ResultRoutingModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        TranslateModule
     ]
 })
 export class ResultModule {

@@ -8,24 +8,37 @@
                 <h2 class="header__subtitle">{{organisation.goal}}</h2>
             </div>
             <app-amounts [values]="organisation.amounts" [currency]="organisation.currency"
-                (onPresetClick)="setCurrentSelected($event)" (onInputModeChange)="setInputMode($event)"
-                (onAmountChange)="saveCustomAmount($event)"></app-amounts>
+                         (onPresetClick)="setCurrentSelected($event)" (onInputModeChange)="setInputMode($event)"
+                         (onAmountChange)="saveCustomAmount($event)"></app-amounts>
         </div>
 
-        <div class="payment-method__container">
-            <div *ngFor="let paymentMethod of organisation.paymentMethods">
-                <input class="payment-method__hide-input" type="radio" name="payment-method" id="{{paymentMethod.id}}"
-                    (click)="setCurrentSelectedPaymentMethod($event)">
-                <label class="payment-method__tile" for="{{paymentMethod.id}}">
-                    <span class="payment-method__helper"></span>
-                    <img src="{{paymentMethod.imgLoc}}" class="payment-method__image" alt="{{paymentMethod.name}}">
-                    <img src="assets/vinkje.svg" class="payment-method__checkmark">
-                </label>
+        <div>
+            <div *ngIf="walletPossible" class="payment-method__tile">
+                <div style="height: 15px"></div>
+                <div id="payment-request-button"></div>
+            </div>
+            <div [ngClass]="{'vl': walletPossible}">
+                <div class="payment-method__container">
+                    <div *ngFor="let paymentMethod of organisation.paymentMethods">
+                        <input class="payment-method__hide-input" type="radio" name="payment-method"
+                               id="{{paymentMethod.id}}"
+                               (click)="setCurrentSelectedPaymentMethod($event)">
+                        <label class="payment-method__tile" for="{{paymentMethod.id}}">
+                            <span class="payment-method__helper"></span>
+                            <img src="{{paymentMethod.imgLoc}}" class="payment-method__image"
+                                 alt="{{paymentMethod.name}}">
+                            <img src="assets/vinkje.svg" class="payment-method__checkmark">
+                        </label>
+                    </div>
+                </div>
+                <button id="main-button" (click)="submit()" class="button"
+                        [ngClass]="{'button--disabled': mainGiveButtonDisabled}"
+                        [disabled]="mainGiveButtonDisabled"
+                        *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">{{ 'Donate.Give' | translate }}</button>
+                <button id="main-button" (click)="submit()" class="button"
+                        [ngClass]="{'button--disabled': mainGiveButtonDisabled}"
+                        [disabled]="mainGiveButtonDisabled"
+                        *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">{{ 'Donate.Continue' | translate }}</button>
             </div>
         </div>
-        <button id="main-button" (click)="submit()" class="button button--align-left"
-            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Give" *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">Give</button>
-        <button id="main-button" (click)="submit()" class="button button--align-left"
-            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Continue" *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">Continue</button>
     </div>
-</div>
