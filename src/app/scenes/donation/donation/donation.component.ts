@@ -141,11 +141,10 @@ export class DonationComponent implements OnInit {
 
             this.elements = this.stripe.elements(this.elementsOptions)
             this.paymentRequestButton = this.elements.create('paymentRequestButton', {
-                paymentRequest: paymentRequest
+               //paymentRequest: paymentRequest
             })
 
             paymentRequest.canMakePayment().then((result: any) => {
-                    this.loader.hide()
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button')
                     }
