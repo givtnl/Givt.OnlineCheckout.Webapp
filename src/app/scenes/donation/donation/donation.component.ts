@@ -166,11 +166,10 @@ export class DonationComponent implements OnInit {
                                 }
                             })
                     })
+
+                    this.loader.hide()
                 }
             )
         })
-
-
-        this.loader.hide()
     }
 }
