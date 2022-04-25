@@ -120,6 +120,7 @@ export class DonationComponent implements OnInit {
                 return
             }
         } else {
+            console.log(this.currentSelected)
             amount = this.currentSelected ? this.currentSelected.value : 5.5; //TODO
         }
 
