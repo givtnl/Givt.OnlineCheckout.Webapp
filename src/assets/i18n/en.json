@@ -5,7 +5,7 @@
     "Donate.ChooseAmount": "Give as much as you'd like",
     "Payment.Continue": "Give",
     "Donate.Give": "Give",
-    "Success.ThankYouTitle": "Thank you for your donation to ${organisationName}",
+    "Success.ThankYouTitle": "Thank you for your donation to {{organisationName}}",
     "Success.WantReceipt": "I want a receipt",
     "Success.DownloadApp": "Download the Givt app",
     "Success.GivtSummary": "Givt offers you a personal summary and an overview for your tax statement. Managing your tax statement has never been so easy! Want to know more?",
