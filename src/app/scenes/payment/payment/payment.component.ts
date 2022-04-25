@@ -121,7 +121,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                                 this.router.navigate(['result', 'success']);
                             } else {
                                 ev.complete('success');
-                                this.router.navigate(['result', 'fail']);
+                                this.router.navigate(['result', 'failure']);
                             }
                         })
                 })
