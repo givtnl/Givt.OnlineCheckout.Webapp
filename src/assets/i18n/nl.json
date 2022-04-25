@@ -5,7 +5,7 @@
     "Donate.ChooseAmount": "Geef zoveel je maar wil",
     "Payment.Continue": "Geven",
     "Donate.Give": "Geven",
-    "Success.ThankYouTitle": "Dankjewel voor je gift aan ${organisationName}",
+    "Success.ThankYouTitle": "Dankjewel voor je gift aan {{organisationName}}",
     "Success.WantReceipt": "Ik wil een bonnetje",
     "Success.DownloadApp": "download de Givt-app",
     "Success.GivtSummary": "Givt biedt u een persoonlijke samenvatting en een overzicht voor je belastingen. Uw belastingsaangifte doen was nog nooit zo eenvoudig! Meer weten?",
