@@ -88,7 +88,7 @@ export class DonationComponent implements OnInit {
 
     setCurrentSelected(event: AmountData) {
         this.currentSelected = event;
-        this.setupWalletPayment()
+        this.checkIfCanUseWallet();
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
@@ -99,7 +99,7 @@ export class DonationComponent implements OnInit {
 
     saveCustomAmount(customAmount: number) {
         this.customAmount = customAmount;
-        this.setupWalletPayment()
+        this.checkIfCanUseWallet();
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
