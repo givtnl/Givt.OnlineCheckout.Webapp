@@ -18,6 +18,17 @@
 
 /**** PAYMENT METHOD TILE STYLINGS ******/
 
+.payment-methods-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.vl {
+    border-left: 1px solid #beded0;
+    padding-left: 40px;
+}
+
 .payment-method__container {
     display: flex;
     flex-direction: row;
