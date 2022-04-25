@@ -156,7 +156,13 @@ export class DonationComponent implements OnInit {
                 this.walletPossible = true;
                 this.elements = this.stripe.elements()
                 this.paymentRequestButton = this.elements.create('paymentRequestButton', {
-                    paymentRequest: paymentRequest
+                    paymentRequest: paymentRequest,
+                    style: {
+                        paymentRequestButton: {
+                            theme: 'light',
+                            height: '75px'
+                        }
+                    }
                 })
                 this.paymentRequestButton.mount('#payment-request-button');
 
