@@ -137,7 +137,7 @@ export class DonationComponent implements OnInit {
                 currency: 'eur',
                 total: {
                     label: 'test',
-                    amount: (+localStorage.getItem('amount')! * 100)
+                    amount: amount * 100
                 }
             })
 
