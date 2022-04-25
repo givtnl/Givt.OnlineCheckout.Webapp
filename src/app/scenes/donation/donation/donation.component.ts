@@ -131,6 +131,7 @@ export class DonationComponent implements OnInit {
             "timezoneOffset": new Date().getTimezoneOffset(),
             "currency": "EUR"
         }).subscribe(pi => {
+            localStorage.setItem('token', pi.token);
             this.elementsOptions.clientSecret = pi.paymentMethodId
             const paymentRequest = this.stripe.paymentRequest({
                 country: 'BE',
@@ -150,22 +151,21 @@ export class DonationComponent implements OnInit {
                     if (result) {
                         this.paymentRequestButton.mount('#payment-request-button')
                     }
+
+                    paymentRequest.on('paymentmethod', (ev: any) => {
+                        this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
+                            .then((result: any) => {
+                                if (result.error) {
+                                    ev.complete('fail');
+                                    this.router.navigate(['result', 'success']);
+                                } else {
+                                    ev.complete('success');
+                                    this.router.navigate(['result', 'failure']);
+                                }
+                            })
+                    })
                 }
             )
-
-            localStorage.setItem('token', pi.token);
-            paymentRequest.on('paymentmethod', (ev: any) => {
-                this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
-                    .then((result: any) => {
-                        if (result.error) {
-                            ev.complete('fail');
-                            this.router.navigate(['result', 'success']);
-                        } else {
-                            ev.complete('success');
-                            this.router.navigate(['result', 'failure']);
-                        }
-                    })
-            })
         })
 
 
