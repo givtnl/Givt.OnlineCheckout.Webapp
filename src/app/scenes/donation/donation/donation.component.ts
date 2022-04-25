@@ -124,34 +124,36 @@ export class DonationComponent implements OnInit {
         paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
                 this.walletPossible = true;
-                this.elements = this.stripe.elements()
-                this.paymentRequestButton = this.elements.create('paymentRequestButton', {
-                    paymentRequest: paymentRequest
-                })
-                this.paymentRequestButton.mount('#payment-request-button');
+                setTimeout(() => {
+                    this.elements = this.stripe.elements()
+                    this.paymentRequestButton = this.elements.create('paymentRequestButton', {
+                        paymentRequest: paymentRequest
+                    })
+                    this.paymentRequestButton.mount('#payment-request-button');
 
-                paymentRequest.on('paymentmethod', (ev: any) => {
-                        this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
-                            "amount": amount,
-                            "medium": this.organisation.id,
-                            "paymentMethod": 'googlepay',
-                            "timezoneOffset": new Date().getTimezoneOffset(),
-                            "currency": this.organisation.currency
-                        }).subscribe(pi => {
-                            localStorage.setItem('token', pi.token);
-                            this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
-                                .then((result: any) => {
-                                    if (result.error) {
-                                        ev.complete('fail');
-                                        this.router.navigate(['result', 'failure']);
-                                    } else {
-                                        ev.complete('success');
-                                        this.router.navigate(['result', 'success']);
-                                    }
-                                })
-                        })
-                    }
-                )
+                    paymentRequest.on('paymentmethod', (ev: any) => {
+                            this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
+                                "amount": amount,
+                                "medium": this.organisation.id,
+                                "paymentMethod": 'googlepay',
+                                "timezoneOffset": new Date().getTimezoneOffset(),
+                                "currency": this.organisation.currency
+                            }).subscribe(pi => {
+                                localStorage.setItem('token', pi.token);
+                                this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
+                                    .then((result: any) => {
+                                        if (result.error) {
+                                            ev.complete('fail');
+                                            this.router.navigate(['result', 'failure']);
+                                        } else {
+                                            ev.complete('success');
+                                            this.router.navigate(['result', 'success']);
+                                        }
+                                    })
+                            })
+                        }
+                    )
+                }, 500) //need to wait .5s so the walletPossible makes sure the element is on the DOM
             }
         })
     }
