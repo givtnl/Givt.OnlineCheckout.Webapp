@@ -5,7 +5,6 @@ import Organisation from 'src/app/shared/models/organisations/organisation';
 import PaymentMethod from 'src/app/shared/models/payment-methods/payment-method';
 import {LoadingService} from "../../../core/services/loading.service";
 import {StripeElementLocale, StripeElementsOptions} from "@stripe/stripe-js";
-import {finalize, firstValueFrom} from "rxjs";
 import PaymentIntent from "../../../shared/models/payment-intent/payment-intent";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -155,7 +154,10 @@ export class DonationComponent implements OnInit {
                     paymentRequest.on('paymentmethod', (ev: any) => {
                         this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
                             .then((result: any) => {
+                                console.log(result)
                                 if (result.error) {
+                                    console.log(result);
+                                    console.log(result.error);
                                     ev.complete('fail');
                                     this.router.navigate(['result', 'success']);
                                 } else {
