@@ -121,7 +121,7 @@ export class DonationComponent implements OnInit {
             }
         } else {
             console.log(this.currentSelected)
-            amount = this.currentSelected ? this.currentSelected.value : 5.5; //TODO
+            amount = this.currentSelected ? this.currentSelected.value : this.organisation.amounts[1].value;
         }
 
         this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
@@ -162,7 +162,7 @@ export class DonationComponent implements OnInit {
                             this.router.navigate(['result', 'success']);
                         } else {
                             ev.complete('success');
-                            this.router.navigate(['result', 'fail']);
+                            this.router.navigate(['result', 'failure']);
                         }
                     })
             })
