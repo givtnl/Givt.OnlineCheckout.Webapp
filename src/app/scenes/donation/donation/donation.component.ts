@@ -44,7 +44,6 @@ export class DonationComponent implements OnInit {
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
         this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
-        this.setupWalletPayment();
     }
 
     async submit() {
@@ -111,7 +110,6 @@ export class DonationComponent implements OnInit {
     }
 
     setupWalletPayment() {
-        this.loader.show();
         let amount = 0;
         if (this.inputMode) {
             amount = Math.round(this.customAmount * 100) / 100;
@@ -120,7 +118,7 @@ export class DonationComponent implements OnInit {
             }
         } else {
             console.log(this.currentSelected)
-            amount = this.currentSelected ? this.currentSelected.value : this.organisation.amounts[1].value;
+            amount = this.currentSelected.value;
         }
 
         this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
