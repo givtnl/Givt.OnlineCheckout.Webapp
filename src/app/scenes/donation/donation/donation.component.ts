@@ -120,36 +120,34 @@ export class DonationComponent implements OnInit {
             console.log(this.currentSelected)
             amount = this.currentSelected.value;
         }
+        const paymentRequest = this.stripe.paymentRequest({
+            country: 'BE',
+            currency: this.organisation.currency.toLowerCase(),
+            total: {
+                label: this.organisation.name,
+                amount: amount * 100
+            }
+        })
 
-        this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
-            "amount": amount,
-            "medium": this.organisation.id,
-            "paymentMethod": "googlepay",
-            "timezoneOffset": new Date().getTimezoneOffset(),
-            "currency": "EUR"
-        }).subscribe(pi => {
-            localStorage.setItem('token', pi.token);
-            this.elementsOptions.clientSecret = pi.paymentMethodId
-            const paymentRequest = this.stripe.paymentRequest({
-                country: 'BE',
-                currency: 'eur',
-                total: {
-                    label: 'test',
-                    amount: amount * 100
-                }
-            })
+        paymentRequest.canMakePayment().then((result: any) => {
+            if (result) {
+                this.elements = this.stripe.elements(this.elementsOptions)
+                this.paymentRequestButton = this.elements.create('paymentRequestButton', {
+                    paymentRequest: paymentRequest
+                })
+                this.paymentRequestButton.mount('#payment-request-button')
+            }
 
-            this.elements = this.stripe.elements(this.elementsOptions)
-            this.paymentRequestButton = this.elements.create('paymentRequestButton', {
-               paymentRequest: paymentRequest
-            })
-
-            paymentRequest.canMakePayment().then((result: any) => {
-                    if (result) {
-                        this.paymentRequestButton.mount('#payment-request-button')
-                    }
-
-                    paymentRequest.on('paymentmethod', (ev: any) => {
+            paymentRequest.on('paymentmethod', (ev: any) => {
+                    this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
+                        "amount": amount,
+                        "medium": this.organisation.id,
+                        "paymentMethod": 'googlepay',
+                        "timezoneOffset": new Date().getTimezoneOffset(),
+                        "currency": this.organisation.currency
+                    }).subscribe(pi => {
+                        localStorage.setItem('token', pi.token);
+                        this.elementsOptions.clientSecret = pi.paymentMethodId
                         this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
                             .then((result: any) => {
                                 if (result.error) {
