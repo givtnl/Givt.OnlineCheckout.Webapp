@@ -2,7 +2,7 @@
     <div class="util--centered-container thank-you__title-container">
         <img src="../../../../assets/thank-you-img.svg">
         <h1 class="thank-you__title">{{ 'Success.ThankYouTitle' | translate:param}}</h1>
-        <p class="thank-you__subtitle">Here comes a personalised message from the organisation</p>
+        <p class="thank-you__subtitle">{{organisationThankYou}}</p>
     </div>
     <div class="util--centered-container">
         <button class="button button--black" (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);">{{ 'Success.WantReceipt' | translate }}</button>

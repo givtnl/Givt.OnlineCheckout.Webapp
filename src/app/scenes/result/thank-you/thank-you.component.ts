@@ -30,12 +30,17 @@ const receiptOverlayAnimation = [
 export class ThankYouComponent implements OnInit {
     userWantsReceipt = false;
     param = { organisationName: "" }
+    organisationThankYou = ""
     token: string;
     receiptShownChanged: Subject<boolean> = new Subject<boolean>();
 
 
     constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private http: HttpClient, private loadingService: LoadingService) {
+        // For string interpolation in localization we need to have an object and no normal string
+        // that's why I created the param object
         this.param.organisationName = localStorage.getItem('organisationName')!;
+
+        this.organisationThankYou = localStorage.getItem('organisationThankYou')!;
         this.token = localStorage.getItem('token')!
     }
 
