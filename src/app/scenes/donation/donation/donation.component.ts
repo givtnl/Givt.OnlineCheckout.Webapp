@@ -36,7 +36,10 @@ export class DonationComponent implements OnInit {
     ngOnInit(): void {
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
-        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P");
+        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P", /*{
+            apiVersion: "2020-08-27",
+            stripeAccount: 'CONNECTED_STRIPE_ACCOUNT_ID',
+        }*/);
 
         //make dummy payment request to check for wallet enableing
         const paymentRequest = this.stripe.paymentRequest({
@@ -78,6 +81,7 @@ export class DonationComponent implements OnInit {
             localStorage.setItem('amount', String(amount));
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
+            this.callToCanUseWalletDone = false;
             await this.router.navigate(['/payment']);
         }
     }
