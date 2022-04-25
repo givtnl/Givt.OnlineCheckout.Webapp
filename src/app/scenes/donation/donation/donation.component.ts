@@ -26,14 +26,6 @@ export class DonationComponent implements OnInit {
 
     paymentRequestButton: any;
     stripe: any;
-    elementsOptions: StripeElementsOptions = {
-        locale: `${navigator.language}` as StripeElementLocale,
-        clientSecret: '',
-        appearance: {
-            disableAnimations: false,
-            theme: "flat",
-        }
-    };
     elements: any;
 
 
@@ -131,7 +123,7 @@ export class DonationComponent implements OnInit {
 
         paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
-                this.elements = this.stripe.elements(this.elementsOptions)
+                this.elements = this.stripe.elements()
                 this.paymentRequestButton = this.elements.create('paymentRequestButton', {
                     paymentRequest: paymentRequest
                 })
@@ -147,7 +139,6 @@ export class DonationComponent implements OnInit {
                         "currency": this.organisation.currency
                     }).subscribe(pi => {
                         localStorage.setItem('token', pi.token);
-                        this.elementsOptions.clientSecret = pi.paymentMethodId
                         this.stripe.confirmCardPayment(pi.paymentMethodId, {payment_method: ev.paymentMethod.id}, {handleActions: false})
                             .then((result: any) => {
                                 if (result.error) {
