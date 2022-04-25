@@ -126,7 +126,7 @@ export class DonationComponent implements OnInit {
                 if (this.walletPossible) {
                     this.setupWalletPayment()
                 }
-            }, 200)
+            }, 1000)
         } else if (this.walletPossible) {
             this.setupWalletPayment();
         }
@@ -160,7 +160,7 @@ export class DonationComponent implements OnInit {
                     style: {
                         paymentRequestButton: {
                             theme: 'light',
-                            height: '75px'
+                            height: '45px'
                         }
                     }
                 })
