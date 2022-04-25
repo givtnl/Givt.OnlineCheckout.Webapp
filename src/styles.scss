@@ -112,6 +112,10 @@ mat-progress-spinner {
     position: absolute !important;
 }
 
+.vl {
+    border-left: 1px solid #beded0;
+}
+
 @media (min-width: 600px) {
     body {
         width: 550px;
