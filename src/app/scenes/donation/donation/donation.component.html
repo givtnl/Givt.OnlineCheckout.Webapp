@@ -13,7 +13,10 @@
         </div>
 
         <div class="payment-method__container">
-            <div *ngIf="walletPossible" id="payment-request-button" class="payment-method__tile"></div>
+            <div *ngIf="walletPossible" class="payment-method__tile">
+                <div style="height: 15px"></div>
+                <div id="payment-request-button"></div>
+            </div>
             <div *ngFor="let paymentMethod of organisation.paymentMethods">
                 <input class="payment-method__hide-input" type="radio" name="payment-method" id="{{paymentMethod.id}}"
                     (click)="setCurrentSelectedPaymentMethod($event)">
@@ -25,8 +28,8 @@
             </div>
         </div>
         <button id="main-button" (click)="submit()" class="button button--align-left"
-            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Give" *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">Give</button>
+            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">{{ 'Donate.Give' | translate }}</button>
         <button id="main-button" (click)="submit()" class="button button--align-left"
-            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" i18n="@@Donate.Continue" *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">Continue</button>
+            [ngClass]="{'button--disabled': mainGiveButtonDisabled}" [disabled]="mainGiveButtonDisabled" *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">{{ 'Donate.Continue' | translate }}</button>
     </div>
 </div>

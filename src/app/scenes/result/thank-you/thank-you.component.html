@@ -1,15 +1,15 @@
 <div class="thank-you__body">
     <div class="util--centered-container thank-you__title-container">
         <img src="../../../../assets/thank-you-img.svg">
-        <h1 class="thank-you__title" i18n="@@Success.ThankYouTitle">Thank you for your donation to {{organisationName}}</h1>
+        <h1 class="thank-you__title">{{ 'Success.ThankYouTitle' | translate}}</h1>
         <p class="thank-you__subtitle">Here comes a personalised message from the organisation</p>
     </div>
     <div class="util--centered-container">
-        <button class="button button--black" (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);" i18n="@@Success.WantReceipt">I want a receipt</button>
-        <button class="button button--white" (click)="downloadApp()" i18n="@@Success.DownloadApp">Download the Givt app</button>
+        <button class="button button--black" (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);">{{ 'Success.WantReceipt' | translate }}</button>
+        <button class="button button--white" (click)="downloadApp()">{{ 'Success.DownloadApp' | translate }}</button>
     </div>
     <div class="util--centered-container">
-        <p class="thank-you__closing-text" i18n="@@Success.GivtSummary">Givt offers you a personal summary and an overview for your tax statement. Managing your tax statement has never been so easy! Want to know more?<span
+        <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }}<span
                 class="thank-you-closing-text-link">Meer weten?</span></p>
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
