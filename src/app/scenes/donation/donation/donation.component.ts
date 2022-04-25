@@ -153,7 +153,7 @@ export class DonationComponent implements OnInit {
                             })
                         }
                     )
-                }, 500) //need to wait .5s so the walletPossible makes sure the element is on the DOM
+                }, 100) //need to wait .5s so the walletPossible makes sure the element is on the DOM
             }
         })
     }
