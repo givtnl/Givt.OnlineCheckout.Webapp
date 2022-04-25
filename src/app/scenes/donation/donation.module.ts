@@ -7,6 +7,7 @@ import {AmountsComponent} from './donation/amounts/amounts.component';
 import {SharedModule} from '../../shared/shared.module';
 import {OrganisationResolver} from '../../core/resolvers/organisation.resolver';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         SharedModule,
         DonationRoutingModule,
         MatProgressSpinnerModule,
+        TranslateModule
     ],
     providers: [
         OrganisationResolver
