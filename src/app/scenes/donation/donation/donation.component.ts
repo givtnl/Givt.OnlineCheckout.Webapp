@@ -106,9 +106,7 @@ export class DonationComponent implements OnInit {
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
             this.callToCanUseWalletDone = false;
-            if (this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay')) {
-                await this.router.navigate(['/result']);
-            } else {
+            if (!(this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay'))) {
                 await this.router.navigate(['/payment']);
             }
         }
