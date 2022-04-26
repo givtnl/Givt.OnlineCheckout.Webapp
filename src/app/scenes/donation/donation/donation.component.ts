@@ -108,6 +108,7 @@ export class DonationComponent implements OnInit {
             if (!(this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay'))) {
                 this.callToCanUseWalletDone = false;
                 await this.router.navigate(['/payment']);
+                this.mainGiveButtonDisabled = false;
             }
         }
     }
