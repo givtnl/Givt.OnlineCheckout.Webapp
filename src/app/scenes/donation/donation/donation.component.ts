@@ -78,7 +78,9 @@ export class DonationComponent implements OnInit {
             }
 
             if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
-                this.paymentRequest.trigger('paymentmethod');
+                console.log(this.paymentRequest)
+                const event = new CustomEvent('paymentmethod');
+                this.paymentRequest.dispatchEvent(event)
             }
 
             localStorage.setItem('organisationName', this.organisation.name)
@@ -176,7 +178,10 @@ export class DonationComponent implements OnInit {
                 })
                 this.paymentRequestButton.mount('#payment-request-button');
 
+                console.log(this.paymentRequest)
+
                 this.paymentRequest.on('paymentmethod', (ev: any) => {
+                        console.log(ev)
                         this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
                             "amount": amount,
                             "medium": this.organisation.id,
