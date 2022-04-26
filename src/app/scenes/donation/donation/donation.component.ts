@@ -173,7 +173,7 @@ export class DonationComponent implements OnInit {
             amount = this.currentSelected.value;
         }
         this.paymentRequest = this.stripe.paymentRequest({
-            country: 'BE',
+            country: this.organisation.country,
             currency: this.organisation.currency.toLowerCase(),
             total: {
                 label: this.organisation.name,
