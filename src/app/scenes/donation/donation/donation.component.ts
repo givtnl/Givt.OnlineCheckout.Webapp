@@ -79,8 +79,7 @@ export class DonationComponent implements OnInit {
 
             if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
                 console.log(this.paymentRequest)
-                const event = new CustomEvent('paymentmethod');
-                this.paymentRequest.dispatchEvent(event)
+                this.paymentRequest.emit('paymentmethod')
             }
 
             localStorage.setItem('organisationName', this.organisation.name)
