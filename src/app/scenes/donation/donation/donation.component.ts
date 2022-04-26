@@ -54,7 +54,6 @@ export class DonationComponent implements OnInit {
 
         paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
-                console.log(result)
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     if (pm.id === 'applepay' && !result.applePay) {
                         return false;
@@ -108,6 +107,7 @@ export class DonationComponent implements OnInit {
             if (!(this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay'))) {
                 this.callToCanUseWalletDone = false;
                 await this.router.navigate(['/payment']);
+            } else {
                 this.mainGiveButtonDisabled = false;
             }
         }
