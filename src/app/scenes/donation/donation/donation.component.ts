@@ -54,10 +54,9 @@ export class DonationComponent implements OnInit {
         })
 
         paymentRequest.canMakePayment().then((result: any) => {
-            console.log(result)
             if (result) {
                 this.walletPossible = true;
-                this.organisation.paymentMethods.filter(pm => {
+                this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     if (pm.id === 'applepay' && !result.applePay) {
                         return false;
                     } else if (pm.id === 'googlepay' && !result.googlePay) {
