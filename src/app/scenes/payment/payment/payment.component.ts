@@ -77,56 +77,10 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 this.idealBank.mount('#ideal-bank-element');
                 break;
             case "sofort": //sofort
-                break;
             case "giropay": //giropay
-                break;
             case "eps": //EPS
+            default:
                 break;
-            case "applepay": //apple pay
-            case "googlepay": //google pay
-                const paymentRequest = this.stripe.paymentRequest({
-                    country: 'BE',
-                    currency: 'eur',
-                    total: {
-                        label: 'test',
-                        amount: (+localStorage.getItem('amount')! * 100)
-                    }
-                })
-
-                this.paymentRequestButton = this.elements.create('paymentRequestButton', {
-                    paymentRequest: paymentRequest
-                })
-
-                paymentRequest.canMakePayment().then((result: any) => {
-                    if (result) {
-                        if (this.clientSelectedPaymentMethod === 'applepay') {
-                            this.paymentRequestButton.mount('#payment-request-button-ap')
-                        } else {
-                            this.paymentRequestButton.mount('#payment-request-button-gp')
-                        }
-                    } else {
-                        if (this.clientSelectedPaymentMethod === 'applepay') {
-                            document.getElementById('payment-request-button-ap')!.innerHTML = 'To use apple pay, you must run safari on a Mac or iPhone and have a card in your wallet. Please try a different approach.'
-                        } else {
-                            document.getElementById('payment-request-button-gp')!.innerHTML = 'You have not enabled google pay or have no valid payment method in google pay. Please try a different approach.'
-                        }
-                    }
-                })
-
-                paymentRequest.on('paymentmethod', (ev: any) => {
-                    this.stripe.confirmCardPayment(this.elementsOptions.clientSecret, {payment_method: ev.paymentMethod.id}, {handleActions: false})
-                        .then((result: any) => {
-                            if (result.error) {
-                                ev.complete('fail');
-                                this.router.navigate(['result', 'failure']);
-                            } else {
-                                ev.complete('success');
-                                this.router.navigate(['result', 'success']);
-                            }
-                        })
-                })
-                break;
-
         }
     }
 
