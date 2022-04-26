@@ -239,12 +239,10 @@ export class DonationComponent implements OnInit {
     openModal(modalText: string) {
         this.modalOpen = true;
         this.errorText = modalText;
-        console.log('open: ' + this.modalOpen)
     }
 
     closeModal() {
         this.modalOpen = false;
         this.callToCanUseWalletDone = true;
-        console.log('open: ' + this.modalOpen)
     }
 }
