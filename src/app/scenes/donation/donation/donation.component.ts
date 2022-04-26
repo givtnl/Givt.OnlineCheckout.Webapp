@@ -46,8 +46,8 @@ export class DonationComponent implements OnInit {
         });
 
         //make dummy payment request to check for wallet enableing
-        const paymentRequest = this.stripe.paymentRequest({
-            country: 'BE',
+        const dummyPaymentRequest = this.stripe.paymentRequest({
+            country: this.organisation.country,
             currency: this.organisation.currency.toLowerCase(),
             total: {
                 label: this.organisation.name,
@@ -55,8 +55,11 @@ export class DonationComponent implements OnInit {
             }
         })
 
-        paymentRequest.canMakePayment().then((result: any) => {
-            console.log(result)
+        console.log('paymentrequest: ')
+        console.log(dummyPaymentRequest)
+
+        dummyPaymentRequest.canMakePayment().then((result: any) => {
+            console.log('result: ' + result)
             if (result) {
                 console.log(result)
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
@@ -69,7 +72,7 @@ export class DonationComponent implements OnInit {
                     }
                 })
                 this.walletPossible = true;
-            } else { //only in develop
+            } else {
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     return !(pm.id === 'applepay' || pm.id === 'googlepay');
                 })
@@ -239,12 +242,10 @@ export class DonationComponent implements OnInit {
     openModal(modalText: string) {
         this.modalOpen = true;
         this.errorText = modalText;
-        console.log('open: ' + this.modalOpen)
     }
 
     closeModal() {
         this.modalOpen = false;
         this.callToCanUseWalletDone = true;
-        console.log('open: ' + this.modalOpen)
     }
 }
