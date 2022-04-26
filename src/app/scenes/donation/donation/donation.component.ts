@@ -53,6 +53,7 @@ export class DonationComponent implements OnInit {
         })
 
         paymentRequest.canMakePayment().then((result: any) => {
+            console.log(result)
             if (result) {
                 this.walletPossible = true;
             }
@@ -88,7 +89,11 @@ export class DonationComponent implements OnInit {
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
             this.callToCanUseWalletDone = false;
-            await this.router.navigate(['/payment']);
+            if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
+                await this.router.navigate(['/result']);
+            } else {
+                await this.router.navigate(['/payment']);
+            }
         }
     }
 
