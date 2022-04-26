@@ -46,7 +46,7 @@ export class DonationComponent implements OnInit {
         });
 
         //make dummy payment request to check for wallet enableing
-        const paymentRequest = this.stripe.paymentRequest({
+        const dummyPaymentRequest = this.stripe.paymentRequest({
             country: this.organisation.country,
             currency: this.organisation.currency.toLowerCase(),
             total: {
@@ -55,7 +55,10 @@ export class DonationComponent implements OnInit {
             }
         })
 
-        paymentRequest.canMakePayment().then((result: any) => {
+        console.log('paymentrequest: ')
+        console.log(dummyPaymentRequest)
+
+        dummyPaymentRequest.canMakePayment().then((result: any) => {
             console.log('result: ' + result)
             if (result) {
                 console.log(result)
