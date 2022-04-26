@@ -56,7 +56,9 @@ export class DonationComponent implements OnInit {
         })
 
         paymentRequest.canMakePayment().then((result: any) => {
+            console.log(result)
             if (result) {
+                console.log(result)
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     if (pm.id === 'applepay' && !result.applePay) {
                         return false;
@@ -78,8 +80,6 @@ export class DonationComponent implements OnInit {
 
     async submit() {
         this.mainGiveButtonDisabled = true
-
-        console.log(this.currentSelectedPaymentMethod)
 
         if (!this.currentSelectedPaymentMethod) {
             this.openModal("Please select a payment method");
