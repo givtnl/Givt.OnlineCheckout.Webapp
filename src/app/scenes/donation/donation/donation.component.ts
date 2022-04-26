@@ -38,10 +38,9 @@ export class DonationComponent implements OnInit {
     ngOnInit(): void {
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
-        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P", /*{
-            apiVersion: "2020-08-27",
-            stripeAccount: 'CONNECTED_STRIPE_ACCOUNT_ID',
-        }*/);
+        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P", {
+            apiVersion: "2020-08-27"
+        });
 
         //make dummy payment request to check for wallet enableing
         const paymentRequest = this.stripe.paymentRequest({
@@ -66,6 +65,10 @@ export class DonationComponent implements OnInit {
                     }
                 })
                 this.walletPossible = true;
+            } else { //only in develop
+                this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
+                    return !(pm.id === 'applepay' || pm.id === 'googlepay');
+                })
             }
             this.callToCanUseWalletDone = true;
         })
@@ -103,9 +106,7 @@ export class DonationComponent implements OnInit {
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
             this.callToCanUseWalletDone = false;
-            if (this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay')) {
-                await this.router.navigate(['/result']);
-            } else {
+            if (!(this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay'))) {
                 await this.router.navigate(['/payment']);
             }
         }
