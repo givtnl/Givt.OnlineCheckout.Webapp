@@ -65,6 +65,10 @@ export class DonationComponent implements OnInit {
                     }
                 })
                 this.walletPossible = true;
+            } else { //only in develop
+                this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
+                    return !(pm.id === 'applepay' || pm.id === 'googlepay');
+                })
             }
             this.callToCanUseWalletDone = true;
         })
