@@ -26,10 +26,7 @@ export default class Organisation {
 
     static fromOrganisationDto(organisationDto: OrganisationDto) {
         return new Organisation(organisationDto.medium, organisationDto.organisationName, organisationDto.goal, AmountData.fromAmounts(organisationDto.amounts), organisationDto.thankYou, organisationDto.currency, organisationDto.organisationLogoLink, organisationDto.paymentMethods
-            .filter(pm => {
-                console.log(pm)
-                return !(pm === 'applepay' || pm === 'googlepay');
-            }).map(pm => {
+            .map(pm => {
                 return PaymentMethod.fromPaymentMethodDto(new PaymentMethodDto(pm))
             })
         );
