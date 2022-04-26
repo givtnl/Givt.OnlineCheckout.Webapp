@@ -65,6 +65,10 @@ export class DonationComponent implements OnInit {
                     }
                 })
                 this.walletPossible = true;
+            } else { //only in develop
+                this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
+                    return !(pm.id === 'applepay' || pm.id === 'googlepay');
+                })
             }
             this.callToCanUseWalletDone = true;
         })
@@ -101,10 +105,8 @@ export class DonationComponent implements OnInit {
             localStorage.setItem('amount', String(amount));
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
-            this.callToCanUseWalletDone = false;
-            if (this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay')) {
-                await this.router.navigate(['/result']);
-            } else {
+            if (!(this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay'))) {
+                this.callToCanUseWalletDone = false;
                 await this.router.navigate(['/payment']);
             }
         }
