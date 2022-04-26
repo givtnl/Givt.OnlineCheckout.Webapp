@@ -7,6 +7,7 @@ import {LoadingService} from "../../../core/services/loading.service";
 import PaymentIntent from "../../../shared/models/payment-intent/payment-intent";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {NotificationService} from "../../../core/notification/notification.service";
 
 @Component({
     selector: 'app-donation',
@@ -31,7 +32,7 @@ export class DonationComponent implements OnInit {
     elements: any;
 
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient) {
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient, private notificationService: NotificationService) {
     }
 
     ngOnInit(): void {
@@ -56,6 +57,15 @@ export class DonationComponent implements OnInit {
             console.log(result)
             if (result) {
                 this.walletPossible = true;
+                this.organisation.paymentMethods.filter(pm => {
+                    if (pm.id === 'applepay' && !result.applePay) {
+                        return false;
+                    } else if (pm.id === 'googlepay' && !result.googlePay) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
             }
             this.callToCanUseWalletDone = true;
         })
@@ -77,9 +87,13 @@ export class DonationComponent implements OnInit {
                 amount = this.currentSelected.value;
             }
 
-            if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
-                console.log(this.paymentRequest)
-                this.paymentRequest.show()
+            if (this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay')) {
+                if (this.paymentRequest === undefined) {
+                    this.notificationService.error('Something went wrong, please try a different method')
+                    return
+                } else {
+                    this.paymentRequest.show()
+                }
             }
 
             localStorage.setItem('organisationName', this.organisation.name)
@@ -89,7 +103,7 @@ export class DonationComponent implements OnInit {
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
             this.callToCanUseWalletDone = false;
-            if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
+            if (this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay')) {
                 await this.router.navigate(['/result']);
             } else {
                 await this.router.navigate(['/payment']);
