@@ -55,7 +55,6 @@ export class DonationComponent implements OnInit {
 
         paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
-                this.walletPossible = true;
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     if (pm.id === 'applepay' && !result.applePay) {
                         return false;
@@ -65,6 +64,7 @@ export class DonationComponent implements OnInit {
                         return true;
                     }
                 })
+                this.walletPossible = true;
             }
             this.callToCanUseWalletDone = true;
         })
