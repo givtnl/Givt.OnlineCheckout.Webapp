@@ -47,7 +47,7 @@ export class DonationComponent implements OnInit {
 
         //make dummy payment request to check for wallet enableing
         const paymentRequest = this.stripe.paymentRequest({
-            country: 'BE',
+            country: this.organisation.country,
             currency: this.organisation.currency.toLowerCase(),
             total: {
                 label: this.organisation.name,
@@ -56,7 +56,7 @@ export class DonationComponent implements OnInit {
         })
 
         paymentRequest.canMakePayment().then((result: any) => {
-            console.log(result)
+            console.log('result: ' + result)
             if (result) {
                 console.log(result)
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
@@ -69,7 +69,7 @@ export class DonationComponent implements OnInit {
                     }
                 })
                 this.walletPossible = true;
-            } else { //only in develop
+            } else {
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     return !(pm.id === 'applepay' || pm.id === 'googlepay');
                 })
