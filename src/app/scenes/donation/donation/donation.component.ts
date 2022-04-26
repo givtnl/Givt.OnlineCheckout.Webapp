@@ -24,6 +24,7 @@ export class DonationComponent implements OnInit {
     loading$ = this.loader.loading$;
     walletPossible = false;
     callToCanUseWalletDone = false;
+    paymentRequest: any;
 
     paymentRequestButton: any;
     stripe: any;
@@ -76,6 +77,10 @@ export class DonationComponent implements OnInit {
                 amount = this.currentSelected.value;
             }
 
+            if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
+                this.paymentRequest.trigger('paymentmethod');
+            }
+
             localStorage.setItem('organisationName', this.organisation.name)
             localStorage.setItem('organisationThankYou', this.organisation.thankYou)
             localStorage.setItem('logoUrl', this.organisation.logoLink);
@@ -89,7 +94,7 @@ export class DonationComponent implements OnInit {
 
     setCurrentSelected(event: AmountData) {
         this.currentSelected = event;
-        this.checkIfCanUseWallet();
+        this.checkIfCanUseWalletDoneAndIfSoSetupWallet();
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
@@ -100,7 +105,7 @@ export class DonationComponent implements OnInit {
 
     saveCustomAmount(customAmount: number) {
         this.customAmount = customAmount;
-        this.checkIfCanUseWallet();
+        this.checkIfCanUseWalletDoneAndIfSoSetupWallet();
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }
 
@@ -125,7 +130,7 @@ export class DonationComponent implements OnInit {
         return amount >= .5 && amount <= 25000;
     }
 
-    checkIfCanUseWallet() {
+    checkIfCanUseWalletDoneAndIfSoSetupWallet() {
         if (!this.callToCanUseWalletDone) {
             setTimeout(() => {
                 if (this.walletPossible) {
@@ -147,7 +152,7 @@ export class DonationComponent implements OnInit {
         } else {
             amount = this.currentSelected.value;
         }
-        const paymentRequest = this.stripe.paymentRequest({
+        this.paymentRequest = this.stripe.paymentRequest({
             country: 'BE',
             currency: this.organisation.currency.toLowerCase(),
             total: {
@@ -156,12 +161,12 @@ export class DonationComponent implements OnInit {
             }
         })
 
-        paymentRequest.canMakePayment().then((result: any) => {
+        this.paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
                 this.walletPossible = true;
                 this.elements = this.stripe.elements()
                 this.paymentRequestButton = this.elements.create('paymentRequestButton', {
-                    paymentRequest: paymentRequest,
+                    paymentRequest: this.paymentRequest,
                     style: {
                         paymentRequestButton: {
                             theme: 'light',
@@ -171,7 +176,7 @@ export class DonationComponent implements OnInit {
                 })
                 this.paymentRequestButton.mount('#payment-request-button');
 
-                paymentRequest.on('paymentmethod', (ev: any) => {
+                this.paymentRequest.on('paymentmethod', (ev: any) => {
                         this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
                             "amount": amount,
                             "medium": this.organisation.id,
