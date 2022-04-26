@@ -53,7 +53,6 @@ export class DonationComponent implements OnInit {
         })
 
         paymentRequest.canMakePayment().then((result: any) => {
-            console.log(result)
             if (result) {
                 this.walletPossible = true;
             }
@@ -75,11 +74,6 @@ export class DonationComponent implements OnInit {
                 }
             } else {
                 amount = this.currentSelected.value;
-            }
-
-            if (this.currentSelectedPaymentMethod && this.currentSelectedPaymentMethod.id === 'googlepay') {
-                console.log(this.paymentRequest)
-                this.paymentRequest.emit('paymentmethod')
             }
 
             localStorage.setItem('organisationName', this.organisation.name)
@@ -177,10 +171,7 @@ export class DonationComponent implements OnInit {
                 })
                 this.paymentRequestButton.mount('#payment-request-button');
 
-                console.log(this.paymentRequest)
-
                 this.paymentRequest.on('paymentmethod', (ev: any) => {
-                        console.log(ev)
                         this.http.post<PaymentIntent>(environment.apiUrl + '/api/donation/intent', {
                             "amount": amount,
                             "medium": this.organisation.id,
