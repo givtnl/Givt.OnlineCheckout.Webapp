@@ -8,6 +8,7 @@ import PaymentIntent from "../../../shared/models/payment-intent/payment-intent"
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {NotificationService} from "../../../core/notification/notification.service";
+import {CurrencyHelper} from "../../../shared/helpers/currency-helper";
 
 @Component({
     selector: 'app-donation',
@@ -31,6 +32,8 @@ export class DonationComponent implements OnInit {
     stripe: any;
     elements: any;
 
+    modalOpen = false;
+    errorText!: string;
 
     constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient, private notificationService: NotificationService) {
     }
@@ -54,7 +57,6 @@ export class DonationComponent implements OnInit {
 
         paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
-                console.log(result)
                 this.organisation.paymentMethods = this.organisation.paymentMethods.filter(pm => {
                     if (pm.id === 'applepay' && !result.applePay) {
                         return false;
@@ -77,14 +79,24 @@ export class DonationComponent implements OnInit {
     async submit() {
         this.mainGiveButtonDisabled = true
 
+        console.log(this.currentSelectedPaymentMethod)
+
+        if (!this.currentSelectedPaymentMethod) {
+            this.openModal("Please select a payment method");
+            return;
+        }
+
         if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
-            return
+            this.openModal('Please specify an amount to give');
+            return;
         } else {
             let amount = 0;
             if (this.inputMode) {
                 amount = Math.round(this.customAmount * 100) / 100;
                 if (!DonationComponent.isValidCustomAmount(amount)) {
-                    return
+                    const currencySymbol = CurrencyHelper.getCurrencySymbol(this.organisation.currency)
+                    this.openModal('Please specify an amount between ' + currencySymbol + '0.5 and ' + currencySymbol + '25000');
+                    return;
                 }
             } else {
                 amount = this.currentSelected.value;
@@ -92,7 +104,7 @@ export class DonationComponent implements OnInit {
 
             if (this.currentSelectedPaymentMethod && (this.currentSelectedPaymentMethod.id === 'googlepay' || this.currentSelectedPaymentMethod.id === 'applepay')) {
                 if (this.paymentRequest === undefined) {
-                    this.notificationService.error('Something went wrong, please try a different method')
+                    this.openModal('Something went wrong, please try a different method');
                     return
                 } else {
                     this.paymentRequest.show()
@@ -222,5 +234,17 @@ export class DonationComponent implements OnInit {
                 )
             }
         })
+    }
+
+    openModal(modalText: string) {
+        this.modalOpen = true;
+        this.errorText = modalText;
+        console.log('open: ' + this.modalOpen)
+    }
+
+    closeModal() {
+        this.modalOpen = false;
+        this.callToCanUseWalletDone = true;
+        console.log('open: ' + this.modalOpen)
     }
 }
