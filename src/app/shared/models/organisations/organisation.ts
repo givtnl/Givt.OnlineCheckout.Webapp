@@ -11,9 +11,10 @@ export default class Organisation {
     thankYou: string;
     currency: string;
     logoLink: string;
+    country: string;
     paymentMethods: PaymentMethod[]
 
-    constructor(id: string, name: string, goal: string, amounts: AmountData[], thankYou: string, currency: string, logoLink: string, paymentMethods: PaymentMethod[]) {
+    constructor(id: string, name: string, goal: string, amounts: AmountData[], thankYou: string, currency: string, logoLink: string, country: string, paymentMethods: PaymentMethod[]) {
         this.id = id;
         this.name = name;
         this.goal = goal;
@@ -21,11 +22,12 @@ export default class Organisation {
         this.thankYou = thankYou;
         this.currency = currency;
         this.logoLink = logoLink;
+        this.country = country;
         this.paymentMethods = paymentMethods;
     }
 
     static fromOrganisationDto(organisationDto: OrganisationDto) {
-        return new Organisation(organisationDto.medium, organisationDto.organisationName, organisationDto.goal, AmountData.fromAmounts(organisationDto.amounts), organisationDto.thankYou, organisationDto.currency, organisationDto.organisationLogoLink, organisationDto.paymentMethods
+        return new Organisation(organisationDto.medium, organisationDto.organisationName, organisationDto.goal, AmountData.fromAmounts(organisationDto.amounts), organisationDto.thankYou, organisationDto.currency, organisationDto.organisationLogoLink, organisationDto.country, organisationDto.paymentMethods
             .map(pm => {
                 return PaymentMethod.fromPaymentMethodDto(new PaymentMethodDto(pm))
             })
