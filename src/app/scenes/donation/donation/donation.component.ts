@@ -38,7 +38,7 @@ export class DonationComponent implements OnInit {
     ngOnInit(): void {
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
-        this.stripe = window.Stripe!("pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P", {
+        this.stripe = window.Stripe!(environment.stripePk, {
             apiVersion: "2020-08-27"
         });
 
