@@ -17,7 +17,7 @@
                 <div style="height: 15px"></div>
                 <div id="payment-request-button"></div>
             </div>
-            <div [ngClass]="{'vl': walletPossible}">
+            <div>
                 <div class="payment-method__container">
                     <div *ngFor="let paymentMethod of organisation.paymentMethods">
                         <input class="payment-method__hide-input" type="radio" name="payment-method"
