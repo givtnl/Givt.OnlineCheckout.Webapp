@@ -29,17 +29,9 @@
 }
 
 .receipt__input--invalid {
-    border: 2px solid red;
+    border: 1px solid #D3726D;
 }
 
 .receipt__input:focus {
     outline: none;
-}
-
-.receipt__button {
-    position: absolute;
-    width: 142px;
-    height: 50px;
-    left: 0;
-    top: 160px;
 }
