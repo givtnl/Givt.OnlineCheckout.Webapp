@@ -101,6 +101,12 @@ mat-progress-spinner {
     line-height: 20px;
 }
 
+@media (max-width: 318px) {
+    .button {
+        width: 100%;
+    }
+}
+
 .button--white {
     background-color: white;
     color: black;
@@ -139,6 +145,12 @@ mat-progress-spinner {
     display: block;
     margin: auto;
     width: 320px;
+}
+
+@media (max-width: 318px) {
+    .util--centered-container {
+        width: 100%;
+    }
 }
 
 .util--margin-bot-30 {
