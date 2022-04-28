@@ -8,8 +8,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {DonationModule} from "../donation/donation.module";
 import {SharedModule} from "../../shared/shared.module";
 import {PaymentGuard} from "./payment.guard";
-import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import {FormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
         DonationModule,
         SharedModule,
         FormsModule,
-        TranslateModule
+        TranslateModule,
+        MatIconModule
     ],
     providers: [
         DonationResolver,
