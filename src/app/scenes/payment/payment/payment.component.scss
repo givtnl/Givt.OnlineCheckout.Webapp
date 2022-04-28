@@ -37,3 +37,12 @@
 .payment-method__name-input:focus {
     outline: none;
 }
+
+.payment-method__name-invalid {
+    border: #D3726D 2px solid;
+}
+
+.error-icon {
+    color: #D3726D;
+    transform: translate(-30px, 8px);
+}

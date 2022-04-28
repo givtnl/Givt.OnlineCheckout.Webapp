@@ -10,8 +10,9 @@
         <form id="payment-form">
             <div [ngSwitch]="this.clientSelectedPaymentMethod">
                 <div *ngSwitchCase="'bancontact'">
-                    <input class="payment-method__name-input" type="text" name="name" [(ngModel)]="bancontactHolderName"
+                    <input class="payment-method__name-input" type="text" name="name" [(ngModel)]="bancontactHolderName" [ngClass]="{'payment-method__name-invalid' : bancontactHolderNameValid == false}" (ngModelChange)="bancontactHolderNameChanged($event)"
                            placeholder="Voor- en achternaam" autocomplete="billing name">
+                    <span *ngIf="bancontactHolderNameValid == false" class="material-icons error-icon">error_outline</span>
                     <img src="../../../assets/paymentMethodIcons/bancontact.svg" class="payment-bancontact-logo" alt="Bancontact logo">
                     <p class="bancontact__explanation">{{'Payment.BancontactExplanation' | translate}}</p>
                     <button (click)="confirmBancontactPayment($event)" class="button button--green button-bottom-payment"
