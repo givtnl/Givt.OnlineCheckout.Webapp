@@ -1,6 +1,6 @@
-.button--payment {
-    width: 100%;
-    margin-top: 20px;
+.payment-bancontact-logo {
+    float: right;
+    transform: translateY(6px);
 }
 
 .header__title {
@@ -8,14 +8,32 @@
     font-weight: 800;
 }
 
-
 .bancontact__explanation {
     margin-top: 2em;
-    font-size: 0.8em;
+    font-size: 12px;
+    line-height: 15px;
 }
-
 
 .header--margin {
     margin-top: 40px;
     margin-bottom: 20px;
+}
+
+.payment-method__name-input {
+    width: 245px;
+    height: 40px;
+    margin: 0 auto;
+    border: #7DBDA1 1px solid;
+    border-radius: 0;
+    padding-left: 8px;
+    font-family: Mulish, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    background-color: white;
+}
+
+.payment-method__name-input:focus {
+    outline: none;
 }

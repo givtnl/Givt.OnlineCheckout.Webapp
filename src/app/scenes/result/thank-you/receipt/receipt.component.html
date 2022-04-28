@@ -13,7 +13,7 @@
             <p class="receipt__title">Receive your receipt via email</p>
             <input class="receipt__input util--full-width" type="email" (input)="emailChanged($event)" [ngClass]="{'receipt__input--invalid': invalidEmail}" id="receiptInput">
             <p class="receipt__no-spam-text">Don’t worry, we won’t send you any spam.</p>
-            <button class="button button--black receipt__button" (click)="submitEmail()">send</button>
+            <button class="button button--black util--full-width" (click)="submitEmail()">send</button>
         </div>
     </div>
 </div>
