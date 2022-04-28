@@ -40,3 +40,10 @@
 .no-thanks-closing-text-link {
     font-weight: 800;
 }
+
+.no-thanks-button-bottom {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}

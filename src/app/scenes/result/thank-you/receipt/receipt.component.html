@@ -12,8 +12,8 @@
         <div *ngIf="!(loading$ | async)">
             <p class="receipt__title">Ontvang uw bewijs via email</p>
             <input class="receipt__input util--full-width" type="email" (input)="emailChanged($event)" [ngClass]="{'receipt__input--invalid': invalidEmail}" id="receiptInput">
-            <p class="receipt__no-spam-text">Geen zorgen, wij zullen u geen spam sturen!</p>
-            <button class="button button--black receipt__button" (click)="submitEmail()">send</button>
+            <p class="receipt__no-spam-text">Don’t worry, we won’t send you any spam.</p>
+            <button class="button button--black util--full-width" (click)="submitEmail()">send</button>
         </div>
     </div>
 </div>

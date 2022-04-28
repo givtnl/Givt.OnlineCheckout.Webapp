@@ -1,6 +1,12 @@
 <div>
     <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
     <div *ngIf="!(loading$ | async)">
+        <div class="util--backdrop modal-backdrop" *ngIf="modalOpen" (click)="closeModal()">
+            <div class="error-modal">
+                <div class="error-text">{{errorText}}</div>
+                <button class="button modal-button">OK</button>
+            </div>
+        </div>
         <app-logos [logoUrl]="organisation.logoLink"></app-logos>
         <div class="header--margin">
             <div class="util--centered-container">
@@ -26,13 +32,11 @@
                     </label>
                 </div>
             </div>
-            <button id="main-button" (click)="submit()" class="button"
+            <button id="main-button" (click)="submit()" class="button button-bottom-donation"
                     [ngClass]="{'button--disabled': mainGiveButtonDisabled}"
-                    [disabled]="mainGiveButtonDisabled"
                     *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">{{ 'Donate.Give' | translate }}</button>
-            <button id="main-button" (click)="submit()" class="button"
+            <button id="main-button" (click)="submit()" class="button button-bottom-donation"
                     [ngClass]="{'button--disabled': mainGiveButtonDisabled}"
-                    [disabled]="mainGiveButtonDisabled"
                     *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">{{ 'Donate.Continue' | translate }}</button>
         </div>
         <div *ngIf="walletPossible" style="visibility: hidden">

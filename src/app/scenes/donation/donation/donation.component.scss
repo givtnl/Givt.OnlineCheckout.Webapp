@@ -25,11 +25,6 @@
     align-items: center;
 }
 
-.vl {
-    border-left: 1px solid #beded0;
-    padding-left: 40px;
-}
-
 .payment-method__container {
     display: flex;
     flex-direction: row;
@@ -79,4 +74,39 @@
 
 .payment-method__hide-input:checked + .payment-method__tile > .payment-method__checkmark {
     display: inline-block;
+}
+
+/***** Modal stylings ********/
+.modal-backdrop {
+    background-color: rgba(248,248,248,.8);
+    z-index: 2;
+}
+
+.error-modal {
+    position: relative;
+    height: 100px;
+    width: 380px;
+    z-index: 100;
+    background-color: rgba(255,255,255,.9);
+    margin: 0 auto;
+    top: 55%;
+    border-radius: 10px;
+    font-family: 'Mulish', sans-serif;
+    text-align: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.error-text {
+    padding: 10px 10px 0;
+    font-size: 14px;
+    position: relative;
+    top: 10px;
+}
+
+.modal-button {
+    height: 32px;
+    width: 150px;
+    position: relative;
+    top: 20px;
+    margin-top: 3px;
 }

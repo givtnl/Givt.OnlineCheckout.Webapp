@@ -8,10 +8,43 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+$givt-green: (
+    50: #ff7f4,
+    100: #d8ebe3,
+    200: #beded0,
+    300: #a4d1bd,
+    400: #91c7af,
+    500: #7dbda1,
+    600: #75b799,
+    700: #6aae8f,
+    800: #60a685,
+    900:  #4d9874,
+    A100: #f7fffb,
+    A200: #c4ffe2,
+    A400: #91ffc9,
+    A700: #78ffbc,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$givt-online-checkout-primary: mat.define-palette(mat.$indigo-palette);
+$givt-online-checkout-primary: mat.define-palette($givt-green);
 $givt-online-checkout-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -68,6 +101,30 @@ mat-progress-spinner {
     line-height: 20px;
 }
 
+@media (min-height: 700px) {
+    .button-bottom-donation {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (min-height: 550px) {
+    .button-bottom-payment {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 318px) {
+    .button {
+        width: 100%;
+    }
+}
+
 .button--white {
     background-color: white;
     color: black;
@@ -85,19 +142,26 @@ mat-progress-spinner {
     background-color: #808080;
 }
 
-.button--align-left {
-    position: absolute;
-    width: 175px;
-    height: 50px;
-    top: 600px;
-}
-
 /************** UTIL STUFF **************/
+
+.util--backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
 
 .util--centered-container {
     display: block;
     margin: auto;
     width: 320px;
+}
+
+@media (max-width: 318px) {
+    .util--centered-container {
+        width: 100%;
+    }
 }
 
 .util--margin-bot-30 {
