@@ -32,10 +32,10 @@
                     </label>
                 </div>
             </div>
-            <button id="main-button" (click)="submit()" class="button button-bottom"
+            <button id="main-button" (click)="submit()" class="button button-bottom-donation"
                     [ngClass]="{'button--disabled': mainGiveButtonDisabled}"
                     *ngIf="this.currentSelectedPaymentMethod?.id == 'applepay' || this.currentSelectedPaymentMethod?.id == 'googlepay'">{{ 'Donate.Give' | translate }}</button>
-            <button id="main-button" (click)="submit()" class="button button-bottom"
+            <button id="main-button" (click)="submit()" class="button button-bottom-donation"
                     [ngClass]="{'button--disabled': mainGiveButtonDisabled}"
                     *ngIf="this.currentSelectedPaymentMethod?.id != 'applepay' && this.currentSelectedPaymentMethod?.id != 'googlepay'">{{ 'Donate.Continue' | translate }}</button>
         </div>
