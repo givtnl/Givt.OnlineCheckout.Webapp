@@ -101,6 +101,24 @@ mat-progress-spinner {
     line-height: 20px;
 }
 
+@media (min-height: 700px) {
+    .button-bottom-donation {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (min-height: 550px) {
+    .button-bottom-payment {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
 @media (max-width: 318px) {
     .button {
         width: 100%;

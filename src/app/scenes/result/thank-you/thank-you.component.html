@@ -4,13 +4,14 @@
         <h1 class="thank-you__title">{{ 'Success.ThankYouTitle' | translate:param}}</h1>
         <p class="thank-you__subtitle">{{organisationThankYou}}</p>
     </div>
-    <div class="util--centered-container">
-        <button class="button button--black" (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);">{{ 'Success.WantReceipt' | translate }}</button>
-        <button class="button button--white" (click)="downloadApp()">{{ 'Success.DownloadApp' | translate }}</button>
-    </div>
-    <div class="util--centered-container">
-        <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }}<span
-                class="thank-you-closing-text-link">Meer weten?</span></p>
+    <div class="thank-you__bottom-container">
+        <div class="util--centered-container">
+            <button class="button button--black" (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);">{{ 'Success.WantReceipt' | translate }}</button>
+            <button class="button button--white" (click)="downloadApp()">{{ 'Success.DownloadApp' | translate }}</button>
+        </div>
+        <div class="util--centered-container">
+            <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }}</p>
+        </div>
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
     <div class="receipt__overlay" [@receiptOverlay]="userWantsReceipt ? 'open' : 'closed'">
