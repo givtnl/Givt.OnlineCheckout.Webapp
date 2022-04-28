@@ -46,14 +46,17 @@ export class DonationComponent implements OnInit {
         });
 
         //make dummy payment request to check for wallet enableing
-        const dummyPaymentRequest = this.stripe.paymentRequest({
+        console.log(this.organisation)
+        let paymentRequestData = {
             country: this.organisation.country,
             currency: this.organisation.currency.toLowerCase(),
             total: {
                 label: this.organisation.name,
-                amount: 0
+                amount: 1
             }
-        })
+        };
+        console.log(paymentRequestData)
+        const dummyPaymentRequest = this.stripe.paymentRequest(paymentRequestData)
 
         console.log('paymentrequest: ')
         console.log(dummyPaymentRequest)
@@ -200,7 +203,7 @@ export class DonationComponent implements OnInit {
 
         this.paymentRequest.canMakePayment().then((result: any) => {
             if (result) {
-                this.walletPossible = true;
+                //this.walletPossible = true;
                 this.elements = this.stripe.elements()
                 this.paymentRequestButton = this.elements.create('paymentRequestButton', {
                     paymentRequest: this.paymentRequest,
