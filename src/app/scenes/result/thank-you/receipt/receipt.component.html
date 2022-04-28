@@ -2,18 +2,18 @@
     <div *ngIf="!emailFormShown">
         <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" class="util--position-absolute"></mat-progress-spinner>
         <div *ngIf="!(loading$ | async)">
-            <p class="receipt__title">How do you want to receive your receipt?</p>
-            <button class="button button--black util--full-width" (click)="downloadReport()">download now</button>
-            <button class="button button--green util--full-width" (click)="showEmailForm()">via email</button>
+            <p class="receipt__title">{{'Receipt.Title' | translate}}</p>
+            <button class="button button--black util--full-width" (click)="downloadReport()">{{'Receipt.Download' | translate}}</button>
+            <button class="button button--green util--full-width" (click)="showEmailForm()">{{'Receipt.ViaEmail' | translate}}</button>
         </div>
     </div>
     <div *ngIf="emailFormShown">
         <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" class="util--position-absolute"></mat-progress-spinner>
         <div *ngIf="!(loading$ | async)">
-            <p class="receipt__title">Receive your receipt via email</p>
+            <p class="receipt__title">{{'ReceiptEmail.Title' | translate}}</p>
             <input class="receipt__input util--full-width" type="email" (input)="emailChanged($event)" [ngClass]="{'receipt__input--invalid': invalidEmail}" id="receiptInput">
-            <p class="receipt__no-spam-text">Don’t worry, we won’t send you any spam.</p>
-            <button class="button button--black util--full-width" (click)="submitEmail()">send</button>
+            <p class="receipt__no-spam-text">{{'ReceiptEmail.SpamText' | translate}}</p>
+            <button class="button button--black util--full-width" (click)="submitEmail()">{{'ReceiptEmail.Send' | translate}}</button>
         </div>
     </div>
 </div>
