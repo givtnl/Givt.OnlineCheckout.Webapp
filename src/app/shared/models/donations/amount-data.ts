@@ -1,10 +1,12 @@
 export default class AmountData {
   id: number;
   value: number;
+  localString: string;
 
   constructor(id: number, value: number) {
     this.id = id;
     this.value = value;
+    this.localString = value.toLocaleString(navigator.language, {minimumFractionDigits: 2, maximumFractionDigits: 2})
   }
 
   static fromAmounts(amounts: number[]): AmountData[] {

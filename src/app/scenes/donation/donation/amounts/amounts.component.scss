@@ -75,7 +75,7 @@
     display: flex;
     flex-direction: row;
     align-content: center;
-    width: 250px;
+    width: 270px;
 }
 
 @media (max-width: 318px) {
@@ -89,10 +89,10 @@
 }
 
 .presets__label {
-    padding: 10px 15px;
+    padding: 15px 10px;
     background-color: #beded0;
     color: white;
-    width: 40px;
+    width: 50px;
     box-sizing: content-box;
     text-align: center;
 }
