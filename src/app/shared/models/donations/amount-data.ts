@@ -6,7 +6,7 @@ export default class AmountData {
   constructor(id: number, value: number) {
     this.id = id;
     this.value = value;
-    this.localString = value.toLocaleString(navigator.language, {minimumFractionDigits: 2, maximumFractionDigits: 2})
+    this.localString = value.toLocaleString(navigator.language, {maximumFractionDigits: 2})
   }
 
   static fromAmounts(amounts: number[]): AmountData[] {
