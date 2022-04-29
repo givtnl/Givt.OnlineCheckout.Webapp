@@ -23,6 +23,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     clientSelectedPaymentMethod!: string;
     paymentRequestButton: any;
     bancontactHolderName: string = "";
+    bancontactHolderNameValid: boolean | undefined;
+
 
     elementsOptions: StripeElementsOptions = {
         locale: `${navigator.language}` as StripeElementLocale,
@@ -85,7 +87,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     confirmIdealPayment(event: Event) {
-        event.preventDefault();
         this.loader.show()
         this.stripe.confirmIdealPayment(
             this.elementsOptions.clientSecret,
@@ -98,8 +99,20 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         );
     }
 
+    bancontactHolderNameChanged(event: Event) {
+        if (!this.bancontactHolderName != undefined)
+        {
+            this.bancontactHolderNameValid = this.bancontactHolderName !== ""
+            return;
+        }
+    }
+
     confirmBancontactPayment(event: Event) {
-        event.preventDefault();
+        if (!this.bancontactHolderName)
+        {
+            this.bancontactHolderNameValid = false;
+            return;
+        }
         this.loader.show()
         this.stripe.confirmBancontactPayment(
             this.elementsOptions.clientSecret,
@@ -115,7 +128,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     confirmCardPayment(event: Event) {
-        event.preventDefault();
         this.loader.show()
         this.stripe.confirmPayment({
                 elements: this.elements,
