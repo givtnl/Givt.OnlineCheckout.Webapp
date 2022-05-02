@@ -7,12 +7,13 @@
 .logo__organisation {
     position: absolute;
     top: 18px;
-    max-width: 400px;
+    max-width: 250px;
     max-height: 100px;
 }
 
 .logo__givt {
     position: absolute;
+    top: 20px;
     left: calc(100vw * 0.55);
 }
 
@@ -23,16 +24,9 @@
     }
 }
 
-@media (max-width: 290px) {
+@media (max-width: 500px) {
     .logo__givt {
         position: absolute;
-        left: 50vw;
-    }
-}
-
-@media (max-width: 230px) {
-    .logo__givt {
-        position: absolute;
-        left: 40vw;
+        left: 250px;
     }
 }
