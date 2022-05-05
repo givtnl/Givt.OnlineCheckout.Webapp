@@ -111,8 +111,9 @@ export class DonationComponent implements OnInit {
                 }
             }
 
-            localStorage.setItem('organisationName', this.organisation.name)
-            localStorage.setItem('organisationThankYou', this.organisation.thankYou)
+            localStorage.setItem('organisationName', this.organisation.name);
+            localStorage.setItem('organisationThankYou', this.organisation.thankYou);
+            localStorage.setItem('organisationTitle', this.organisation.title);
             localStorage.setItem('logoUrl', this.organisation.logoLink);
             localStorage.setItem('amount', String(amount));
             if (this.currentSelectedPaymentMethod)

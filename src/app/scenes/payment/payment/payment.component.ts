@@ -13,7 +13,7 @@ import {environment} from "../../../../environments/environment";
 export class PaymentComponent implements OnInit, AfterViewInit {
     paymentMethod: PaymentIntent | undefined
     loading$ = this.loader.loading$;
-    organisationName!: string
+    title!: string
     logoUrl!: string
     stripe: any;
     cardPaymentElement: any;
@@ -55,7 +55,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
         this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
         localStorage.setItem('token', paymentMethod.token);
-        this.organisationName = localStorage.getItem('organisationName')!;
+        this.title = localStorage.getItem('organisationTitle')!;
         this.logoUrl = localStorage.getItem('logoUrl')!;
     }
 
@@ -86,7 +86,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         }
     }
 
-    confirmIdealPayment(event: Event) {
+    confirmIdealPayment() {
         this.loader.show()
         this.stripe.confirmIdealPayment(
             this.elementsOptions.clientSecret,
@@ -99,7 +99,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         );
     }
 
-    bancontactHolderNameChanged(event: Event) {
+    bancontactHolderNameChanged() {
         if (!this.bancontactHolderName != undefined)
         {
             this.bancontactHolderNameValid = this.bancontactHolderName !== ""
@@ -107,7 +107,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         }
     }
 
-    confirmBancontactPayment(event: Event) {
+    confirmBancontactPayment() {
         if (!this.bancontactHolderName)
         {
             this.bancontactHolderNameValid = false;
@@ -127,7 +127,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         );
     }
 
-    confirmCardPayment(event: Event) {
+    confirmCardPayment() {
         this.loader.show()
         this.stripe.confirmPayment({
                 elements: this.elements,

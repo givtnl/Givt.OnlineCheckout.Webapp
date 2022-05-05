@@ -40,7 +40,7 @@ export class ThankYouComponent implements OnInit {
         // that's why I created the param object
         this.param.organisationName = localStorage.getItem('organisationName')!;
 
-        this.organisationThankYou = localStorage.getItem('organisationThankYou')!;
+        this.organisationThankYou = localStorage.getItem('organisationThankYou')!.substring(0, 175);
         this.token = localStorage.getItem('token')!
     }
 
