@@ -62,7 +62,7 @@ export class ReceiptComponent implements OnInit {
         const headers = {
             'Authorization': 'Bearer ' + this.token
         }
-        this.http.get(environment.apiUrl + '/api/report/singleDonation', {
+        this.http.get(environment.apiUrl + '/api/report/singleDonation?language=' + navigator.language, {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders(headers)

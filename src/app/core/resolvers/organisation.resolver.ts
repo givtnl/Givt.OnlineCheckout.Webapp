@@ -18,7 +18,7 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             let mediumIdDecoded = atob(mediumIdEncoded);
             localStorage.setItem('medium', mediumIdDecoded);
             this.loader.show();
-            return this.http.get<OrganisationDto>(environment.apiUrl + '/api/medium?code=' + mediumIdDecoded + '&locale=' + navigator.language)
+            return this.http.get<OrganisationDto>(environment.apiUrl + '/api/medium?code=' + mediumIdDecoded + '&language=' + navigator.language)
                 .pipe(map((data) => {
                     if (!data.medium) {
                         data.medium = mediumIdDecoded;
