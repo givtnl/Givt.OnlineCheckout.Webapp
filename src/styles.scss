@@ -101,7 +101,7 @@ mat-progress-spinner {
     line-height: 20px;
 }
 
-@media (min-height: 700px) {
+@media (min-height: 630px) {
     .button-bottom-donation {
         position: fixed;
         bottom: 20px;
@@ -186,4 +186,38 @@ mat-progress-spinner {
 body {
     font-family: Mulish, sans-serif;
     overflow-y: scroll; //if you remove this, the thank-you page will jump around on animations
+}
+
+.universal-margin {
+    margin: 5px 0;
+}
+
+@media (min-height: 600px) {
+    .universal-margin {
+        margin: 10px 0;
+    }
+}
+
+@media (min-height: 680px) {
+    .universal-margin {
+        margin: 35px 0;
+    }
+}
+
+@media (min-height: 760px) {
+    .universal-margin {
+        margin: 50px 0;
+    }
+}
+
+@media (min-height: 840px) {
+    .universal-margin {
+        margin: 75px 0;
+    }
+}
+
+@media (min-height: 900px) {
+    .universal-margin {
+        margin: 90px 0;
+    }
 }
