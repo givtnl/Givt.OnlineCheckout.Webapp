@@ -18,7 +18,7 @@ $givt-green: (
     600: #75b799,
     700: #6aae8f,
     800: #60a685,
-    900:  #4d9874,
+    900: #4d9874,
     A100: #f7fffb,
     A200: #c4ffe2,
     A400: #91ffc9,
@@ -188,36 +188,30 @@ body {
     overflow-y: scroll; //if you remove this, the thank-you page will jump around on animations
 }
 
-.universal-margin {
-    margin: 5px 0;
-}
-
-@media (min-height: 600px) {
-    .universal-margin {
-        margin: 10px 0;
-    }
+.donation-common-vertical-margin {
+    margin: 20px 0;
 }
 
 @media (min-height: 680px) {
-    .universal-margin {
+    .donation-common-vertical-margin {
         margin: 35px 0;
     }
 }
 
 @media (min-height: 760px) {
-    .universal-margin {
+    .donation-common-vertical-margin {
         margin: 50px 0;
     }
 }
 
 @media (min-height: 840px) {
-    .universal-margin {
+    .donation-common-vertical-margin {
         margin: 75px 0;
     }
 }
 
 @media (min-height: 900px) {
-    .universal-margin {
+    .donation-common-vertical-margin {
         margin: 90px 0;
     }
 }

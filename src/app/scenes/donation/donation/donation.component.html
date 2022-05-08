@@ -9,17 +9,17 @@
         </div>
         <app-logos [logoUrl]="organisation.logoLink"></app-logos>
         <div class="content">
-            <div class="universal-margin header--margin">
+            <div class="donation-common-vertical-margin header--margin">
                 <div class="util--centered-container">
                     <h1 class="header__title">{{organisation.title}}</h1>
                     <h2 class="header__subtitle">{{organisation.goal}}</h2>
                 </div>
-                <app-amounts class="universal-margin" [values]="organisation.amounts" [currency]="organisation.currency"
+                <app-amounts class="donation-common-vertical-margin" [values]="organisation.amounts" [currency]="organisation.currency"
                              (onPresetClick)="setCurrentSelected($event)" (onInputModeChange)="setInputMode($event)"
                              (onAmountChange)="saveCustomAmount($event)"></app-amounts>
             </div>
 
-            <div class="universal-margin" *ngIf="this.callToCanUseWalletDone">
+            <div class="donation-common-vertical-margin" *ngIf="this.callToCanUseWalletDone">
                 <div class="payment-method__container">
                     <div *ngFor="let paymentMethod of organisation.paymentMethods">
                         <input class="payment-method__hide-input" type="radio" name="payment-method"
