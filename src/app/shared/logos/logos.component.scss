@@ -1,6 +1,6 @@
 .logos__container {
     margin-top: 30px;
-    height: 30px;
+    height: 110px;
     position: relative;
 }
 
@@ -15,6 +15,7 @@
     position: absolute;
     top: 20px;
     left: calc(100vw * 0.55);
+    height: 42px;
 }
 
 @media (min-width: 600px) {
