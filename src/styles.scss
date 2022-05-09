@@ -192,6 +192,8 @@ body {
     margin: 20px 0;
 }
 
+/*********************** Mobile Media Query's ***********************************/
+
 @media (min-height: 680px) {
     .donation-common-vertical-margin {
         margin: 35px 0;
@@ -213,5 +215,26 @@ body {
 @media (min-height: 900px) {
     .donation-common-vertical-margin {
         margin: 90px 0;
+    }
+}
+
+/*********************** Desktop Media Query's ***********************************/
+
+
+@media (min-height: 1180px) {
+    .donation-common-vertical-margin {
+        margin: 140px 0;
+    }
+}
+
+@media (min-height: 1520px) {
+    .donation-common-vertical-margin {
+        margin: 180px 0;
+    }
+}
+
+@media (min-height: 1750px) {
+    .donation-common-vertical-margin {
+        margin: 230px 0;
     }
 }
