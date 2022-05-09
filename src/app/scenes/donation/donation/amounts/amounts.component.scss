@@ -15,7 +15,7 @@
     font-family: Mulish, sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 15px;
     color: black;
     margin-bottom: 15px;
@@ -27,15 +27,20 @@
     background: white;
     height: 40px;
     width: 205px;
-    padding-left: 8px;
+    padding-left: 5px;
     border: none;
+    border-radius: 0;
     border-top: #7DBDA1 1px solid;
     border-bottom: #7DBDA1 1px solid;
     font-family: Mulish, sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 15px;
+}
+
+.custom-amount__currency-input[type="number"] {
+    -webkit-appearance: none;
 }
 
 .custom-amount__currency-input:focus {
@@ -64,8 +69,7 @@
 .amount__container {
     background-color: #f8f8f8;
     padding: 35px 35px;
-    margin-top: 65px;
-    margin-bottom: 35px;
+    //margin: 50px 0;
     height: 175px;
 }
 
