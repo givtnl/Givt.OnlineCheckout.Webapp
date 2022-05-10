@@ -9,7 +9,7 @@
             <button class="button button--white" (click)="downloadApp()">{{ 'Success.DownloadApp' | translate }}</button>
         </div>
         <div class="util--centered-container">
-            <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }}</p>
+            <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }}<span class="thank-you-closing-text-link">{{ 'Success.GivtSummaryKnowMore'}}</span></p>
         </div>
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>
