@@ -20,5 +20,6 @@
     "PaymentFailure.StartOver": "Start over",
     "Payment.BancontactExplanation": "After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.",
     "Payment.BancontactContinue": "Continue to Bancontact",
-    "Payment.IdealContinue": "Continue to IDeal"
+    "Payment.IdealContinue": "Continue to IDeal",
+    "Bancontact.NamePlaceholder": "First and last name"
 }
