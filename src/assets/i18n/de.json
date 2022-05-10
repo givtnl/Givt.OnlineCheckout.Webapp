@@ -8,7 +8,7 @@
     "Success.ThankYouTitle": "Danke für deine Spende an {{organisationName}}",
     "Success.WantReceipt": "Ich möchte eine Quittung",
     "Success.DownloadApp": "Laden Sie die Give-App herunter",
-    "Success.GivtSummary": "Givt bietet dir eine persönliche Zusammenfassung und Übersicht für deinen Steuerauszug. Die Verwaltung Ihrer Steuererklärung war noch nie so einfach! Möchten Sie mehr wissen?",
+    "Success.GivtSummary": "Givt bietet dir eine persönliche Zusammenfassung und Übersicht für deinen Steuerauszug. Die Verwaltung Ihrer Steuererklärung war noch nie so einfach!",
     "Receipt.Title": "Wie möchten Sie Ihre Quittung erhalten?",
     "Receipt.Download": "jetzt downloaden",
     "Receipt.ViaEmail": "per Email",
@@ -28,5 +28,6 @@
     "DonationErrorModal.AmountBetweenLowerLimit": "",
     "DonationErrorModal.AmountBetweenPart2": "",
     "DonationErrorModal.AmountBetweenUpperLimit": "",
-    "DonationErrorModal.WalletError": ""
+    "DonationErrorModal.WalletError": "",
+    "Success.GivtSummaryKnowMore": "Möchten Sie mehr wissen?"
 }
