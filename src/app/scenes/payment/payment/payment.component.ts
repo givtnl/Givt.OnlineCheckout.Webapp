@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                 this.idealBank.mount('#ideal-bank-element');
                 this.idealBank.on('change', (event: any) => {
                     this.bankSelected = true;
-            })
+                })
                 break;
             case "sofort": //sofort
             case "giropay": //giropay
@@ -109,16 +109,14 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     bancontactHolderNameChanged() {
-        if (!this.bancontactHolderName != undefined)
-        {
+        if (!this.bancontactHolderName != undefined) {
             this.bancontactHolderNameValid = this.bancontactHolderName !== ""
             return;
         }
     }
 
     confirmBancontactPayment() {
-        if (!this.bancontactHolderName)
-        {
+        if (!this.bancontactHolderName) {
             this.bancontactHolderNameValid = false;
             return;
         }
@@ -138,12 +136,17 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmCardPayment() {
         this.loader.show()
-        this.stripe.confirmPayment({
+        const error = this.stripe.confirmPayment({
                 elements: this.elements,
                 confirmParams: {
                     return_url: environment.returnUrl
                 }
             }
-        )
+        ).then((error: any) => {
+            console.log(error)
+            if (error) {
+                this.loader.hide()
+            }
+        })
     }
 }
