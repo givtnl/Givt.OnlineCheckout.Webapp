@@ -32,7 +32,7 @@
                         <div id="ideal-bank-element">
                         </div>
                     </div>
-                    <button (click)="confirmIdealPayment()" class="button button--green button-bottom-payment">
+                    <button (click)="confirmIdealPayment()" class="button button-bottom-payment" [disabled]="!bankSelected" [ngClass]="bankSelected ? 'button--green' : 'button--disabled'">
                         {{'Payment.IdealContinue' | translate}}
                     </button>
                 </div>
