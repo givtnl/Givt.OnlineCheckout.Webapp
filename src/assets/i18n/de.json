@@ -21,5 +21,12 @@
     "Payment.BancontactExplanation": "After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.",
     "Payment.BancontactContinue": "Continue to Bancontact",
     "Payment.IdealContinue": "Continue to IDeal",
-    "Bancontact.NamePlaceholder": "Vor-und Nachname"
+    "Bancontact.NamePlaceholder": "Vor-und Nachname",
+    "DonationErrorModal.PaymentMethodNotSelected": "",
+    "DonationErrorModal.NoAmountSpecified": "",
+    "DonationErrorModal.AmountBetweenPart1": "",
+    "DonationErrorModal.AmountBetweenLowerLimit": "",
+    "DonationErrorModal.AmountBetweenPart2": "",
+    "DonationErrorModal.AmountBetweenUpperLimit": "",
+    "DonationErrorModal.WalletError": ""
 }
