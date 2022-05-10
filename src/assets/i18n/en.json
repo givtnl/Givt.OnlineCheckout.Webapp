@@ -21,5 +21,12 @@
     "Payment.BancontactExplanation": "After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.",
     "Payment.BancontactContinue": "Continue to Bancontact",
     "Payment.IdealContinue": "Continue to IDeal",
-    "Bancontact.NamePlaceholder": "First and last name"
+    "Bancontact.NamePlaceholder": "First and last name",
+    "DonationErrorModal.PaymentMethodNotSelected": "Please select a payment method",
+    "DonationErrorModal.NoAmountSpecified": "Please specify an amount to give",
+    "DonationErrorModal.AmountBetweenPart1": "Please specify an amount between ",
+    "DonationErrorModal.AmountBetweenLowerLimit": " 0.5",
+    "DonationErrorModal.AmountBetweenPart2": " and ",
+    "DonationErrorModal.AmountBetweenUpperLimit": " 25000",
+    "DonationErrorModal.WalletError": "Something went wrong with your wallet, please try a different method"
 }
