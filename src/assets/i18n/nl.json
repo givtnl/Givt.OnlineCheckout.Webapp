@@ -21,5 +21,12 @@
     "Payment.BancontactExplanation": "Na het invullen van je voor- en achternaam word je omgeleid naar de veilige omgeving van bancontact om je donatie te vervolledigen.",
     "Payment.BancontactContinue": "Ga naar Bancontact",
     "Payment.IdealContinue": "Ga naar iDEAL",
-    "Bancontact.NamePlaceholder": "Voor-en achternaam"
+    "Bancontact.NamePlaceholder": "Voor-en achternaam",
+    "DonationErrorModal.PaymentMethodNotSelected": "Gelieve een betaalmethode te selecteren",
+    "DonationErrorModal.NoAmountSpecified": "Gelieve een bedrag in te geven",
+    "DonationErrorModal.AmountBetweenPart1": "Gelieve een bedrag in te geven tussen ",
+    "DonationErrorModal.AmountBetweenLowerLimit": " 0,5",
+    "DonationErrorModal.AmountBetweenPart2": " en ",
+    "DonationErrorModal.AmountBetweenUpperLimit": " 25000",
+    "DonationErrorModal.WalletError": "Er ging iets verkeerd, gelieve een andere methode te selecteren, of probeer later eens opnieuw."
 }
