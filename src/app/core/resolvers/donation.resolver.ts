@@ -21,7 +21,8 @@ export class DonationResolver implements Resolve<PaymentIntent> {
             "medium": medium,
             "paymentMethod": paymentMethod,
             "timezoneOffset": new Date().getTimezoneOffset(),
-            "currency": "EUR"
+            "currency": "EUR",
+            "language": navigator.language
         }).pipe(
             finalize(() => {
                 this.loader.hide()

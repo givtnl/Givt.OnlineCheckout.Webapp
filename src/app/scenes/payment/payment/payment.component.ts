@@ -24,6 +24,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     paymentRequestButton: any;
     bancontactHolderName: string = "";
     bancontactHolderNameValid: boolean | undefined;
+    bankSelected = false;
 
 
     elementsOptions: StripeElementsOptions = {
@@ -77,6 +78,9 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             case "ideal": //iDeal
                 this.idealBank = this.elements.create("idealBank", this.idealElementsOptions);
                 this.idealBank.mount('#ideal-bank-element');
+                this.idealBank.on('change', (event: any) => {
+                    this.bankSelected = true;
+                })
                 break;
             case "sofort": //sofort
             case "giropay": //giropay
@@ -88,28 +92,31 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmIdealPayment() {
         this.loader.show()
-        this.stripe.confirmIdealPayment(
-            this.elementsOptions.clientSecret,
-            {
-                return_url: environment.returnUrl,
-                payment_method: {
-                    ideal: this.idealBank
+        if (this.bankSelected) {
+            this.stripe.confirmIdealPayment(
+                this.elementsOptions.clientSecret,
+                {
+                    return_url: environment.returnUrl,
+                    payment_method: {
+                        ideal: this.idealBank
+                    }
                 }
-            }
-        );
+            );
+        } else {
+            this.loader.hide()
+            return
+        }
     }
 
     bancontactHolderNameChanged() {
-        if (!this.bancontactHolderName != undefined)
-        {
+        if (!this.bancontactHolderName != undefined) {
             this.bancontactHolderNameValid = this.bancontactHolderName !== ""
             return;
         }
     }
 
     confirmBancontactPayment() {
-        if (!this.bancontactHolderName)
-        {
+        if (!this.bancontactHolderName) {
             this.bancontactHolderNameValid = false;
             return;
         }
@@ -129,12 +136,17 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmCardPayment() {
         this.loader.show()
-        this.stripe.confirmPayment({
+        const error = this.stripe.confirmPayment({
                 elements: this.elements,
                 confirmParams: {
                     return_url: environment.returnUrl
                 }
             }
-        )
+        ).then((error: any) => {
+            console.log(error)
+            if (error) {
+                this.loader.hide()
+            }
+        })
     }
 }
