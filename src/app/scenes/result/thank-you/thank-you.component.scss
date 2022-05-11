@@ -24,7 +24,14 @@
 
 .thank-you__title-container {
     padding-top: 15vh;
+    height: 200px;
     margin-bottom: 15vh;
+}
+
+@media (min-height: 600px) {
+    .thank-you__title-container{
+        height: vh * 0.25;
+    }
 }
 
 .thank-you__closing-text {
