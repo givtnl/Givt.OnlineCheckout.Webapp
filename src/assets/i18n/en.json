@@ -20,7 +20,7 @@
     "PaymentFailure.StartOver": "Start over",
     "Payment.BancontactExplanation": "After entering your first and last name you will be redirected to the safe environment of Bancontact where you can complete your donation.",
     "Payment.BancontactContinue": "Continue to Bancontact",
-    "Payment.IdealContinue": "Continue to IDeal",
+    "Payment.IdealContinue": "Continue to iDEAL",
     "Bancontact.NamePlaceholder": "First and last name",
     "DonationErrorModal.PaymentMethodNotSelected": "Please select a payment method",
     "DonationErrorModal.NoAmountSpecified": "Please specify an amount to give",
@@ -29,5 +29,6 @@
     "DonationErrorModal.AmountBetweenPart2": " and ",
     "DonationErrorModal.AmountBetweenUpperLimit": " 25000",
     "DonationErrorModal.WalletError": "Something went wrong with your wallet, please try a different method",
-    "Success.GivtSummaryKnowMore": "Want to know more?"
+    "Success.GivtSummaryKnowMore": "Want to know more?",
+    "Page.Title": "Givt point of giving"
 }

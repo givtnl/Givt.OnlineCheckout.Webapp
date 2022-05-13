@@ -10,6 +10,7 @@ import {HttpClient} from "@angular/common/http";
 import {NotificationService} from "../../../core/notification/notification.service";
 import {CurrencyHelper} from "../../../shared/helpers/currency-helper";
 import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-donation',
@@ -36,10 +37,11 @@ export class DonationComponent implements OnInit {
     modalOpen = false;
     errorText!: string;
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient, private notificationService: NotificationService, private translate: TranslateService) {
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient, private notificationService: NotificationService, private translate: TranslateService, private titleService: Title) {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle(this.translate.instant('Page.Title'));
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
         this.stripe = window.Stripe!(environment.stripePk, {
@@ -88,8 +90,8 @@ export class DonationComponent implements OnInit {
             return;
         }
 
-        if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
-            this.openModal(this.translate.instant('DonationErrorModal.PaymentMethodNotSelected'));
+        if (this.inputMode && this.customAmount === 0) {
+            this.openModal(this.translate.instant('DonationErrorModal.NoAmountSpecified'));
             return;
         } else {
             let amount = 0;
@@ -97,10 +99,10 @@ export class DonationComponent implements OnInit {
                 amount = Math.round(this.customAmount * 100) / 100;
                 if (!DonationComponent.isValidCustomAmount(amount)) {
                     const currencySymbol = CurrencyHelper.getCurrencySymbol(this.organisation.currency)
-                    this.openModal(this.translate.instant('DonationErrorModal.PaymentMethodNotSelected') + currencySymbol +
-                        this.translate.instant('DonationErrorModal.PaymentMethodNotSelected') +
-                        this.translate.instant('DonationErrorModal.PaymentMethodNotSelected') + currencySymbol +
-                        this.translate.instant('DonationErrorModal.PaymentMethodNotSelected'));
+                    this.openModal(this.translate.instant('DonationErrorModal.AmountBetweenPart1') + currencySymbol +
+                        this.translate.instant('DonationErrorModal.AmountBetweenLowerLimit') +
+                        this.translate.instant('DonationErrorModal.AmountBetweenPart2') + currencySymbol +
+                        this.translate.instant('DonationErrorModal.AmountBetweenUpperLimit'));
                     return;
                 }
             } else {
