@@ -90,8 +90,8 @@ export class DonationComponent implements OnInit {
             return;
         }
 
-        if (this.currentSelected.id === 0 && (this.inputMode && this.customAmount === 0)) {
-            this.openModal(this.translate.instant('DonationErrorModal.PaymentMethodNotSelected'));
+        if (this.inputMode && this.customAmount === 0) {
+            this.openModal(this.translate.instant('DonationErrorModal.NoAmountSpecified'));
             return;
         } else {
             let amount = 0;
@@ -99,10 +99,10 @@ export class DonationComponent implements OnInit {
                 amount = Math.round(this.customAmount * 100) / 100;
                 if (!DonationComponent.isValidCustomAmount(amount)) {
                     const currencySymbol = CurrencyHelper.getCurrencySymbol(this.organisation.currency)
-                    this.openModal(this.translate.instant('DonationErrorModal.PaymentMethodNotSelected') + currencySymbol +
-                        this.translate.instant('DonationErrorModal.PaymentMethodNotSelected') +
-                        this.translate.instant('DonationErrorModal.PaymentMethodNotSelected') + currencySymbol +
-                        this.translate.instant('DonationErrorModal.PaymentMethodNotSelected'));
+                    this.openModal(this.translate.instant('DonationErrorModal.AmountBetweenPart1') + currencySymbol +
+                        this.translate.instant('DonationErrorModal.AmountBetweenLowerLimit') +
+                        this.translate.instant('DonationErrorModal.AmountBetweenPart2') + currencySymbol +
+                        this.translate.instant('DonationErrorModal.AmountBetweenUpperLimit'));
                     return;
                 }
             } else {
