@@ -10,6 +10,7 @@ import {HttpClient} from "@angular/common/http";
 import {NotificationService} from "../../../core/notification/notification.service";
 import {CurrencyHelper} from "../../../shared/helpers/currency-helper";
 import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-donation',
@@ -36,10 +37,11 @@ export class DonationComponent implements OnInit {
     modalOpen = false;
     errorText!: string;
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient, private notificationService: NotificationService, private translate: TranslateService) {
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private http: HttpClient, private notificationService: NotificationService, private translate: TranslateService, private titleService: Title) {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle(this.translate.instant('Page.Title'));
         this.organisation = this.route.snapshot.data['organisation'];
         this.mainGiveButtonDisabled = true
         this.stripe = window.Stripe!(environment.stripePk, {

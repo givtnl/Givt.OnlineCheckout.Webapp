@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from "./../core/core.module"
 import {animate, style, transition, trigger} from "@angular/animations";
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 
 export const routingAnimationsTrigger = trigger('routingAnimations', [
     transition(':enter', [style({opacity: 0}), animate('300ms')]),
@@ -15,7 +15,7 @@ export const routingAnimationsTrigger = trigger('routingAnimations', [
     animations: [routingAnimationsTrigger]
 })
 export class AppComponent implements OnInit {
-    constructor(private storageService: LocalStorageService, translate: TranslateService) {
+    constructor(private storageService: LocalStorageService, private translate: TranslateService) {
         translate.setDefaultLang('en');
         translate.addLangs(['nl', 'de', 'en']);
 
