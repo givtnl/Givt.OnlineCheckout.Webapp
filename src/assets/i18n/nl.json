@@ -30,5 +30,5 @@
     "DonationErrorModal.AmountBetweenUpperLimit": " 25000",
     "DonationErrorModal.WalletError": "Er ging iets verkeerd, gelieve een andere methode te selecteren, of probeer later eens opnieuw.",
     "Success.GivtSummaryKnowMore": "Meer weten?",
-    "PageTitle": "Givt supersnel geven"
+    "Page.Title": "Givt supersnel geven"
 }
