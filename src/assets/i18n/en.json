@@ -30,5 +30,5 @@
     "DonationErrorModal.AmountBetweenUpperLimit": " 25000",
     "DonationErrorModal.WalletError": "Something went wrong with your wallet, please try a different method",
     "Success.GivtSummaryKnowMore": "Want to know more?",
-    "PageTitle": "Givt point of giving"
+    "Page.Title": "Givt point of giving"
 }
