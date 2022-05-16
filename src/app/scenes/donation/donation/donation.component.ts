@@ -122,6 +122,8 @@ export class DonationComponent implements OnInit {
             localStorage.setItem('organisationThankYou', this.organisation.thankYou);
             localStorage.setItem('organisationTitle', this.organisation.title);
             localStorage.setItem('logoUrl', this.organisation.logoLink);
+            localStorage.setItem('wantKnowMoreLink', this.organisation.wantKnowMoreLink);
+            localStorage.setItem('privacyPolicyLink', this.organisation.privacyPolicyLink);
             localStorage.setItem('amount', String(amount));
             if (this.currentSelectedPaymentMethod)
                 localStorage.setItem('paymentMethod', this.currentSelectedPaymentMethod.id) // this is to store a number in localstorage
