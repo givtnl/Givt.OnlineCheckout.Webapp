@@ -56,7 +56,7 @@ export class AmountsComponent implements OnInit, AfterViewInit {
     }
 
     itemClickedEvent(id: number, value: number) {
-        this.onPresetClick.emit(new AmountData(id, value,));
+        this.onPresetClick.emit(new AmountData(id, value, this.currency));
     }
 
     closeAmount() {

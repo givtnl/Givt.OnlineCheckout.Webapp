@@ -33,7 +33,7 @@ export default class Organisation {
     }
 
     static fromOrganisationDto(organisationDto: OrganisationDto) {
-        return new Organisation(organisationDto.medium, organisationDto.organisationName, organisationDto.goal, AmountData.fromAmounts(organisationDto.amounts), organisationDto.thankYou, organisationDto.currency, organisationDto.organisationLogoLink, organisationDto.country, organisationDto.title, organisationDto.wantKnowMoreLink, organisationDto.privacyPolicyLink, organisationDto.paymentMethods
+        return new Organisation(organisationDto.medium, organisationDto.organisationName, organisationDto.goal, AmountData.fromAmounts(organisationDto.amounts, organisationDto.currency), organisationDto.thankYou, organisationDto.currency, organisationDto.organisationLogoLink, organisationDto.country, organisationDto.title, organisationDto.wantKnowMoreLink, organisationDto.privacyPolicyLink, organisationDto.paymentMethods
             .map(pm => {
                 return PaymentMethod.fromPaymentMethodDto(new PaymentMethodDto(pm))
             })
