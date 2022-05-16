@@ -6,6 +6,8 @@ import {environment} from "../../../../environments/environment";
 import {LoadingService} from "../../../core/services/loading.service";
 import {Subject} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 const receiptOverlayAnimation = [
     trigger('receiptOverlay', [
@@ -36,7 +38,7 @@ export class ThankYouComponent implements OnInit {
     wantKnowMoreLink: string;
 
 
-    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private http: HttpClient, private loadingService: LoadingService) {
+    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private http: HttpClient, private loadingService: LoadingService, private title: Title, private translate: TranslateService) {
         // For string interpolation in localization we need to have an object and no normal string
         // that's why I created the param object
         this.param.organisationName = localStorage.getItem('organisationName')!;
@@ -46,6 +48,7 @@ export class ThankYouComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.title.setTitle(this.translate.instant('Page.Title'))
     }
 
     closeBackdrop() {
