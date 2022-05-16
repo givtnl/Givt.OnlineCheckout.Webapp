@@ -12,7 +12,7 @@
         <div *ngIf="!(loading$ | async)">
             <p class="receipt__title">{{'ReceiptEmail.Title' | translate}}</p>
             <input class="receipt__input util--full-width" type="email" (input)="emailChanged($event)" [ngClass]="{'receipt__input--invalid': invalidEmail}" id="receiptInput">
-            <a class="receipt__no-spam-text" [href]="privacyPolicyLink"><p>{{'ReceiptEmail.SpamText' | translate}}</p></a>
+            <a [href]="privacyPolicyLink"><p class="receipt__no-spam-text">{{'ReceiptEmail.SpamText' | translate}}</p></a>
             <button class="button button--black util--full-width" (click)="submitEmail()">{{'ReceiptEmail.Send' | translate}}</button>
         </div>
     </div>
