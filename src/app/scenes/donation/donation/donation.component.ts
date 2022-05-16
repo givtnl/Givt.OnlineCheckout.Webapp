@@ -146,7 +146,11 @@ export class DonationComponent implements OnInit {
     }
 
     saveCustomAmount(customAmount: number) {
-        this.customAmount = customAmount;
+        if (customAmount.toString().indexOf(',') != -1) {
+            this.customAmount = +customAmount.toString().replace(',','.')
+        } else {
+            this.customAmount = customAmount;
+        }
         this.checkIfCanUseWalletDoneAndIfSoSetupWallet();
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
     }

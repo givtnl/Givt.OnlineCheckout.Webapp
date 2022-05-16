@@ -16,10 +16,11 @@
 
     <h2 [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="presets__title">{{ 'Donate.ChooseAmount' | translate}}</h2>
     <div [@customAmountInputShownState]="customAmountInputShown ? 'shown' : 'not-shown'" class="custom-amount__input-container">
-        <span class="custom-amount__currency-symbol">{{this.currencySymbol}}<input type="number"
+        <span class="custom-amount__currency-symbol">{{this.currencySymbol}}<input type="text"
                                                                                    id="custom-amount-input"
                                                                                    class="custom-amount__currency-input"
                                                                                    (input)="sendAmount($event)"
-                                                                                   style="margin: 0 auto"/></span>
+                                                                                   style="margin: 0 auto"
+                                                                                   inputmode="numeric"/></span>
     </div>
 </div>
