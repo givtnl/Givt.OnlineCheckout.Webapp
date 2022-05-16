@@ -22,7 +22,10 @@ export class ReceiptComponent implements OnInit {
     onEmailSubmit = new EventEmitter<string>();
     loading$ = this.loadingService.loading$;
 
+    privacyPolicyLink: string;
+
     constructor(private http: HttpClient, private loadingService: LoadingService, private notificationService: NotificationService) {
+        this.privacyPolicyLink = localStorage.getItem('privacyPolicyLink')!;
     }
 
     ngOnInit(): void {
