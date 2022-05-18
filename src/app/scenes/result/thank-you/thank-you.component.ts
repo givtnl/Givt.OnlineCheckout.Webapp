@@ -8,6 +8,7 @@ import {Subject} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
+import mixpanel from "mixpanel-browser";
 
 const receiptOverlayAnimation = [
     trigger('receiptOverlay', [
@@ -49,6 +50,7 @@ export class ThankYouComponent implements OnInit {
 
     ngOnInit(): void {
         this.title.setTitle(this.translate.instant('Page.Title'))
+        mixpanel.track('page_load', {page: 'success_page', organisationName: this.param.organisationName})
     }
 
     closeBackdrop() {
@@ -57,6 +59,7 @@ export class ThankYouComponent implements OnInit {
     }
 
     sendEmail($event: string) {
+        mixpanel.track('button_pressed', {page: 'success_page', buttonName: 'send_email'})
         const headers = {
             'Authorization': 'Bearer ' + this.token
         }
@@ -73,6 +76,7 @@ export class ThankYouComponent implements OnInit {
     }
 
     downloadApp() {
+        mixpanel.track('button_pressed', {page: 'success_page', buttonName: 'download_app'})
         document.location.href = 'https://givtapp.net/download'
     }
 }

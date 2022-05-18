@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from "./../core/core.module"
 import {animate, style, transition, trigger} from "@angular/animations";
 import {TranslateService} from '@ngx-translate/core';
+import mixpanel from 'mixpanel-browser';
+import {environment} from "../../environments/environment";
 
 export const routingAnimationsTrigger = trigger('routingAnimations', [
     transition(':enter', [style({opacity: 0}), animate('300ms')]),
@@ -27,5 +29,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.storageService.testLocalStorage();
+        mixpanel.init(environment.mixpanelKey, { debug: environment.production, ignore_dnt: true, ip: false });
     }
 }

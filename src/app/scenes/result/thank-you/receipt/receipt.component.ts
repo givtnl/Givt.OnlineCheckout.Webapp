@@ -4,6 +4,7 @@ import {LoadingService} from "../../../../core/services/loading.service";
 import {environment} from "../../../../../environments/environment";
 import {NotificationService} from "../../../../core/notification/notification.service";
 import {Subject} from "rxjs";
+import mixpanel from "mixpanel-browser";
 
 @Component({
     selector: 'app-receipt',
@@ -61,6 +62,7 @@ export class ReceiptComponent implements OnInit {
 
 
     downloadReport() {
+        mixpanel.track('button_pressed', {page: 'success_page', buttonName: 'download_receipt'})
         this.loadingService.show();
         const headers = {
             'Authorization': 'Bearer ' + this.token
