@@ -29,6 +29,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.storageService.testLocalStorage();
-        mixpanel.init(environment.mixpanelKey, {debug: environment.production});
+        mixpanel.init(environment.mixpanelKey, { debug: environment.production, ignore_dnt: true, ip: false });
     }
 }
