@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import PaymentIntent from '../../../shared/models/payment-intent/payment-intent';
 import {LoadingService} from "../../../core/services/loading.service";
 import {environment} from "../../../../environments/environment";
+import mixpanel from 'mixpanel-browser';
 
 @Component({
     selector: 'app-payment',
@@ -52,6 +53,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        mixpanel.track('page_load', {page: 'payment_page', organisationName: localStorage.getItem('organisationName')});
         const paymentMethod = this.route.snapshot.data['donation'];
         this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
         this.elementsOptions.clientSecret = paymentMethod.paymentMethodId;
@@ -92,6 +94,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmIdealPayment() {
         this.loader.show()
+        mixpanel.track('button_pressed', {page: 'payment_page', organisationName: localStorage.getItem('organisationName')})
         if (this.bankSelected) {
             this.stripe.confirmIdealPayment(
                 this.elementsOptions.clientSecret,
@@ -121,6 +124,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             return;
         }
         this.loader.show()
+        mixpanel.track('button_pressed', {page: 'payment_page', organisationName: localStorage.getItem('organisationName')})
         this.stripe.confirmBancontactPayment(
             this.elementsOptions.clientSecret,
             {
@@ -136,6 +140,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     confirmCardPayment() {
         this.loader.show()
+        mixpanel.track('button_pressed', {page: 'payment_page', organisationName: localStorage.getItem('organisationName')})
         const error = this.stripe.confirmPayment({
                 elements: this.elements,
                 confirmParams: {

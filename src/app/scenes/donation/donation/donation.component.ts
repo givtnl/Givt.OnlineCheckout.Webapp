@@ -11,6 +11,7 @@ import {NotificationService} from "../../../core/notification/notification.servi
 import {CurrencyHelper} from "../../../shared/helpers/currency-helper";
 import {TranslateService} from "@ngx-translate/core";
 import {Title} from "@angular/platform-browser";
+import mixpanel from 'mixpanel-browser';
 
 @Component({
     selector: 'app-donation',
@@ -24,7 +25,6 @@ export class DonationComponent implements OnInit {
     inputMode = false;
     customAmount = 0;
     mainGiveButtonDisabled = true;
-    email = '';
     loading$ = this.loader.loading$;
     walletPossible = false;
     callToCanUseWalletDone = false;
@@ -43,6 +43,7 @@ export class DonationComponent implements OnInit {
     ngOnInit(): void {
         this.titleService.setTitle(this.translate.instant('Page.Title'));
         this.organisation = this.route.snapshot.data['organisation'];
+        mixpanel.track('page_load', {page: 'donation_page', organisationName: this.organisation.name, organisationData: this.organisation});
         this.mainGiveButtonDisabled = true
         this.stripe = window.Stripe!(environment.stripePk, {
             apiVersion: "2020-08-27"
@@ -87,11 +88,13 @@ export class DonationComponent implements OnInit {
         if (!this.currentSelectedPaymentMethod) {
             let modalText = 'DonationErrorModal.PaymentMethodNotSelected'
             this.openModal(this.translate.instant('DonationErrorModal.PaymentMethodNotSelected'));
+            mixpanel.track('button_pressed', {page: 'donation_page', organisationName: this.organisation.name, error: true, errorMessage: 'PaymentMethodNotSelected'})
             return;
         }
 
         if (this.inputMode && this.customAmount === 0) {
             this.openModal(this.translate.instant('DonationErrorModal.NoAmountSpecified'));
+            mixpanel.track('button_pressed', {page: 'donation_page', organisationName: this.organisation.name, error: true, errorMessage: 'NoAmountSpecified'})
             return;
         } else {
             let amount = 0;
@@ -118,6 +121,8 @@ export class DonationComponent implements OnInit {
                 }
             }
 
+            mixpanel.track('button_pressed' ,{page: 'donation_page', organisationName: this.organisation.name, error: false, changedToCustomAmount: this.inputMode, paymentMethod: this.currentSelectedPaymentMethod.name})
+
             localStorage.setItem('organisationName', this.organisation.name);
             localStorage.setItem('organisationThankYou', this.organisation.thankYou);
             localStorage.setItem('organisationTitle', this.organisation.title);
@@ -137,6 +142,7 @@ export class DonationComponent implements OnInit {
     }
 
     setCurrentSelected(event: AmountData) {
+        mixpanel.track('preset_clicked')
         this.currentSelected = event;
         this.checkIfCanUseWalletDoneAndIfSoSetupWallet();
         this.mainGiveButtonDisabled = this.determineMainButtonDisabled();
