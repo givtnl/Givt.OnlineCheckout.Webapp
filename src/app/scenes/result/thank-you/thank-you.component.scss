@@ -3,6 +3,7 @@
     height: 100vh;
     background-color: #7DBDA1;
     position: relative;
+    overflow: hidden;
 }
 
 .thank-you__text {
@@ -27,37 +28,44 @@
     }
 }
 
+
+
 .thank-you__top-container {
-    padding-top: 100px;
+    padding-top: 75px;
     margin-bottom: 0;
 }
 
 @media (min-height: 450px) {
     .thank-you__top-container{
+        padding-top: 80px;
         margin-bottom: 50px;
     }
 }
 
 @media (min-height: 550px) {
     .thank-you__top-container{
+        padding-top: 85px;
         margin-bottom: 100px;
     }
 }
 
 @media (min-height: 660px) {
     .thank-you__top-container{
+        padding-top: 90px;
         margin-bottom: 150px;
     }
 }
 
 @media (min-height: 720px) {
     .thank-you__top-container{
+        padding-top: 95px;
         margin-bottom: 200px;
     }
 }
 
 @media (min-height: 800px) {
     .thank-you__top-container{
+        padding-top: 100px;
         margin-bottom: 250px;
     }
 }
