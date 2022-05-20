@@ -5,6 +5,8 @@ import PaymentIntent from '../../../shared/models/payment-intent/payment-intent'
 import {LoadingService} from "../../../core/services/loading.service";
 import {environment} from "../../../../environments/environment";
 import mixpanel from 'mixpanel-browser';
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-payment',
@@ -49,10 +51,11 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         },
     };
 
-    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService) {
+    constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private pageTitle: Title, private translate: TranslateService) {
     }
 
     ngOnInit(): void {
+        this.pageTitle.setTitle(this.translate.instant('Page.Title'))
         mixpanel.track('page_load', {page: 'payment_page', organisationName: localStorage.getItem('organisationName')});
         const paymentMethod = this.route.snapshot.data['donation'];
         this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
