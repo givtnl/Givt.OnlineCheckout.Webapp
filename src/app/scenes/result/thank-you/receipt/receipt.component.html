@@ -3,8 +3,8 @@
         <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" class="util--position-absolute"></mat-progress-spinner>
         <div *ngIf="!(loading$ | async)">
             <p class="receipt__title">{{'Receipt.Title' | translate}}</p>
-            <button class="button button--black util--full-width" (click)="downloadReport()">{{'Receipt.Download' | translate}}</button>
-            <button class="button button--green util--full-width" (click)="showEmailForm()">{{'Receipt.ViaEmail' | translate}}</button>
+            <button class="button button--black util--full-width button--reduced-height" (click)="downloadReport()">{{'Receipt.Download' | translate}}</button>
+            <button class="button button--green util--full-width button--reduced-height" (click)="showEmailForm()">{{'Receipt.ViaEmail' | translate}}</button>
         </div>
     </div>
     <div *ngIf="emailFormShown">

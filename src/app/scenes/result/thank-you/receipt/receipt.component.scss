@@ -36,3 +36,26 @@
 .receipt__input:focus {
     outline: none;
 }
+
+@media (max-height: 750px) {
+    .receipt__container {
+        margin: 35px;
+    }
+}
+
+
+@media (max-height: 600px) {
+    .receipt__container {
+        margin-top: 20px;
+    }
+
+    .receipt__title {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .button--reduced-height {
+        height: 35px;
+        font-size: 14px;
+    }
+}
