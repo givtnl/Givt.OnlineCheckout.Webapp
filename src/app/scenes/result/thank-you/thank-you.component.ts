@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "../../../core/notification/notification.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -30,7 +30,7 @@ const receiptOverlayAnimation = [
     styleUrls: ['./thank-you.component.scss'],
     animations: receiptOverlayAnimation
 })
-export class ThankYouComponent implements OnInit, AfterViewInit {
+export class ThankYouComponent implements OnInit, AfterViewInit, OnDestroy {
     userWantsReceipt = false;
     param = { organisationName: "" }
     organisationThankYou = ""
@@ -55,6 +55,10 @@ export class ThankYouComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.elRef.nativeElement.ownerDocument.body.style.backgroundColor = '#7DBDA1'
+    }
+
+    ngOnDestroy() {
+        this.elRef.nativeElement.ownerDocument.body.style.backgroundColor = 'transparent'
     }
 
     closeBackdrop() {
