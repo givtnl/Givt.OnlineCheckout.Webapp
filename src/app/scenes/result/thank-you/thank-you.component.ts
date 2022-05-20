@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "../../../core/notification/notification.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -30,7 +30,7 @@ const receiptOverlayAnimation = [
     styleUrls: ['./thank-you.component.scss'],
     animations: receiptOverlayAnimation
 })
-export class ThankYouComponent implements OnInit {
+export class ThankYouComponent implements OnInit, AfterViewInit {
     userWantsReceipt = false;
     param = { organisationName: "" }
     organisationThankYou = ""
@@ -39,7 +39,7 @@ export class ThankYouComponent implements OnInit {
     wantKnowMoreLink: string;
 
 
-    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private http: HttpClient, private loadingService: LoadingService, private title: Title, private translate: TranslateService) {
+    constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService, private http: HttpClient, private loadingService: LoadingService, private title: Title, private translate: TranslateService, private elRef: ElementRef) {
         // For string interpolation in localization we need to have an object and no normal string
         // that's why I created the param object
         this.param.organisationName = localStorage.getItem('organisationName')!;
@@ -51,6 +51,10 @@ export class ThankYouComponent implements OnInit {
     ngOnInit(): void {
         this.title.setTitle(this.translate.instant('Page.Title'))
         mixpanel.track('page_load', {page: 'success_page', organisationName: this.param.organisationName})
+    }
+
+    ngAfterViewInit() {
+        this.elRef.nativeElement.ownerDocument.body.style.backgroundColor = '#7DBDA1'
     }
 
     closeBackdrop() {
