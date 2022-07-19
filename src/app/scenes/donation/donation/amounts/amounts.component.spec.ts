@@ -17,7 +17,7 @@ describe('AmountComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AmountsComponent);
     component = fixture.componentInstance;
-    component.values = [new AmountData(1,5), new AmountData(2,10), new AmountData(3,15)];
+    component.values = [new AmountData(1,5, 'USD'), new AmountData(2,10, 'USD'), new AmountData(3,15, 'USD')];
     fixture.detectChanges();
   });
 
