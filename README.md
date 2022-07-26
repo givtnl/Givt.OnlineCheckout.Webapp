@@ -2,9 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
+## Building docker image
+The docker image runs on top of nginx, which comes with a config file in `/docker/default.conf`. One particular rule rewrites [url]/result to [url]/#/result so that Stripe can work with the retun url (doesn't work for development server).
+
+1. First build the angular project: `ng build`
+2. Then build the dockerfile: `docker build -t onlinecheckout-webapp .`
+3. Run it: `docker run -p 80:80 onlinecheckout-webapp`
+4. Access via: `http://localhost:4200/#/?code=[some_existing_code]`
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/#/?code=[some_existing_code]`. The app will automatically reload if you change any of the source files. This will take the `/src/environments/environment.local.ts` config file. Running the local setup will not allow you to test the Stripe return url, because of the hashtag that stripe interprets as page location.
 
 ## Code scaffolding
 
