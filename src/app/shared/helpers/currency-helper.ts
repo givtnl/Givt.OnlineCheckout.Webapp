@@ -11,4 +11,8 @@ export class CurrencyHelper {
                 return ''
         }
     }
+
+    static isValidCustomAmount(amount: number): boolean {
+        return amount >= .5 && amount <= 25000;
+    }
 }

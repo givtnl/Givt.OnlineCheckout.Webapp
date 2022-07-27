@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {PaymentRoutingModule} from './payment-routing.module';
 import {PaymentComponent} from './payment/payment.component';
+
 import {DonationResolver} from 'src/app/core/resolvers/donation.resolver';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {DonationModule} from "../donation/donation.module";
@@ -12,10 +13,14 @@ import {FormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from "@angular/material/icon";
 
+import {StripePaymentComponent} from './payment/providers/stripe/stripe-payment.component';
+import {WepayPaymentComponent} from './payment/providers/wepay/wepay-payment.component';
 
 @NgModule({
     declarations: [
         PaymentComponent,
+        StripePaymentComponent,
+        WepayPaymentComponent
     ],
     imports: [
         CommonModule,

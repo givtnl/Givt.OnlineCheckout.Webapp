@@ -1,0 +1,11 @@
+<form id="payment-form">
+    <div class="donation-common-vertical-margin" [ngSwitch]="this.clientSelectedPaymentMethod">
+        <div *ngSwitchCase="'card'">
+            <div #creditCardIframe id="credit-card-iframe"></div>
+            <button (click)="confirmCardPayment()" class="button button--green button-bottom-payment">
+                {{'Payment.Continue' | translate}}
+            </button>
+        </div>
+    </div>
+</form>
+
