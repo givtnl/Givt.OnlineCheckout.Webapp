@@ -1,8 +1,20 @@
-<form id="payment-form">
+<form id="payment-form" #myForm="ngForm">
     <div class="donation-common-vertical-margin" [ngSwitch]="this.clientSelectedPaymentMethod">
         <div *ngSwitchCase="'card'">
+            <div class="input-field">
+                <input placeholder="name on card" name= "name" id="name" type="text" 
+                [(ngModel)]="fullName"
+                required minlength="3" maxlength="26">
+            </div>
             <div #creditCardIframe id="credit-card-iframe"></div>
-            <button (click)="confirmCardPayment()" class="button button--green button-bottom-payment">
+            <div class="input-field">
+                <input placeholder="zip" name="zipCode" id="zip" type="text"
+                [(ngModel)]="zipCode"
+                required
+                pattern="/^\d{5}$/">
+            </div>
+            <button [disabled]="!myForm.valid" (click)="confirmCardPayment()" class="button button-bottom-payment"
+            [ngClass]="myForm.valid ? 'button--green' : 'button--disabled'" >
                 {{'Payment.Continue' | translate}}
             </button>
         </div>

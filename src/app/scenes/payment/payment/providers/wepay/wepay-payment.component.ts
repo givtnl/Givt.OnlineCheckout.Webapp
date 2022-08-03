@@ -3,7 +3,7 @@ import PaymentIntent from '../../../../../shared/models/payment-intent/payment-i
 import {LoadingService} from "../../../../../core/services/loading.service";
 import { AngularWePayService } from '@givtnl/angular-wepay-service'
 
-const appId = "537744";
+const appId = "631644";
 const apiVersion = "3.0";
 const iframeContainerId = "credit-card-iframe";
 const iframeContainerLabel = "#creditCardIframe"
@@ -20,8 +20,9 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     clientSelectedPaymentMethod!: string;
     loading$ = this.loader.loading$;
     wepay: any;
-
-
+    creditCard: any;
+    fullName: string | undefined;
+    zipCode: string | undefined;
 
 
     constructor(private wePayService: AngularWePayService, public loader: LoadingService) { }
@@ -32,8 +33,6 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-
-        // window.wkVars = {}
 
         const custom_style = {
             'styles': {
@@ -89,8 +88,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
                 };
 
 
-                wepay.createCreditCardIframe(iframeContainerId, options);
-                // wkVars.creditCard = 
+                this.creditCard = wepay.createCreditCardIframe(iframeContainerId, null);
                 // Doesn't work because the frame is not initialized yet...
                 // this.iframeContainer.nativeElement.children[0].onload = function() {
                 //     console.log({'event': 'iFrameLoaded'});
@@ -104,20 +102,26 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
 
   confirmCardPayment() {
     this.loader.show()
-    //mixpanel.track('button_pressed', { page: 'payment_page', organisationName: localStorage.getItem('organisationName') })
-    // ConfirmPayment
-    // const error = this.stripe.confirmPayment({
-    //         elements: this.elements,
-    //         confirmParams: {
-    //             return_url: environment.returnUrl
-    //         }
-    //     }
-    // ).then((error: any) => {
-    //     console.log(error)
-    //     if (error) {
-    //         this.loader.hide()
-    //     }
-    // })
-  }
+    console.log(this.fullName);
+    console.log(this.zipCode);
 
+    const tokenizeDetails = {
+         "holder_name": this.fullName,
+         "address": {
+             "postal_code": this.zipCode
+        }
+    }; 
+
+    this.creditCard.tokenize(tokenizeDetails).then(function(response:any) {
+        console.log(response.id);
+    })
+    .catch(function(error:any){
+
+        console.log(error);
+        // TODO input validation should be managed here
+        // TODO error mgmt
+    })
+
+    this.loader.hide();
+  }
 }

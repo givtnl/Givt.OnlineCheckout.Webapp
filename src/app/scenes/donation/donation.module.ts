@@ -8,15 +8,11 @@ import {SharedModule} from '../../shared/shared.module';
 import {OrganisationResolver} from '../../core/resolvers/organisation.resolver';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { TranslateModule } from '@ngx-translate/core';
-import { StripeDonationComponent } from './donation/providers/stripe/stripe-donation/stripe-donation.component';
-import { WepayDonationComponent } from './donation/providers/wepay/wepay-donation/wepay-donation.component';
 
 @NgModule({
     declarations: [
         DonationComponent,
-        AmountsComponent,
-        StripeDonationComponent,
-        WepayDonationComponent,
+        AmountsComponent
     ],
     imports: [
         CommonModule,

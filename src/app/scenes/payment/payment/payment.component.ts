@@ -18,11 +18,11 @@ export class PaymentComponent implements OnInit {
     loading$ = this.loader.loading$;
     title!: string
     logoUrl!: string
-    paymentProvider: string;
+    paymentProvider: string | null;
 
 
     constructor(private router: Router, private route: ActivatedRoute, public loader: LoadingService, private pageTitle: Title, private translate: TranslateService) {
-        this.paymentProvider = environment.paymentProvider;
+        this.paymentProvider = localStorage.getItem('paymentProvider');
     }
 
     ngOnInit(): void {

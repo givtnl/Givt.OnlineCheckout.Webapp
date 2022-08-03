@@ -4,6 +4,7 @@ export const environment = {
     returnUrl: 'http://localhost:4200/#/result/',
     stripePk: 'pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P',
     mixpanelKey: '77b6bce1167498c2a417e0b1a46e5e3f',
+    wePayAppId: "631644",
     paymentProvider: 'wepay'
 }
 
