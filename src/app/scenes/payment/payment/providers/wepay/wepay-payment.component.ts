@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnInit} from '@angular/core';
 import PaymentIntent from '../../../../../shared/models/payment-intent/payment-intent';
 import {LoadingService} from "../../../../../core/services/loading.service";
+import {environment} from "../../../../../../environments/environment";
+import { DOCUMENT } from '@angular/common'; 
+
 import { AngularWePayService } from '@givtnl/angular-wepay-service'
 
-const appId = "631644";
 const apiVersion = "3.0";
 const iframeContainerId = "credit-card-iframe";
-const iframeContainerLabel = "#creditCardIframe"
 
 @Component({
     selector: 'payment-wepay',
@@ -16,7 +17,6 @@ const iframeContainerLabel = "#creditCardIframe"
 export class WepayPaymentComponent implements OnInit, AfterViewInit {
 
     @Input() paymentMethod: PaymentIntent | undefined;
-    @ViewChild(iframeContainerLabel, { static: false }) public iframeContainer!: ElementRef;
     clientSelectedPaymentMethod!: string;
     loading$ = this.loader.loading$;
     wepay: any;
@@ -25,7 +25,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     zipCode: string | undefined;
 
 
-    constructor(private wePayService: AngularWePayService, public loader: LoadingService) { }
+    constructor(private wePayService: AngularWePayService, public loader: LoadingService, @Inject(DOCUMENT) document: Document) { }
 
     ngOnInit(): void { 
         this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
@@ -36,25 +36,25 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
 
         const custom_style = {
             'styles': {
-                // 'cvv-icon': {
-                //     'base': {
-                //         'display': 'none'
-                //     }
-                // },
-                // 'base': {
-                //     'height': '44px',
-                //     'margin': '0',
-                //     'border-radius': '4px',
-                //     'font-family': 'Avenir',
-                //     'font-size': '16px',
-                //     'color': '#2C2B57',
-                //     '::placeholder': {
-                //         'color': '#BCB9C8'
-                //     },
-                //     ':focus': {
-                //         'border': '1px solid #2C2B57'
-                //     }
-                // },
+                'cvv-icon': {
+                    'base': {
+                        'display': 'none'
+                    }
+                },
+                'base': {
+                    'height': '44px',
+                    'margin': '0',
+                    'border-radius': '4px',
+                    'font-family': 'Avenir',
+                    'font-size': '16px',
+                    'color': '#2C2B57',
+                    '::placeholder': {
+                        'color': '#BCB9C8'
+                    },
+                    ':focus': {
+                        'border': '1px solid #2C2B57'
+                    }
+                },
                 'invalid': {
                     'border': '2px solid #D73C49'
                 },
@@ -79,24 +79,32 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
 
         this.wePayService.create().then(
             wepay => {
-              this.wepay = wepay;
+                this.wepay = wepay;
 
                 // javascript library docs: https://dev.wepay.com/sdks-and-libraries/helper-js/
-                let error = wepay.configure("stage", appId, apiVersion);
+                // https://dev.wepay.com/clear/create-payment-methods/
+                // https://dev.wepay.com/clear/cookbooks/style-credit-card-iframes/
+
+                // The non minimized library can be found here: https://cdn.wepay.com/wepay.full.js
+
+                let error = wepay.configure(
+                    environment.production ? "production" : "stage",
+                    environment.wePayAppId, apiVersion);
+                
                 if (error) {
                     console.log(error)
                 };
 
 
                 this.creditCard = wepay.createCreditCardIframe(iframeContainerId, null);
-                // Doesn't work because the frame is not initialized yet...
-                // this.iframeContainer.nativeElement.children[0].onload = function() {
-                //     console.log({'event': 'iFrameLoaded'});
-                // };
+                document.getElementById(iframeContainerId)?.children[0].addEventListener('load', function() {
+                    console.log("Finished loading iframe!");
+                    // TODO
+                    // set iframeReady = true and hide the other form elements till ready
+                    // Add loader ??? 
+                })
             }
         )
-
-
     }
 
 

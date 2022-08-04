@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@fireflysemantics/angular-stripe-service": "^1.0.6",
-    "@givtnl/angular-wepay-service": "file:../angular-wepay-service/dist/angular-wepay-service",
+    "@givtnl/angular-wepay-service": "^1.0.9",
     "@ngrx/router-store": "^13.1.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
