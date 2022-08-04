@@ -14,6 +14,11 @@ The docker image runs on top of nginx, which comes with a config file in `/docke
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/#/?code=[some_existing_code]`. The app will automatically reload if you change any of the source files. This will take the `/src/environments/environment.local.ts` config file. Running the local setup will not allow you to test the Stripe return url, because of the hashtag that stripe interprets as page location.
 
+`ng serve -c development` will load `environment.local.ts` (default)
+`ng serve -c production` will load `environment.prod.ts`
+
+Other environments are not defined.
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

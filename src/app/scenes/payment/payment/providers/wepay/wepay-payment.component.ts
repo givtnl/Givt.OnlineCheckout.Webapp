@@ -3,7 +3,7 @@ import PaymentIntent from '../../../../../shared/models/payment-intent/payment-i
 import {LoadingService} from "../../../../../core/services/loading.service";
 import {environment} from "../../../../../../environments/environment";
 import { DOCUMENT } from '@angular/common'; 
-
+import {HttpClient} from "@angular/common/http";
 import { AngularWePayService } from '@givtnl/angular-wepay-service'
 
 const apiVersion = "3.0";
@@ -25,7 +25,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     zipCode: string | undefined;
 
 
-    constructor(private wePayService: AngularWePayService, public loader: LoadingService, @Inject(DOCUMENT) document: Document) { }
+    constructor(private wePayService: AngularWePayService, public loader: LoadingService, @Inject(DOCUMENT) document: Document, private http: HttpClient) { }
 
     ngOnInit(): void { 
         this.clientSelectedPaymentMethod = localStorage.getItem('paymentMethod')!
@@ -109,9 +109,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
 
 
   confirmCardPayment() {
-    this.loader.show()
-    console.log(this.fullName);
-    console.log(this.zipCode);
+    this.loader.show();
 
     const tokenizeDetails = {
          "holder_name": this.fullName,
@@ -120,8 +118,24 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
         }
     }; 
 
-    this.creditCard.tokenize(tokenizeDetails).then(function(response:any) {
+    console.log(tokenizeDetails);
+
+    this.creditCard.tokenize(tokenizeDetails).then( (response: any) => {
         console.log(response.id);
+
+        this.http.post(environment.apiUrl + '/api/donation', {
+            "currency": localStorage.getItem('organisationCurrency'),
+            "amount": localStorage.getItem('amount'),
+            "medium": localStorage.getItem('organisationMediumId'),
+            "paymentProvider": "wepay",
+            "paymentTokem": response.id,
+            //"paymentMethod": "",
+            "language": "en",
+            "timezoneOffset": new Date().getTimezoneOffset(),
+            
+        }).subscribe(data => {
+            console.log(data);
+        })
     })
     .catch(function(error:any){
 
