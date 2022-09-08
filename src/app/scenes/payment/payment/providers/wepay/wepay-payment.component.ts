@@ -123,22 +123,25 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     this.creditCard.tokenize(tokenizeDetails).then( (response: any) => {
         console.log(response.id);
 
-        this.http.post(environment.apiUrl + '/api/donation', {
+        // TODO: make payment here (yes, on frontend)
+        // 1. fetch payment method id from token
+        // 2. use payment method id to create payment
+        // Backend I/O not needed for this story!
+        /*
+        this.http.post(environment.apiUrl + '/api/donation/payment', {
             "currency": localStorage.getItem('organisationCurrency'),
             "amount": localStorage.getItem('amount'),
             "medium": localStorage.getItem('organisationMediumId'),
             "paymentProvider": "wepay",
-            "paymentTokem": response.id,
-            //"paymentMethod": "",
-            "language": "en",
+            "paymentToken": response.id,
+            "language": navigator.language || "en",
             "timezoneOffset": new Date().getTimezoneOffset(),
-            
         }).subscribe(data => {
             console.log(data);
         })
+        */
     })
-    .catch(function(error:any){
-
+    .catch(function(error:any) {
         console.log(error);
         // TODO input validation should be managed here
         // TODO error mgmt
