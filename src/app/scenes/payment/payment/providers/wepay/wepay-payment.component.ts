@@ -123,9 +123,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     this.creditCard.tokenize(tokenizeDetails).then( (response: any) => {
         console.log(response.id);
 
-        // TODO: make payment here (yes, on frontend)
-        // 1. fetch payment method id from token
-        // 2. use payment method id to create payment
+        // Story ends here. 
         // Backend I/O not needed for this story!
         /*
         this.http.post(environment.apiUrl + '/api/donation/payment', {
