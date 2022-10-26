@@ -1,10 +1,20 @@
-import { AfterViewInit, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    Inject,
+    Input,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
 import PaymentIntent from '../../../../../shared/models/payment-intent/payment-intent';
 import { LoadingService } from '../../../../../core/services/loading.service';
 import { environment } from '../../../../../../environments/environment';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AngularWePayService } from '@givtnl/angular-wepay-service';
+import { WePayPaymentService } from './wepay-payment.service';
+import { Router } from '@angular/router';
+import { finalize, Subject, takeUntil } from 'rxjs';
 
 const apiVersion = '3.0';
 const iframeContainerId = 'credit-card-iframe';
@@ -14,18 +24,22 @@ const iframeContainerId = 'credit-card-iframe';
     templateUrl: './wepay-payment.component.html',
     styleUrls: ['./wepay-payment.component.scss'],
 })
-export class WepayPaymentComponent implements OnInit, AfterViewInit {
+export class WepayPaymentComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() paymentMethod: PaymentIntent | undefined;
     clientSelectedPaymentMethod!: string;
+    onDestroy$: Subject<boolean> = new Subject();
     loading$ = this.loader.loading$;
     wepay: any;
     creditCard: any;
     fullName: string | undefined;
     zipCode: string | undefined;
+    options: any;
 
     constructor(
+        private router: Router,
         private wePayService: AngularWePayService,
         public loader: LoadingService,
+        private wePayPaymentService: WePayPaymentService,
         @Inject(DOCUMENT) document: Document,
         private http: HttpClient
     ) {}
@@ -36,6 +50,11 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        this.initWePayIFrameOptions();
+        this.initWePayIFrame();
+    }
+
+    initWePayIFrameOptions() {
         const custom_style = {
             styles: {
                 'cvv-icon': {
@@ -71,23 +90,19 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
             },
         };
 
-        const options = {
+        this.options = {
             custom_style: custom_style,
             show_labels: false,
             show_placeholders: true,
             show_error_messages: false,
             show_error_messages_when_unfocused: false,
         };
+    }
 
+    initWePayIFrame() {
         this.wePayService.create().then((wepay) => {
             this.loader.show();
             this.wepay = wepay;
-
-            // javascript library docs: https://dev.wepay.com/sdks-and-libraries/helper-js/
-            // https://dev.wepay.com/clear/create-payment-methods/
-            // https://dev.wepay.com/clear/cookbooks/style-credit-card-iframes/
-
-            // The non minimized library can be found here: https://cdn.wepay.com/wepay.full.js
 
             let error = wepay.configure(
                 environment.production ? 'production' : 'stage',
@@ -101,7 +116,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
 
             this.creditCard = wepay.createCreditCardIframe(
                 iframeContainerId,
-                options
+                this.options
             );
 
             let that = this;
@@ -113,7 +128,7 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
         });
     }
 
-    confirmCardPayment() {
+    async confirmCardPayment() {
         this.loader.show();
 
         const tokenizeDetails = {
@@ -122,34 +137,30 @@ export class WepayPaymentComponent implements OnInit, AfterViewInit {
                 postal_code: this.zipCode,
             },
         };
+        let wePayToken;
+        try {
+            let reponse = await this.creditCard.tokenize(tokenizeDetails);
+            wePayToken = reponse.id;
+        } catch (error) {
+            this.router.navigate(['result', 'failure']);
+        }
 
-        this.creditCard
-            .tokenize(tokenizeDetails)
-            .then((response: any) => {
-                console.log(response.id);
-
-                // Story ends here.
-                // Backend I/O not needed for this story!
-                /*
-        this.http.post(environment.apiUrl + '/api/donation/payment', {
-            "currency": localStorage.getItem('organisationCurrency'),
-            "amount": localStorage.getItem('amount'),
-            "medium": localStorage.getItem('organisationMediumId'),
-            "paymentProvider": "wepay",
-            "paymentToken": response.id,
-            "language": navigator.language || "en",
-            "timezoneOffset": new Date().getTimezoneOffset(),
-        }).subscribe(data => {
-            console.log(data);
-        })
-        */
-            })
-            .catch(function (error: any) {
-                console.log(error);
-                // TODO input validation should be managed here
-                // TODO error mgmt
+        this.wePayPaymentService
+            .processAnonymousDonation(this.zipCode!, wePayToken)
+            .pipe(
+                takeUntil(this.onDestroy$),
+                finalize(() => this.loader.hide())
+            )
+            .subscribe({
+                next: (_) => {
+                    this.router.navigate(['result', 'success']);
+                },
+                error: () => this.router.navigate(['result', 'failure']),
             });
+    }
 
-        this.loader.hide();
+    ngOnDestroy() {
+        this.onDestroy$.next(true);
+        this.onDestroy$.unsubscribe();
     }
 }

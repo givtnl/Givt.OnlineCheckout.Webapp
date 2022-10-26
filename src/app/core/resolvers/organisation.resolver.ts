@@ -5,7 +5,7 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
-import { catchError, finalize, map, Observable, of } from 'rxjs';
+import { catchError, finalize, tap, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import OrganisationDto from 'src/app/shared/models/organisations/organisation-dto';
@@ -41,7 +41,7 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
                         navigator.language
                 )
                 .pipe(
-                    map((data) => {
+                    tap((data) => {
                         if (!data.medium) {
                             data.medium = mediumIdDecoded;
                         }

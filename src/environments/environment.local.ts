@@ -1,6 +1,7 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:5000',
+    apiUrl: 'https://goc-debug-api-app-service.azurewebsites.net',
+    wepayApiUrl: 'https://givt-debug-api.azurewebsites.net',
     returnUrl: 'http://localhost:4200/#/result/',
     stripePk:
         'pk_test_51HmwjvLgFatYzb8pQD7L83GIWCjeNoM08EgF7PlbsDFDHrXR9dbwkxRy2he5kCnmyLuFMSolwgx8xmlmJf5mr33200V44g2q5P',
