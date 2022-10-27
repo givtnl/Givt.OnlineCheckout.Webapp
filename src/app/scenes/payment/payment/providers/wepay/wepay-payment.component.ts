@@ -113,17 +113,15 @@ export class WepayPaymentComponent implements OnInit, OnDestroy, AfterViewInit {
             if (error) {
                 console.log(error);
             }
-
             this.creditCard = wepay.createCreditCardIframe(
                 iframeContainerId,
                 this.options
             );
 
-            let that = this;
             document
                 .getElementById(iframeContainerId)
-                ?.children[0].addEventListener('load', function () {
-                    that.loader.hide();
+                ?.children[0].addEventListener('load', () => {
+                    this.loader.hide();
                 });
         });
     }

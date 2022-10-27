@@ -5,7 +5,7 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
-import { catchError, finalize, tap, Observable, of } from 'rxjs';
+import { catchError, finalize, map, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import OrganisationDto from 'src/app/shared/models/organisations/organisation-dto';
@@ -32,16 +32,17 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             let mediumIdDecoded = atob(mediumIdEncoded);
             localStorage.setItem('medium', mediumIdDecoded);
             this.loader.show();
+            console.log(localStorage.getItem('organisationCountry'));
+            let apiUrl =
+                localStorage.getItem('organisationCountry') == 'US'
+                    ? `${environment.USApiUrl}/api/CollectGroup/medium?Code=`
+                    : `${environment.apiUrl}/api/medium?Code=`;
             return this.http
                 .get<OrganisationDto>(
-                    environment.apiUrl +
-                        '/api/medium?code=' +
-                        mediumIdDecoded +
-                        '&language=' +
-                        navigator.language
+                    `${apiUrl}${mediumIdDecoded}&language=${navigator.language}`
                 )
                 .pipe(
-                    tap((data) => {
+                    map((data) => {
                         if (!data.medium) {
                             data.medium = mediumIdDecoded;
                         }

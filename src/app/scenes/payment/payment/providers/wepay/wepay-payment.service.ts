@@ -22,14 +22,14 @@ export class WePayPaymentService {
     processAnonymousDonation(
         zipcode: string,
         wePayToken: string
-    ): Observable<any> {
+    ): Observable<string> {
         const opts: object = {
             responseType: 'text',
         };
         let tempUser = this.createTempUser(zipcode);
         return this.http
             .post<string>(
-                `${environment.wepayApiUrl}/api/v2/users`,
+                `${environment.USApiUrl}/api/v2/users`,
                 tempUser,
                 opts
             )
@@ -41,7 +41,7 @@ export class WePayPaymentService {
                         tempUser
                     );
                     return this.http.post<RegisteredUser>(
-                        `${environment.wepayApiUrl}/api/v2/users/register`,
+                        `${environment.USApiUrl}/api/v2/users/register`,
                         regUser
                     );
                 }),
@@ -55,7 +55,7 @@ export class WePayPaymentService {
                         wePayToken
                     );
                     return this.http.post(
-                        `${environment.wepayApiUrl}/api/v2/users/${this.userId}/givts`,
+                        `${environment.USApiUrl}/api/v2/users/${this.userId}/givts`,
                         donation
                     );
                 }),
@@ -64,9 +64,10 @@ export class WePayPaymentService {
                         paymentMethodToken: wePayToken,
                         userId: this.userId,
                     };
-                    return this.http.post(
-                        `${environment.wepayApiUrl}/api/v2/users/${this.userId}/mandates`,
-                        mandate
+                    return this.http.post<string>(
+                        `${environment.USApiUrl}/api/v2/users/${this.userId}/mandates`,
+                        mandate,
+                        opts
                     );
                 }),
                 catchError((error) => {
