@@ -1,7 +1,7 @@
 <form id="payment-form" #myForm="ngForm">
     <div class="donation-common-vertical-margin" [ngSwitch]="this.clientSelectedPaymentMethod">
         <div *ngIf="clientSelectedPaymentMethod == 'card' || clientSelectedPaymentMethod == 'wepay'">
-            <div class="input-field">
+            <div *ngIf="showFormFields" class="input-field">
                 <input placeholder="Cardholder name" name= "name" id="name" type="text" 
                 [(ngModel)]="fullName" 
                 [ngClass]="(name.untouched)?'form-control-custom':(name.invalid && (name.dirty || name.touched)? 'error form-control-custom':'valid form-control-custom')"
@@ -11,7 +11,7 @@
             </div>
             <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
             <div id="credit-card-iframe"></div>
-            <div class="input-field">
+            <div *ngIf="showFormFields" class="input-field">
                 <input placeholder="Postal code" name="zipCode" id="zip" type="text"
                 [(ngModel)]="zipCode" 
                 #zip="ngModel"
@@ -20,7 +20,7 @@
                 pattern="[0-9]{5}">
                 
             </div>
-            <button [disabled]="!myForm.valid" (click)="confirmCardPayment()" class="button button-bottom-payment"
+            <button *ngIf="showFormFields" [disabled]="!myForm.valid" (click)="confirmCardPayment()" class="button button-bottom-payment"
             [ngClass]="myForm.valid ? 'button--green' : 'button--disabled'" >
                 {{'Payment.Continue' | translate}}
             </button>
