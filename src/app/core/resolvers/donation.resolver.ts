@@ -20,9 +20,13 @@ export class DonationResolver implements Resolve<PaymentIntent> {
     ): Observable<PaymentIntent> | Promise<PaymentIntent> | PaymentIntent {
         let amount = localStorage.getItem('amount');
         let medium = localStorage.getItem('medium');
+        let organisationCountry = localStorage.getItem('organisationCountry')!;
         let paymentMethod = localStorage.getItem('paymentMethod')!;
         this.loader.show();
-        if (localStorage.getItem('paymentMethod') == 'wepay') {
+        if (
+            (paymentMethod == 'card' || paymentMethod == 'wepay') &&
+            organisationCountry == 'US'
+        ) {
             return of(new PaymentIntent('wepay', '')).pipe(
                 finalize(() => {
                     this.loader.hide();
