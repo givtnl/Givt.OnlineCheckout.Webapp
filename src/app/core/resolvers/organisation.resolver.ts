@@ -32,7 +32,7 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             let mediumIdDecoded = atob(mediumIdEncoded);
             localStorage.setItem('medium', mediumIdDecoded);
             this.loader.show();
-            let apiUrl = window.location.hostname.endsWith('givt.app')
+            let apiUrl = this.isUSOrgBasedOnMediumId(mediumIdDecoded)
                 ? `${environment.USApiUrl}/api/CollectGroup/medium?Code=`
                 : `${environment.apiUrl}/api/medium?Code=`;
             return this.http
@@ -62,5 +62,13 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             this.router.navigate(['/not-found']);
             return of(false);
         }
+    }
+
+    isUSOrgBasedOnMediumId(mediumIdDecoded: string) {
+        if (mediumIdDecoded && mediumIdDecoded !== '') {
+            let USIdentifier = '5553';
+            return mediumIdDecoded.includes(USIdentifier);
+        }
+        return false;
     }
 }

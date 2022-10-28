@@ -1,6 +1,6 @@
 <form id="payment-form" #myForm="ngForm">
     <div class="donation-common-vertical-margin" [ngSwitch]="this.clientSelectedPaymentMethod">
-        <div *ngSwitchCase="'card'">
+        <div *ngIf="clientSelectedPaymentMethod == 'card' || clientSelectedPaymentMethod == 'wepay'">
             <div class="input-field">
                 <input placeholder="Cardholder name" name= "name" id="name" type="text" 
                 [(ngModel)]="fullName" 
