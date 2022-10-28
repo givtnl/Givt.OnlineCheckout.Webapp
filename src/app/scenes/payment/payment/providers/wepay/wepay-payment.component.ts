@@ -33,6 +33,7 @@ export class WepayPaymentComponent implements OnInit, OnDestroy, AfterViewInit {
     creditCard: any;
     fullName: string | undefined;
     zipCode: string | undefined;
+    showFormFields = false;
     options: any;
 
     constructor(
@@ -121,6 +122,7 @@ export class WepayPaymentComponent implements OnInit, OnDestroy, AfterViewInit {
             document
                 .getElementById(iframeContainerId)
                 ?.children[0].addEventListener('load', () => {
+                    this.showFormFields = true;
                     this.loader.hide();
                 });
         });
