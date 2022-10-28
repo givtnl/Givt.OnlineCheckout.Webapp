@@ -29,7 +29,6 @@ export class DonationResolver implements Resolve<PaymentIntent> {
                 })
             );
         }
-        console.log('fired3');
         return firstValueFrom(
             this.http
                 .post<PaymentIntent>(
