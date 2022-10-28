@@ -32,11 +32,9 @@ export class OrganisationResolver implements Resolve<OrganisationDto> {
             let mediumIdDecoded = atob(mediumIdEncoded);
             localStorage.setItem('medium', mediumIdDecoded);
             this.loader.show();
-            console.log(localStorage.getItem('organisationCountry'));
-            let apiUrl =
-                localStorage.getItem('organisationCountry') == 'US'
-                    ? `${environment.USApiUrl}/api/CollectGroup/medium?Code=`
-                    : `${environment.apiUrl}/api/medium?Code=`;
+            let apiUrl = window.location.hostname.endsWith('givt.app')
+                ? `${environment.USApiUrl}/api/CollectGroup/medium?Code=`
+                : `${environment.apiUrl}/api/medium?Code=`;
             return this.http
                 .get<OrganisationDto>(
                     `${apiUrl}${mediumIdDecoded}&language=${navigator.language}`
