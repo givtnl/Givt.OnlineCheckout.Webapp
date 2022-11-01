@@ -217,7 +217,6 @@ export class DonationComponent implements OnInit {
                 )
             ) {
                 this.callToCanUseWalletDone = false;
-                console.log('fired');
                 if (this.organisation.country === 'US') {
                     await this.router.navigate(['/registration']);
                 } else {

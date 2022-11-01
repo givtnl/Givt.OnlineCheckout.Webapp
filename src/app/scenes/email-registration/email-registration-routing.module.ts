@@ -6,7 +6,6 @@ const routes: Routes = [
     {
         path: '',
         component: EmailRegistrationComponent,
-        // resolve: { organisation: EmailRegistrationComponent }
     },
 ];
 

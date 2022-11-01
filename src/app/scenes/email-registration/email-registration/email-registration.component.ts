@@ -17,12 +17,10 @@ export class EmailRegistrationComponent implements OnInit {
 
     openModal() {
         this.modalOpen = true;
-        // this.errorText = modalText;
     }
 
     closeModal() {
         this.modalOpen = false;
-        //  this.callToCanUseWalletDone = true;
     }
 
     routeToPayment() {
