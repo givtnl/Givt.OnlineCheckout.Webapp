@@ -1,0 +1,52 @@
+<div>
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+    <div *ngIf="!(loading$ | async)">
+        <div class="util--backdrop modal-backdrop" *ngIf="modalOpen" (click)="closeModal()">
+            <div class="confirmation-modal">
+                <div class="close-icon" (click)="closeModal()"><mat-icon>close</mat-icon></div>
+                <div class="modal__title">{{ 'EmailRegistration.ConfirmationTitle' | translate }}</div>
+                <div class="modal__text">{{ 'EmailRegistration.ConfirmationText' | translate }}</div>
+                <button class="button modal-button"
+                (click)="closeModal()">{{ 'EmailRegistration.ConfirmationBtnText' | translate }}</button>
+                <button (click)="routeToPayment()" class="button button--black modal-button">{{ 'EmailRegistration.ConfirmationBtnText2' | translate }}</button>
+            </div>
+        </div>
+        <app-logos></app-logos>
+        <div class="content">
+            <div class="donation-common-vertical-margin header--margin">
+                <div class="util--centered-container">
+                    <h1 class="header__title">Email</h1>
+                    <h2 class="header__subtitle">{{ 'EmailRegistration.Subtitle' | translate }}</h2>
+                </div>
+            </div>
+            <div class="donation-common-vertical-margin header--margin">
+                <div class="util--centered-container">
+                    <form id="payment-form" #myForm="ngForm">
+                        <div class="form-group">
+                            <input  placeholder="john.doe@test.com" name="email" id="email" type="text"
+                                    [(ngModel)]="email" 
+                                    #emailInput="ngModel"
+                                    [ngClass]="(emailInput.untouched)?'form-control-custom':(emailInput.errors && (emailInput.dirty || emailInput.touched)? 'error form-control-custom':'valid form-control-custom')"
+                                    email
+                                    required>
+                            <span class="text-danger"
+                                *ngIf="emailInput.touched && emailInput.errors && emailInput.errors['required']">
+                                    Email is required
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="emailInput.touched && emailInput.errors && emailInput.errors['email']">
+                                Enter a valid email address
+                            </span>
+                        </div>
+        
+                        <button class="button button-bottom-payment button--green"
+                                (click)="(myForm.valid)?submit():openModal()">
+                            {{(myForm.valid)?('Donate.Continue' | translate):('EmailRegistration.Skip' | translate)}}
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

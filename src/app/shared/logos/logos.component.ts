@@ -1,18 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-logos',
     templateUrl: './logos.component.html',
-    styleUrls: ['./logos.component.scss']
+    styleUrls: ['./logos.component.scss'],
 })
 export class LogosComponent implements OnInit {
     @Input()
-    logoUrl!: string
+    logoUrl?: string;
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

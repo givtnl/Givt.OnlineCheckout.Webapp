@@ -155,7 +155,7 @@ export class WepayPaymentComponent implements OnInit, OnDestroy, AfterViewInit {
                 next: (_) => {
                     this.router.navigate(['result', 'success']);
                 },
-                error: () => this.router.navigate(['result', 'failure']),
+                error: (_) => this.router.navigate(['result', 'failure']),
             });
     }
 

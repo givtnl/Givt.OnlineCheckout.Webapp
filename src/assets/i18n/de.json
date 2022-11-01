@@ -29,5 +29,11 @@
     "DonationErrorModal.AmountBetweenPart2": "",
     "DonationErrorModal.AmountBetweenUpperLimit": "",
     "DonationErrorModal.WalletError": "",
-    "Success.GivtSummaryKnowMore": "Möchten Sie mehr wissen?"
+    "Success.GivtSummaryKnowMore": "Möchten Sie mehr wissen?",
+    "EmailRegistration.Subtitle": "Geben Sie Ihre E-Mail-Adresse ein, um Ihre persönliche Übersicht anzuzeigen.",
+    "EmailRegistration.Skip": "Überspringen",
+    "EmailRegistration.ConfirmationTitle":"Bist du dir sicher, dass du weitermachen willst?",
+    "EmailRegistration.ConfirmationText":"Wenn Sie fortfahren, ohne Ihre E-Mail-Adresse anzugeben, können Sie keine Informationen zu Ihren Geschenken sehen und haben keine persönliche Übersicht.",
+    "EmailRegistration.ConfirmationBtnText":"E-Mail ausfüllen",
+    "EmailRegistration.ConfirmationBtnText2":"Weiter ohne"
 }

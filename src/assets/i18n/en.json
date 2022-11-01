@@ -30,5 +30,12 @@
     "DonationErrorModal.AmountBetweenUpperLimit": " 25000",
     "DonationErrorModal.WalletError": "Something went wrong with your wallet, please try a different method",
     "Success.GivtSummaryKnowMore": "Want to know more?",
-    "Page.Title": "Givt point of giving"
+    "Page.Title": "Givt point of giving",
+    "EmailRegistration.Subtitle": "Fill in your email address to see your personal overview.",
+    "EmailRegistration.Skip": "Skip",
+    "EmailRegistration.ConfirmationTitle":"Are you sure you want to continue?",
+    "EmailRegistration.ConfirmationText":"If you continue without filling in your e-mail address, you won’t be able to see any information about your gifts and won’t have a personal overview.",
+    "EmailRegistration.ConfirmationBtnText":"Fill in email",
+    "EmailRegistration.ConfirmationBtnText2":"Continue without"
+    
 }

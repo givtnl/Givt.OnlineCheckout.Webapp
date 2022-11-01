@@ -71,14 +71,15 @@ export class WePayPaymentService {
                     );
                 }),
                 catchError((error) => {
-                    throw Error;
+                    throw HttpErrorResponse;
                 })
             );
     }
 
     createTempUser(postcode: string): TempUser {
+        let storedEmail = localStorage.getItem('email');
         return {
-            Email: this.getRandomGeneratedEmail(),
+            Email: storedEmail ? storedEmail : this.getRandomGeneratedEmail(),
             IBAN: 'FB66GIVT12345678',
             PhoneNumber: '060000000',
             FirstName: 'John',
