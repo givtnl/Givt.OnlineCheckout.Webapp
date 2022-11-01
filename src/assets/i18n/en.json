@@ -36,6 +36,8 @@
     "EmailRegistration.ConfirmationTitle":"Are you sure you want to continue?",
     "EmailRegistration.ConfirmationText":"If you continue without filling in your e-mail address, you won’t be able to see any information about your gifts and won’t have a personal overview.",
     "EmailRegistration.ConfirmationBtnText":"Fill in email",
-    "EmailRegistration.ConfirmationBtnText2":"Continue without"
+    "EmailRegistration.ConfirmationBtnContinueWithout":"Continue without",
+    "EmailRegistration.EmailRequiredError":"Email is required",
+    "EmailRegistration.EmailValidError":"Enter a valid email address"
     
 }

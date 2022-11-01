@@ -8,7 +8,7 @@
                 <div class="modal__text">{{ 'EmailRegistration.ConfirmationText' | translate }}</div>
                 <button class="button modal-button"
                 (click)="closeModal()">{{ 'EmailRegistration.ConfirmationBtnText' | translate }}</button>
-                <button (click)="routeToPayment()" class="button button--black modal-button">{{ 'EmailRegistration.ConfirmationBtnText2' | translate }}</button>
+                <button (click)="routeToPayment()" class="button button--black modal-button">{{ 'EmailRegistration.ConfirmationBtnContinueWithout' | translate }}</button>
             </div>
         </div>
         <app-logos></app-logos>
@@ -31,11 +31,11 @@
                                     required>
                             <span class="text-danger"
                                 *ngIf="emailInput.touched && emailInput.errors && emailInput.errors['required']">
-                                    Email is required
+                                {{ 'EmailRegistration.EmailRequiredError' | translate }}
                             </span>
                             <span class="text-danger"
                                 *ngIf="emailInput.touched && emailInput.errors && emailInput.errors['email']">
-                                Enter a valid email address
+                                {{ 'EmailRegistration.EmailValidError' | translate }}
                             </span>
                         </div>
         

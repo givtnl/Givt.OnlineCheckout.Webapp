@@ -36,5 +36,7 @@
     "EmailRegistration.ConfirmationTitle":"Weet je zeker dat je door wilt gaan?",
     "EmailRegistration.ConfirmationText":"Als je doorgaat zonder je e-mailadres in te vullen, krijg je geen informatie over je cadeaus te zien en heb je geen persoonlijk overzicht.",
     "EmailRegistration.ConfirmationBtnText":"E-mail invullen",
-    "EmailRegistration.ConfirmationBtnText2":"Doorgaan zonder"
+    "EmailRegistration.ConfirmationBtnContinueWithout":"Doorgaan zonder",
+    "EmailRegistration.EmailRequiredError":"E-mail is vereist",
+    "EmailRegistration.EmailValidError":"Voer een geldig e-mailadres in"
 }

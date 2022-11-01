@@ -35,5 +35,7 @@
     "EmailRegistration.ConfirmationTitle":"Bist du dir sicher, dass du weitermachen willst?",
     "EmailRegistration.ConfirmationText":"Wenn Sie fortfahren, ohne Ihre E-Mail-Adresse anzugeben, können Sie keine Informationen zu Ihren Geschenken sehen und haben keine persönliche Übersicht.",
     "EmailRegistration.ConfirmationBtnText":"E-Mail ausfüllen",
-    "EmailRegistration.ConfirmationBtnText2":"Weiter ohne"
+    "EmailRegistration.ConfirmationBtnContinueWithout":"Weiter ohne",
+    "EmailRegistration.EmailRequiredError":"E-Mail ist erforderlich",
+    "EmailRegistration.EmailValidError":"Geben sie eine gültige E-Mail-Adresse an"
 }

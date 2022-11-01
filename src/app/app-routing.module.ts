@@ -19,7 +19,7 @@ const routes: Routes = [
             ),
     },
     {
-        path: 'registration',
+        path: 'link-email',
         loadChildren: () =>
             import(
                 './scenes/email-registration/email-registration.module'

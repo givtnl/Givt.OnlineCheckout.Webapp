@@ -218,7 +218,7 @@ export class DonationComponent implements OnInit {
             ) {
                 this.callToCanUseWalletDone = false;
                 if (this.organisation.country === 'US') {
-                    await this.router.navigate(['/registration']);
+                    await this.router.navigate(['/link-email']);
                 } else {
                     await this.router.navigate(['/payment']);
                 }
