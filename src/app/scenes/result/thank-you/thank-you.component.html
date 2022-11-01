@@ -7,13 +7,13 @@
     </div>
     <div class="thank-you__bottom-container">
         <div class="util--centered-container">
-            <button class="button button--black"
+            <button *ngIf="organisationCountry !== 'US'" class="button button--black"
                     (click)="userWantsReceipt=true;this.receiptShownChanged.next(this.userWantsReceipt);">{{ 'Success.WantReceipt' | translate }}</button>
             <button class="button button--white"
                     (click)="downloadApp()">{{ 'Success.DownloadApp' | translate }}</button>
         </div>
-        <div class="util--centered-container">
-            <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }} <span class="thank-you-closing-text-link"><a [href]="wantKnowMoreLink" target="_blank" class="knowMoreLink">{{ 'Success.GivtSummaryKnowMore' | translate    }}</a></span></p>
+        <div *ngIf="organisationCountry !== 'US'" class="util--centered-container">
+            <p class="thank-you__closing-text">{{ 'Success.GivtSummary' | translate }} <span class="thank-you-closing-text-link"></span></p>
         </div>
     </div>
     <div class="util--backdrop" *ngIf="userWantsReceipt" (click)="closeBackdrop()"></div>

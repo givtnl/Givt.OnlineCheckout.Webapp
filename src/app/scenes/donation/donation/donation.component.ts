@@ -158,19 +158,8 @@ export class DonationComponent implements OnInit {
                     );
                     this.openModal(
                         this.translate.instant(
-                            'DonationErrorModal.PaymentMethodNotSelected'
-                        ) +
-                            currencySymbol +
-                            this.translate.instant(
-                                'DonationErrorModal.PaymentMethodNotSelected'
-                            ) +
-                            this.translate.instant(
-                                'DonationErrorModal.PaymentMethodNotSelected'
-                            ) +
-                            currencySymbol +
-                            this.translate.instant(
-                                'DonationErrorModal.PaymentMethodNotSelected'
-                            )
+                            'DonationErrorModal.NoAmountSpecified'
+                        )
                     );
                     return;
                 }
