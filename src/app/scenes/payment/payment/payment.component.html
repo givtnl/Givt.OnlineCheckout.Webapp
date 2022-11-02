@@ -7,45 +7,7 @@
                 <h1 class="header__title">{{this.title}}</h1>
             </div>
         </div>
-        <form id="payment-form">
-            <div class="donation-common-vertical-margin" [ngSwitch]="this.clientSelectedPaymentMethod">
-                <div *ngSwitchCase="'bancontact'">
-                    <input class="payment-method__name-input" type="text" name="name" [(ngModel)]="bancontactHolderName" [ngClass]="{'payment-method__name-invalid' : bancontactHolderNameValid == false}" (ngModelChange)="bancontactHolderNameChanged()"
-                           placeholder="Voor- en achternaam" autocomplete="billing name">
-                    <span *ngIf="bancontactHolderNameValid == false" class="material-icons error-icon">error_outline</span>
-                    <img src="../../../assets/paymentMethodIcons/bancontact.svg" class="payment-bancontact-logo" alt="Bancontact logo">
-                    <p class="bancontact__explanation">{{'Payment.BancontactExplanation' | translate}}</p>
-                    <button (click)="confirmBancontactPayment()" class="button button--green button-bottom-payment"
-                            i18n="@@Payment.BancontactContinue">
-                        {{'Payment.BancontactContinue' | translate}}
-                    </button>
-                </div>
-                <div *ngSwitchCase="'card'">
-                    <div id="payment-element">
-                    </div>
-                    <button (click)="confirmCardPayment()" class="button button--green button-bottom-payment">
-                        {{'Payment.Continue' | translate}}
-                    </button>
-                </div>
-                <div *ngSwitchCase="'ideal'">
-                    <div class="form-row">
-                        <div id="ideal-bank-element">
-                        </div>
-                    </div>
-                    <button (click)="confirmIdealPayment()" class="button button-bottom-payment" [disabled]="!bankSelected" [ngClass]="bankSelected ? 'button--green' : 'button--disabled'">
-                        {{'Payment.IdealContinue' | translate}}
-                    </button>
-                </div>
-                <div *ngSwitchCase="'sofort'">
-
-                </div>
-                <div *ngSwitchCase="'giropay'">
-
-                </div>
-                <div *ngSwitchCase="'eps'">
-
-                </div>
-            </div>
-        </form>
+        <payment-stripe *ngIf="organisationCountry !='US'" [paymentMethod]="paymentMethod" ></payment-stripe>
+        <payment-wepay *ngIf="organisationCountry =='US'" [paymentMethod]="paymentMethod" ></payment-wepay>
     </div>
 </div>

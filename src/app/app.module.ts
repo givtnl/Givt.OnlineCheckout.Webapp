@@ -10,25 +10,25 @@ import { CoreModule } from './core/core.module';
 import { NotFoundComponent } from './scenes/error/not-found/not-found.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    BrowserAnimationsModule,
-    CoreModule,
-    AppRoutingModule,
-  ],
-  declarations: [AppComponent, NotFoundComponent],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        TranslateModule.forRoot({
+            defaultLanguage: 'en',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+        }),
+        BrowserAnimationsModule,
+        CoreModule,
+        AppRoutingModule,
+    ],
+    declarations: [AppComponent, NotFoundComponent],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

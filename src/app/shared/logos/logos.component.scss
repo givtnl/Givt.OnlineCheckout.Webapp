@@ -13,15 +13,15 @@
 
 .logo__givt {
     position: absolute;
-    top: 20px;
-    left: calc(100vw * 0.55);
+    top: 35px;
+    left: calc(100vw * 0.40);
     height: 42px;
 }
 
 @media (min-width: 600px) {
     .logo__givt {
         position: absolute;
-        left: calc(600px * 0.55);
+        left: calc(600px * 0.40);
     }
 }
 
