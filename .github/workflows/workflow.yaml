@@ -37,7 +37,12 @@ jobs:
         # ng test
 
       - name: Build the Angular webapp
-        run: ng build ${{ endsWith(github.ref, '/pre-main') && '--configuration=debug' }}
+        if: ${{endsWith(github.ref, '/pre-main')}}
+        run: ng build --configuration=debug
+
+      - name: Build the Angular webapp for production
+        if: ${{endsWith(github.ref, '/main')}}
+        run: ng build
 
   # TODO: Hand over de dist folder from previous job to next one.
   # deploy:
