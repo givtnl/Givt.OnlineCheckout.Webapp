@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [17.x]
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
         # ng test
 
       - name: Build the Angular webapp
-        run: npm run build ${{ endsWith(github.ref, '/pre-main') && '--configuration=debug' }}
+        run: ng build ${{ endsWith(github.ref, '/pre-main') && '--configuration=debug' }}
 
   # TODO: Hand over de dist folder from previous job to next one.
   # deploy:
