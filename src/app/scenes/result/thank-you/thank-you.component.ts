@@ -141,6 +141,10 @@ export class ThankYouComponent implements OnInit, AfterViewInit, OnDestroy {
             page: 'success_page',
             buttonName: 'download_app',
         });
-        document.location.href = 'https://givtapp.net/download';
+        if (this.organisationCountry == "US") {
+            document.location.href = 'https://givt.app/download';
+        } else {
+            document.location.href = 'https://givtapp.net/download';
+        }
     }
 }
